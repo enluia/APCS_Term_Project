@@ -1,2 +1,2 @@
 print("hahloe")
-print(" there")
+print("there")
