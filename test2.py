@@ -1,5 +1,9 @@
-print("hello world")
+class Solution(object):
+    def twoSum(self, nums, target):
 
-x = 4
-if x == 4:
-    print (x)
+        for i in range(len(nums) - 1):
+            if (nums[i] + nums[i + 1] == target):
+                print("[", i, ",", i + 1, "]")
+                break
+
+    twoSum(Solution, [3, 4, 5, 7], 7)
