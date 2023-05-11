@@ -1,5 +1,4 @@
-print("hello world")
+inputFile = open("studentData.csv", "r")
 
-x = 4
-if x == 4:
-    print (x)
+for line in inputFile:
+    print(line, end = "")
