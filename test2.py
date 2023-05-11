@@ -7,3 +7,4 @@ for line in inputFile:
 
 for line in inputArray:
     print(inputArray[line], end = "")
+
