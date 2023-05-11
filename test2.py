@@ -1,4 +1,9 @@
 inputFile = open("studentData.csv", "r")
 
+inputArray = []
+
 for line in inputFile:
-    print(line, end = "")
+    inputArray = line
+
+for line in inputArray:
+    print(inputArray[line], end = "")
