@@ -1,7 +1,7 @@
 import pandas as pd
 
 # read the data from the CSV file into a dataframe
-df = pd.read_csv('data.csv')
+df = pd.read_csv('studentData.csv')
 
 # create a new column for IDs
 df['ID'] = df['Course'].str.startswith('ID').cumsum()  # assign ID based on "ID" rows
