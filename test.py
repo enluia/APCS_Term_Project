@@ -1,4 +1,8 @@
 import random
+import os
+
+# Clearing the Screen
+os.system('cls')
 
 class ww:
     def myMeth(x):
