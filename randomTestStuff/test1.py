@@ -75,7 +75,7 @@ def parse_csv(filename):
     return course_data
 
 # Usage example:
-filename = 'Course Information.csv'
+filename = 'Data for project/Course Information.csv'
 courses = parse_csv(filename)
 
 for course in courses:
@@ -90,3 +90,4 @@ csv_file_path = 'studentData.csv'
 parsed_data = parse_csv(csv_file_path)
 courseOccurrences = count_course_occurrences(parsed_data)
 write_course_occurrences_to_csv(courseOccurrences, "courseOccurrences.csv")
+
