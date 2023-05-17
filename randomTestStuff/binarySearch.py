@@ -1,12 +1,12 @@
 def binarySearch(arr, low, high, x):
     if low > high:
         return -1
-    mid = (low + high) // 2
+    mid = (high + low) // 2
     if arr[mid] == x:
         return x
     if arr[mid] > x:
         return binarySearch(arr, low, mid - 1, x)
-    return binarySearch(arr, mid + 1, high, x)
+    return binarySearch(arr, mid + 1, high, x) 
            
 # Test Case 1: Target is present in the middle of the array
 arr = [1, 2, 3, 4, 5, 6, 7]
