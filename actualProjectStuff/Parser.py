@@ -44,7 +44,3 @@ def write_to_csv(data, file_path):
 
             writer.writerow([set_id, ','.join(course_ids)])
 
-# Example usage
-csv_file_path = 'studentData.csv'
-parsed_data = parse_csv(csv_file_path)
-write_to_csv(parsed_data, 'parsedStudentData.csv')

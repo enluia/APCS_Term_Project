@@ -10,4 +10,11 @@ class Timetable:
         self.blockH = blockH
 
     def __str__(self):
-        return f"Block A: {self.blockA}\nBlock B: {self.blockB}\nBlock C: {self.blockC}\nBlock D: {self.blockD}\nBlock E: {self.blockE}\nBlock F: {self.blockF}\nBlock G: {self.blockG}\nBlock H: {self.blockH}"
+        return f"Block A: {self.blockA}\
+            \nBlock B: {self.blockB}\
+            \nBlock C: {self.blockC}\
+            \nBlock D: {self.blockD}\
+            \nBlock E: {self.blockE}\
+            \nBlock F: {self.blockF}\
+            \nBlock G: {self.blockG}\
+            \nBlock H: {self.blockH}"
