@@ -4,4 +4,7 @@ class Block:
         self.courses = courses
 
     def __str__(self):
-        return f"{self.blockID}: {self.courses}"
+        blockString = f"{self.blockID}: "
+        for i in self.courses:
+            blockString += f"\n{i} "
+        return blockString

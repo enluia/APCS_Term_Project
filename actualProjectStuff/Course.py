@@ -7,7 +7,4 @@ class Course:
         self.sections = sections
 
     def __str__(self):
-        return f"{self.courseID}:\
-                \nmaxEnrollment: {self.maxEnrollment}\
-                \npriority: {self.priority}\
-                \nsections: {self.sections}"
+        return f"{self.courseID}: maxEnrollment: {self.maxEnrollment}"

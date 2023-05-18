@@ -11,10 +11,10 @@ class Timetable:
 
     def __str__(self):
         return f"Block A: {self.blockA}\
-            \nBlock B: {self.blockB}\
-            \nBlock C: {self.blockC}\
-            \nBlock D: {self.blockD}\
-            \nBlock E: {self.blockE}\
-            \nBlock F: {self.blockF}\
-            \nBlock G: {self.blockG}\
-            \nBlock H: {self.blockH}"
+            \nBlock {self.blockB}\
+            \nBlock {self.blockC}\
+            \nBlock {self.blockD}\
+            \nBlock {self.blockE}\
+            \nBlock {self.blockF}\
+            \nBlock {self.blockG}\
+            \nBlock {self.blockH}"
