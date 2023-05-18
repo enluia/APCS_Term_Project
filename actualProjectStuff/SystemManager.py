@@ -1,8 +1,9 @@
-from Timetable import Timetable
+from timetable import Timetable
 from Block import Block
 from Course import Course
 from Student import Student
 from Parser import Parser
+from CourseParser import CourseParser
 import csv
 
 class SystemManager:
@@ -18,3 +19,5 @@ class SystemManager:
 
     for i in students:
         print(i)
+
+    CourseParser.parse_raw_csv("Data for Project/Course Information.csv")

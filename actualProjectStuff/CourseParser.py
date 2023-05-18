@@ -1,6 +1,6 @@
 import csv
 
-class Parser:
+class CourseParser:
 
     def parse_raw_csv(file_path):
         data = []
@@ -11,40 +11,31 @@ class Parser:
 
             for row in reader:
                 
-                # Start of a new set
-                if row[0].startswith("ID"):
-                    if current_set is not None:
-                        data.append(current_set)
-                    current_set = {'ID': row[1]}
-
-                # Skip headers and alternates
-                elif row[0] == 'Course' or row[11] == 'Y':
+                if row[0] == "Greater Victoria" or row[0].startswith("Page") or row[0] == "":
                     continue
-                    
-                # Course data row
-                else:
-                    course_id = row[0]
-                    current_set.setdefault('CourseIDs', []).append(course_id)
 
-            if current_set is not None:
+                current_set = {'ID': row[0]}
+                current_set.setdefault('name', row[2])
+                current_set.setdefault('base_terms', row[7])
+                current_set.setdefault('max_enroll', row[9])
+                current_set.setdefault('priority', row[12])
+                current_set.setdefault('sections', row[14])
+
                 data.append(current_set)
 
-        Parser.write_parsed_to_csv(data, "Data for Project/_parsedStudentData.csv")
+        CourseParser.write_parsed_to_csv(data, "Data for Project/_parsedCourseData.csv")
 
     # write to csv
     def write_parsed_to_csv(data, file_path):
-        headers = ['ID', 'CourseIDs']
+        headers = ['ID', 'Name', 'Base Terms', 'Max Enrollment', 'Priority', 'Sections']
 
         with open(file_path, 'w', newline='') as file:
             writer = csv.writer(file)
             writer.writerow(headers)
 
             for set_data in data:
-                set_id = set_data['ID']
-                course_ids = set_data.get('CourseIDs', [])
-
-                writer.writerow([set_id, ','.join(course_ids)])
-
+                writer.writerow(list(set_data.values()))
+'''
     # read in parsed data, structure into array
     def read_parsed_csv(file_path):
         data = {}
@@ -59,3 +50,4 @@ class Parser:
                 data[set_id] = course_ids
 
         return data
+'''
