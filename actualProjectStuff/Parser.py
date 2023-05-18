@@ -11,19 +11,24 @@ class Parser:
             is_course_header = False
 
             for row in reader:
+                
+                # Start of a new set
                 if row[0].startswith("ID"):
-                    # Start of a new set
                     if current_set is not None:
                         data.append(current_set)
                     current_set = {'ID': row[1]}
                     is_course_header = True
 
+                # Course headers row
                 elif is_course_header:
-                    # Course headers row
                     is_course_header = False
 
+                # Skip alternates
+                elif row[11] == 'Y':
+                    continue
+                    
+                # Course data row
                 else:
-                    # Course data row
                     course_id = row[0]
                     current_set.setdefault('CourseIDs', []).append(course_id)
 
