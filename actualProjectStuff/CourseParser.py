@@ -46,11 +46,6 @@ class CourseParser:
             next(reader)  # Skip the header row
 
             for row in reader:
-                current_set.setdefault('name', row[1])
-                current_set.setdefault('base_terms', row[2])
-                current_set.setdefault('max_enroll', row[3])
-                current_set.setdefault('priority', row[4])
-                current_set.setdefault('sections', row[5])
-                data[row[0]] = current_set
+                data[row[0]] = {'name', row[1], 'base_terms', row[2], 'max_enroll', row[3], 'priority', row[4], 'sections', row[5]}
 
         return data
