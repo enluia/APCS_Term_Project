@@ -39,14 +39,18 @@ class CourseParser:
     # read in parsed data, structure into array
     def read_parsed_csv(file_path):
         data = {}
+        current_set = None
 
         with open(file_path, 'r') as file:
             reader = csv.reader(file)
             next(reader)  # Skip the header row
 
             for row in reader:
-                set_id = row[0]
-                course_ids = row[1].split(",")
-                data[set_id] = course_ids
+                current_set.setdefault('name', row[1])
+                current_set.setdefault('base_terms', row[2])
+                current_set.setdefault('max_enroll', row[3])
+                current_set.setdefault('priority', row[4])
+                current_set.setdefault('sections', row[5])
+                data[row[0]] = current_set
 
         return data
