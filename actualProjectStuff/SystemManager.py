@@ -4,17 +4,18 @@ from Course import Course
 from Student import Student
 from Parser import Parser
 from CourseParser import CourseParser
+from Matrix import Matrix
 import csv
 
 class SystemManager:
 
     # students
     Parser.parse_raw_csv("Data for Project/Cleaned Student Requests.csv")
-    parsed_data = Parser.read_parsed_csv("Data for Project/_parsedStudentData.csv")
+    parsed_student_data = Parser.read_parsed_csv("Data for Project/_parsedStudentData.csv")
 
     students = []
 
-    for set_id, course_ids in parsed_data.items():
+    for set_id, course_ids in parsed_student_data.items():
         students.append(Student(set_id, course_ids))
 
     for i in students:
@@ -26,3 +27,6 @@ class SystemManager:
 
     for i in parsed_course_data:
         print(i, parsed_course_data[i])
+
+    # matrix
+    Matrix.start(parsed_student_data, parsed_course_data)
