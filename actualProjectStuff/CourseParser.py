@@ -11,7 +11,7 @@ class CourseParser:
 
             for row in reader:
                 
-                if row[0] == "Greater Victoria" or row[0].startswith("Page") or row[0] == "":
+                if row[0] == "Greater Victoria" or row[0].startswith("Page") or row[0] == "" or row[7] == 0:
                     continue
 
                 current_set = {'ID': row[0]}
@@ -35,7 +35,7 @@ class CourseParser:
 
             for set_data in data:
                 writer.writerow(list(set_data.values()))
-'''
+
     # read in parsed data, structure into array
     def read_parsed_csv(file_path):
         data = {}
@@ -50,4 +50,3 @@ class CourseParser:
                 data[set_id] = course_ids
 
         return data
-'''
