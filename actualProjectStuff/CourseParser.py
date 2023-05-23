@@ -46,6 +46,6 @@ class CourseParser:
             next(reader)  # Skip the header row
 
             for row in reader:
-                data[row[0]] = {'name', row[1], 'base_terms', row[2], 'max_enroll', row[3], 'priority', row[4], 'sections', row[5]}
+                data[row[0]] = {'name': row[1], 'base_terms': row[2], 'max_enroll': row[3], 'priority': row[4], 'sections': row[5]}
 
         return data
