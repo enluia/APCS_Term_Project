@@ -22,7 +22,7 @@ class SystemManager:
         print(i)
 
     # blocks
-    blocks = ['1A', '1B', '1C', '1D', '1E', '1F', '1G', '1H', '1I', '1J', '2A', '2B', '2C', '2D', '2E', '2F', '2G', '2H', '2I', '2J']
+    blocks = ['1A', '1B', '1C', '1D', '2A', '2B', '2C', '2D', '3A', '3B', '3C', '3D', '3E', '3F', '3G', '3H', '3I', '3J', '3K', '3L', '3M']
 
     # courses
     CourseParser.parse_raw_csv("Data for Project/Course Information.csv")
@@ -32,4 +32,4 @@ class SystemManager:
         print(i, parsed_course_data[i])
 
     # matrix
-    Matrix.start(parsed_student_data, parsed_course_data)
+    Matrix.start(parsed_student_data, blocks, parsed_course_data)
