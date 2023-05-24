@@ -4,7 +4,13 @@ class Matrix:
 
         # Define the matrix variable as a nested dictionary
         matrix = {}
-        outside_timetable = []
+        outside_timetable = ['MDNC-12--L', 'MDNCM12--L', 'MGMT-12L--', 'MCMCC12--L', 'MIMJB12--L', 
+                             'MMUOR12S-L', 'YCPA-2AX-L', 'YCPA-2AXE-', 'MGRPR12--L', 'YED--2DX-L', 
+                             'YED--2FX-L', 'MWEX-2A--L', 'MWEX-2B--L', 'MDNC-11--L', 'MDNCM11--L', 
+                             'YCPA-1AX-L', 'YCPA-1AXE-', 'MGRPR11--L', 'MCMCC11--L', 'MMUOR11S-L', 
+                             'YCPA-0AX-L', 'MDNCM10--L', 'YED--0BX-L', 'MMUCC10--L', 'MMUOR10S-L', 
+                             'MDNC-10--L', 'MIDS-0C---', 'MMUJB10--L', 'XC---09--L', 'MDNC-09C-L', 
+                             'MDNC-09M-L', 'XBA--09J-L', 'XLDCB09S-L']
 
         # Initialize the nested dictionaries for each key
         for s_key in students:
@@ -19,8 +25,9 @@ class Matrix:
             b_key = 0
             ec_key = 8
 
-            # for every couse a student has requested
+            # For every course a student has requested
             for c_key in students[s_key]:
+
                 if (c_key in outside_timetable):
                     matrix[s_key][blocks[ec_key]][c_key] = 1
                     ec_key += 1
@@ -28,7 +35,7 @@ class Matrix:
                     matrix[s_key][blocks[b_key]][c_key] = 1
                     b_key += 1
 
-
+            # 
 
 
 
