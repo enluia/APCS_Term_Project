@@ -35,7 +35,7 @@ class Matrix:
                     matrix[s_key][blocks[b_key]][c_key] = 1
                     b_key += 1
 
-            # 
+            
 
 
 
