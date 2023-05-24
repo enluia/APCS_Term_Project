@@ -22,7 +22,7 @@ class SystemManager:
         print(i)
 
     # blocks
-    blocks = ['1A', '1B', '1C', '1D', '2A', '2B', '2C', '2D', '3A', '3B', '3C', '3D', '3E', '3F', '3G', '3H', '3I', '3J', '3K', '3L', '3M']
+    blocks = blocks = ['1A', '1B', '1C', '1D', '2A', '2B', '2C', '2D', '3A', '3B', '3C', '3D', '3E', '3F', '3G', '3H', '3I', '3J', '3K', '3L', '3M']
 
     # courses
     CourseParser.parse_raw_csv("Data for Project/Course Information.csv")

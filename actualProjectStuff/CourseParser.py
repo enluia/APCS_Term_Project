@@ -11,7 +11,7 @@ class CourseParser:
 
             for row in reader:
                 
-                if row[0] == "Greater Victoria" or row[0].startswith("Page") or row[0] == "" or row[7] == 0:
+                if row[0] == "Greater Victoria" or row[0].startswith("Page") or row[0] == "" or row[9] == 0:
                     continue
 
                 current_set = {'ID': row[0]}
