@@ -2,6 +2,9 @@ class Matrix:
 
     def start(students, blocks, courses):
 
+        # Sort courses by priority
+        courses = sorted(courses, key=lambda d: courses[d]['priority'])
+
         # Define the matrix variable as a nested dictionary
         matrix = {}
         outside_timetable = ['MDNC-12--L', 'MDNCM12--L', 'MGMT-12L--', 'MCMCC12--L', 'MIMJB12--L', 
@@ -20,20 +23,29 @@ class Matrix:
                 for c_key in courses:
                     matrix[s_key][b][c_key] = 0
 
-        # Assign value of 1 for students chosen courses
-        for s_key in students:
-            b_key = 0
-            ec_key = 8
+        for c_key in courses:
+            for s_key in students:
+                b_key = 0
+                ec_key = 8
 
-            # For every course a student has requested
-            for c_key in students[s_key]:
+                if c_key in students[s_key]:
+                    matrix[s_key][blocks[b_key]][c_key] = 0
 
-                if (c_key in outside_timetable):
-                    matrix[s_key][blocks[ec_key]][c_key] = 1
-                    ec_key += 1
-                else:
-                    matrix[s_key][blocks[b_key]][c_key] = 1
-                    b_key += 1
+
+        # # Assign value of 1 for students chosen courses
+        # for s_key in students:
+        #     b_key = 0
+        #     ec_key = 8
+
+        #     # For every course a student has requested
+        #     for c_key in students[s_key]:
+
+        #         if (c_key in outside_timetable):
+        #             matrix[s_key][blocks[ec_key]][c_key] = 1
+        #             ec_key += 1
+        #         else:
+        #             matrix[s_key][blocks[b_key]][c_key] = 1
+        #             b_key += 1
 
             
 
