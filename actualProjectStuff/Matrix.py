@@ -23,13 +23,24 @@ class Matrix:
                 for c_key in courses:
                     matrix[s_key][b][c_key] = 0
 
+        # for every course
         for c_key in courses:
+
+            # for every student
             for s_key in students:
                 b_key = 0
                 ec_key = 8
 
+                # if course is requested by student
                 if c_key in students[s_key]:
-                    matrix[s_key][blocks[b_key]][c_key] = 0
+
+                    # assign outside timetable courses
+                    if c_key in outside_timetable:
+                        matrix[s_key][blocks[ec_key]][c_key] = 1
+                        ec_key += 1
+                    else:
+                        matrix[s_key][blocks[b_key]][c_key] = 1
+                        b_key += 1
 
 
         # # Assign value of 1 for students chosen courses

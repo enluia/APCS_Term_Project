@@ -1,6 +1,6 @@
 import csv
 
-class CourseParser:
+class ParserCourse:
 
     def parse_raw_csv(file_path):
         data = []
@@ -23,7 +23,7 @@ class CourseParser:
 
                 data.append(current_set)
 
-        CourseParser.write_parsed_to_csv(data, "Data for Project/_parsedCourseData.csv")
+        ParserCourse.write_parsed_to_csv(data, "Data for Project/_parsedCourseData.csv")
 
     # write to csv
     def write_parsed_to_csv(data, file_path):
