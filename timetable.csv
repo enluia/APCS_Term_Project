@@ -1,51 +1,51 @@
 Subject,Blocks
-Math,"[0, 1, 2, 3]"
-English,"[0, 1, 2, 3]"
-History,"[0, 1, 2, 3]"
-Science,"[0, 1, 2, 3]"
-Art,"[0, 1, 2, 3]"
-PE,"[0, 1, 2, 3]"
-Biology,"[0, 1, 2, 3]"
-Chemistry,"[0, 1, 2, 3]"
-Physics,"[0, 1, 2, 3]"
-Geography,"[0, 1, 2, 3]"
-Spanish,"[0, 1, 2, 3]"
-French,"[0, 1, 2, 3]"
-German,"[0, 1, 2, 3]"
-Music,"[0, 1, 2, 3]"
-Drama,"[0, 1, 2, 3]"
-Computer Science,"[0, 1, 2, 3]"
-Health,"[0, 1, 2, 3]"
-Social Studies,"[0, 1, 2, 3]"
-Physical Education,"[0, 1, 2, 3]"
-Business,"[0, 1, 2, 3]"
-Economics,"[0, 1, 2, 3]"
-Psychology,"[0, 1, 2, 3]"
-Statistics,"[0, 1, 2, 3]"
-Calculus,"[0, 1, 2, 3]"
-Algebra,"[0, 1, 2, 3]"
-Geometry,"[0, 1, 2, 3]"
-Latin,"[0, 1, 2, 3]"
-Japanese,"[0, 1, 2, 3]"
-Chinese,"[0, 1, 2, 3]"
-Italian,"[0, 1, 2, 3]"
-Art History,"[0, 1, 2, 3]"
-Literature,"[0, 1, 2, 3]"
-Creative Writing,"[0, 1, 2, 3]"
-Philosophy,"[0, 1, 2, 3]"
-Ethics,"[0, 1, 2, 3]"
-Sociology,"[0, 1, 2, 3]"
-Astronomy,"[0, 1, 2, 3]"
-Geology,"[0, 1, 2, 3]"
-Meteorology,"[0, 1, 2, 3]"
-Political Science,"[0, 1, 2, 3]"
-Human Rights,"[0, 1, 2, 3]"
-Law,"[0, 1, 2, 3]"
-Marketing,"[0, 1, 2, 3]"
-Accounting,"[0, 1, 2, 3]"
-Anthropology,"[0, 1, 2, 3]"
-Archeology,"[0, 1, 2, 3]"
-Communication,"[0, 1, 2, 3]"
-Journalism,"[0, 1, 2, 3]"
-Design,"[0, 1, 2, 3]"
-Film Studies,"[0, 1, 2, 3]"
+Math,
+English,
+History,
+Science,
+Art,
+PE,
+Biology,
+Chemistry,
+Physics,
+Geography,
+Spanish,
+French,
+German,
+Music,
+Drama,
+Computer Science,
+Health,
+Social Studies,
+Physical Education,
+Business,
+Economics,
+Psychology,
+Statistics,
+Calculus,
+Algebra,
+Geometry,
+Latin,
+Japanese,
+Chinese,
+Italian,
+Art History,
+Literature,
+Creative Writing,
+Philosophy,
+Ethics,
+Sociology,
+Astronomy,
+Geology,
+Meteorology,
+Political Science,
+Human Rights,
+Law,
+Marketing,
+Accounting,
+Anthropology,
+Archeology,
+Communication,
+Journalism,
+Design,
+Film Studies,
