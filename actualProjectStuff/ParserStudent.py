@@ -1,6 +1,6 @@
 import csv
 
-class Parser:
+class ParserStudent:
 
     def parse_raw_csv(file_path):
         data = []
@@ -29,7 +29,7 @@ class Parser:
             if current_set is not None:
                 data.append(current_set)
 
-        Parser.write_parsed_to_csv(data, "Data for Project/_parsedStudentData.csv")
+        ParserStudent.write_parsed_to_csv(data, "Data for Project/_parsedStudentData.csv")
 
     # write to csv
     def write_parsed_to_csv(data, file_path):
