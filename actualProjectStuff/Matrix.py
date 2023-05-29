@@ -1,3 +1,5 @@
+import csv
+
 class Matrix:
 
     def __init__(self):
@@ -25,7 +27,22 @@ class Matrix:
                 for c_key in courses:
                     self.matrix[s_key][b][c_key] = 0
 
+        b_key = 0
+        for c_key in courses:
+            for s_key in students:
+                if c_key not in students[s_key]:
+                    continue
+                if c_key in outside_timetable:
+                    b_key = 8
+                else: 
+                    b_key = 0
+                for b in blocks[b_key:]:
+                    if sum(self.matrix[s_key][b].values()) > 0:
+                        continue
+                    self.matrix[s_key][b][c_key] = 1
+                    break
 
+        """
         # for every student
         for s_key in students:
             b_key = 0
@@ -44,16 +61,18 @@ class Matrix:
                     else:
                         self.matrix[s_key][blocks[b_key]][c_key] = 1
                         b_key += 1
+        """
 
-        sum = 0
+
+        my_sum = 0
         # Loop through the matrix and print the values
         for s_key in students:
             for b in blocks:
                 for c_key in courses:
                     if self.matrix[s_key][b][c_key] == 1:
                         print(s_key, b, c_key, self.matrix[s_key][b][c_key])
-                        sum += 1
-        print(sum)
+                        my_sum += 1
+        print(my_sum)
 
     # counts percentage of correct course given to students
     # count number of correctly assigned courses
@@ -72,4 +91,23 @@ class Matrix:
             temp += len(students[s_key])
 
         print(score, "/", temp)
-#hi
+
+    def export_to_csv(self, filename):
+        # Collect all blocks and unique courses with assigned value 1
+        blocks = sorted(set(b for s_key in self.matrix for b in self.matrix[s_key]))
+        block_courses = {b: list(set(c_key for s_key in self.matrix for c_key in self.matrix[s_key][b] if self.matrix[s_key][b][c_key] == 1)) for b in blocks}
+
+        # Collect all unique courses with assigned value 1
+        courses = sorted(set(c_key for b in block_courses for c_key in block_courses[b]))
+
+        # Open the CSV file for writing
+        with open(filename, 'w', newline='') as file:
+            writer = csv.writer(file)
+
+            # Write the top header row with block names
+            writer.writerow(['Courses'] + blocks)
+
+            # Iterate through the courses and write each row
+            for c_key in courses:
+                row = [c_key if c_key in block_courses[b] else "" for b in blocks]
+                writer.writerow([c_key] + row)
