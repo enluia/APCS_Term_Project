@@ -97,6 +97,9 @@ class Matrix:
         blocks = sorted(set(b for s_key in self.matrix for b in self.matrix[s_key]))
         block_courses = {b: list(set(c_key for s_key in self.matrix for c_key in self.matrix[s_key][b] if self.matrix[s_key][b][c_key] == 1)) for b in blocks}
 
+        # Collect all unique courses with assigned value 1
+        courses = sorted(set(c_key for b in block_courses for c_key in block_courses[b]))
+
         # Open the CSV file for writing
         with open(filename, 'w', newline='') as file:
             writer = csv.writer(file)
@@ -104,7 +107,7 @@ class Matrix:
             # Write the top header row with block names
             writer.writerow(['Courses'] + blocks)
 
-            # Iterate through the block_courses dictionary and write each row
-            for b in blocks:
-                row = [c_key if c_key in block_courses[b] else "" for c_key in block_courses[b]]
-                writer.writerow([b] + row)
+            # Iterate through the courses and write each row
+            for c_key in courses:
+                row = [c_key if c_key in block_courses[b] else "" for b in blocks]
+                writer.writerow([c_key] + row)
