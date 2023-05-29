@@ -25,7 +25,20 @@ class Matrix:
                 for c_key in courses:
                     self.matrix[s_key][b][c_key] = 0
 
+        b_key = 0
+        for c_key in courses:
+            for s_key in students:
+                if c_key not in students[s_key]:
+                    continue
+                if c_key in outside_timetable:
+                    b_key = 8
+                for b in blocks[b_key:]:
+                    if sum(self.matrix[s_key][b]) > 0:
+                        continue
+                    self.matrix[s_key][b][c_key] = 1
+                    break
 
+        """
         # for every student
         for s_key in students:
             b_key = 0
@@ -44,6 +57,8 @@ class Matrix:
                     else:
                         self.matrix[s_key][blocks[b_key]][c_key] = 1
                         b_key += 1
+        """
+
 
         sum = 0
         # Loop through the matrix and print the values
@@ -72,4 +87,3 @@ class Matrix:
             temp += len(students[s_key])
 
         print(score, "/", temp)
-#hi
