@@ -43,4 +43,5 @@ class SystemManager:
 
     matrix.measure(parsed_student_data)
 
+    matrix.export_to_csv('_matrixOuptput.csv')
     

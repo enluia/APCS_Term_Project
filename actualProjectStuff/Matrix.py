@@ -1,3 +1,5 @@
+import csv
+
 class Matrix:
 
     def __init__(self):
@@ -72,4 +74,20 @@ class Matrix:
             temp += len(students[s_key])
 
         print(score, "/", temp)
-#hi
+
+    def export_to_csv(self, filename):
+        # Collect all blocks and unique courses with assigned value 1
+        blocks = sorted(set(b for s_key in self.matrix for b in self.matrix[s_key]))
+        block_courses = {b: list(set(c_key for s_key in self.matrix for c_key in self.matrix[s_key][b] if self.matrix[s_key][b][c_key] == 1)) for b in blocks}
+
+        # Open the CSV file for writing
+        with open(filename, 'w', newline='') as file:
+            writer = csv.writer(file)
+
+            # Write the top header row with block names
+            writer.writerow(['Courses'] + blocks)
+
+            # Iterate through the block_courses dictionary and write each row
+            for b in blocks:
+                row = [c_key if c_key in block_courses[b] else "" for c_key in block_courses[b]]
+                writer.writerow([b] + row)
