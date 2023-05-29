@@ -1,11 +1,15 @@
 import csv
+import copy
 
 class Matrix:
 
     def __init__(self):
         self.matrix = {}
 
-    def start(self, students, blocks, courses, sequence, non_simul):
+    def start(self, students_original, blocks, courses, sequence, non_simul):
+
+        # copy students just in case
+        students = copy.deepcopy(students_original)
 
         # Sort courses by priority
         courses = sorted(courses, key=lambda d: courses[d]['priority'])
@@ -27,6 +31,7 @@ class Matrix:
                 for c_key in courses:
                     self.matrix[s_key][b][c_key] = 0
 
+        # assign courses to students
         b_key = 0
         for c_key in courses:
             for s_key in students:
@@ -36,33 +41,27 @@ class Matrix:
                     b_key = 8
                 else: 
                     b_key = 0
-                for b in blocks[b_key:]:
+
+                # assign student's requested course to next available block
+                for b in blocks[b_key:b_key + 8]:
                     if sum(self.matrix[s_key][b].values()) > 0:
                         continue
+
                     self.matrix[s_key][b][c_key] = 1
+
+                    # add non simul courses
+                    if non_simul.get(c_key):
+                        for non_simul_course in non_simul.get(c_key):
+                            if non_simul_course in students[s_key]:
+                                self.matrix[s_key][b][non_simul_course] = 1
+                                students.remove(non_simul_course)
+
+                    # add sequenced courses
+                    for postreq in sequence[c_key]:
+                        if postreq in students[s_key]:
+                            print()
+                            
                     break
-
-        """
-        # for every student
-        for s_key in students:
-            b_key = 0
-            ec_key = 8
-
-            # for every course
-            for c_key in courses:
-
-                # if course is requested by student
-                if c_key in students[s_key]:
-
-                    # assign outside timetable courses
-                    if c_key in outside_timetable:
-                        self.matrix[s_key][blocks[ec_key]][c_key] = 1
-                        ec_key += 1
-                    else:
-                        self.matrix[s_key][blocks[b_key]][c_key] = 1
-                        b_key += 1
-        """
-
 
         my_sum = 0
         # Loop through the matrix and print the values
