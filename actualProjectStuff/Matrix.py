@@ -27,7 +27,22 @@ class Matrix:
                 for c_key in courses:
                     self.matrix[s_key][b][c_key] = 0
 
+        b_key = 0
+        for c_key in courses:
+            for s_key in students:
+                if c_key not in students[s_key]:
+                    continue
+                if c_key in outside_timetable:
+                    b_key = 8
+                else: 
+                    b_key = 0
+                for b in blocks[b_key:]:
+                    if sum(self.matrix[s_key][b].values()) > 0:
+                        continue
+                    self.matrix[s_key][b][c_key] = 1
+                    break
 
+        """
         # for every student
         for s_key in students:
             b_key = 0
@@ -46,16 +61,18 @@ class Matrix:
                     else:
                         self.matrix[s_key][blocks[b_key]][c_key] = 1
                         b_key += 1
+        """
 
-        sum = 0
+
+        my_sum = 0
         # Loop through the matrix and print the values
         for s_key in students:
             for b in blocks:
                 for c_key in courses:
                     if self.matrix[s_key][b][c_key] == 1:
                         print(s_key, b, c_key, self.matrix[s_key][b][c_key])
-                        sum += 1
-        print(sum)
+                        my_sum += 1
+        print(my_sum)
 
     # counts percentage of correct course given to students
     # count number of correctly assigned courses
