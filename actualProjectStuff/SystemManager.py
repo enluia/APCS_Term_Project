@@ -31,13 +31,21 @@ class SystemManager:
     ParserCourse.parse_raw_csv("Data for Project/Course Information.csv")
     parsed_course_data = ParserCourse.read_parsed_csv("Data for Project/_parsedCourseData.csv")
 
-    #for i in parsed_course_data:
+      #for i in parsed_course_data:
         #print(i, parsed_course_data[i])
 
     # conditions
     sequence = ParserConditions.parse_sequence_csv("Data for Project/Course Sequencing Rules.csv")
     non_simul = ParserConditions.parse_non_simul_csv("Data for Project/Course Blocking Rules.csv")
-
+    simul = ParserConditions.parse_simul_csv("Data for Project/Course Blocking Rules.csv")
+    
+    # # Nested for loop
+    # for key_second in sequence:
+    #     for key_first in parsed_course_data:
+    #         if key_first == key_second:
+    #             parsed_course_data[key_first]["simul"] = sequence[key_second]
+    #             del parsed_course_data[key_second]
+    # print(parsed_course_data)
     # matrix
     matrix.start(parsed_student_data, blocks, parsed_course_data, sequence, non_simul)
 
