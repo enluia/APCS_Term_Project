@@ -72,3 +72,4 @@ class Matrix:
             temp += len(students[s_key])
 
         print(score, "/", temp)
+#hi
