@@ -6,13 +6,14 @@ class Matrix:
     def __init__(self):
         self.matrix = {}
 
-    def start(self, students_original, blocks, courses, sequence, non_simul):
+    def start(self, students_original, blocks, courses_original, sequence, non_simul):
 
-        # copy students just in case
+        # copy arrays just in case
         students = copy.deepcopy(students_original)
+        courses = copy.deepcopy(courses_original)
 
         # Sort courses by priority
-        courses = sorted(courses, key=lambda d: courses[d]['priority'])
+        courses = dict(sorted(courses.items(), key=lambda x: x[1]['priority']))
 
         # Define the matrix variable as a nested dictionary
         outside_timetable = ['MDNC-12--L', 'MDNCM12--L', 'MGMT-12L--', 'MCMCC12--L', 'MIMJB12--L', 
@@ -75,33 +76,14 @@ class Matrix:
 
                 # assign students requested course to next available block
                 for b in blocks[b_key:b_key + 8]:
-                    if sum(self.matrix[s_key][b].values()) > 0:
+                    if sum(self.matrix[s_key][b].values()) > 0 or courses[c_key].get("sections") == 0:
                         continue
 
-<<<<<<< HEAD
-        """
-        # for every student
-        for s_key in students:
-            b_key = 0
-            ec_key = 8
-
-            # for every course
-            for c_key in courses:
-#s
-                # if course is requested by student
-                if c_key in students[s_key]:
-
-                    # assign outside timetable courses
-                    if c_key in outside_timetable:
-                        self.matrix[s_key][blocks[ec_key]][c_key] = 1
-                        ec_key += 1
-                    else:
-                        self.matrix[s_key][blocks[b_key]][c_key] = 1
-                        b_key += 1
-        """
-=======
                     self.matrix[s_key][b][c_key] = 1
->>>>>>> 603fba44d52a19332ba920e6c8cc58cd92a29c0a
+                    courses[c_key]["max_enroll"] = int(courses[c_key]["max_enroll"]) - 1
+                    if courses[c_key]["max_enroll"] == 0:
+                        courses[c_key]["sections"] = int(courses[c_key]["sections"]) - 1
+                        courses[c_key]["max_enroll"] = courses_original[c_key]["max_enroll"]
 
                     # add non simul courses
                     if non_simul.get(c_key):
@@ -136,6 +118,7 @@ class Matrix:
                     course_freq += self.matrix[s_key][b][c_key] 
                 if course_freq == 0:
                     print(s_key, c_key)
+        print()
         """============================"""
 
         score = 0
@@ -150,8 +133,8 @@ class Matrix:
                         score += 1
             temp += len(students[s_key])
 
-        print(score/7130*100, '%')
-        
+        print(score, "/", 7130)
+
 
     def export_to_csv(self, filename, courseData):
         # Collect all blocks and unique courses with assigned value 1
