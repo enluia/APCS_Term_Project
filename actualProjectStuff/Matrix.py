@@ -23,7 +23,7 @@ class Matrix:
                              'MDNC-10--L', 'MIDS-0C---', 'MMUJB10--L', 'XC---09--L', 'MDNC-09C-L', 
                              'MDNC-09M-L', 'XBA--09J-L', 'XLDCB09S-L']
 
-        # Initialize the nested dictionaries for each key
+        # Initialize the matrix
         for s_key in students:
             self.matrix[s_key] = {}
             for b in blocks:
@@ -33,6 +33,37 @@ class Matrix:
 
         # assign courses to students
         b_key = 0
+
+        # start with courses that need prereq
+        for prereq in sequence.keys():
+            for s_key in students:
+                if prereq not in students[s_key]:
+                    continue
+
+                # assign postreq
+                postreq_count = 0
+                for postreq in sequence[prereq]:
+                    if postreq in students[s_key]:
+                        postreq_count += 1
+                        for b in blocks[4:8]:
+                            if sum(self.matrix[s_key][b].values()) > 0:
+                                continue
+
+                            self.matrix[s_key][b][postreq] = 1
+                            students[s_key].remove(postreq)
+                            break
+
+                # assign prereq
+                if postreq_count > 1:
+                    for b in blocks[0:4]:
+                        if sum(self.matrix[s_key][b].values()) > 0:
+                            continue
+
+                        self.matrix[s_key][b][prereq] = 1
+                        students[s_key].remove(prereq)
+                        break
+
+        # then go through non-sequenced courses by priority
         for c_key in courses:
             for s_key in students:
                 if c_key not in students[s_key]:
@@ -42,7 +73,7 @@ class Matrix:
                 else: 
                     b_key = 0
 
-                # assign student's requested course to next available block
+                # assign students requested course to next available block
                 for b in blocks[b_key:b_key + 8]:
                     if sum(self.matrix[s_key][b].values()) > 0:
                         continue
@@ -54,12 +85,7 @@ class Matrix:
                         for non_simul_course in non_simul.get(c_key):
                             if non_simul_course in students[s_key]:
                                 self.matrix[s_key][b][non_simul_course] = 1
-                                students.remove(non_simul_course)
-
-                    # add sequenced courses
-                    for postreq in sequence[c_key]:
-                        if postreq in students[s_key]:
-                            print()
+                                students[s_key].remove(non_simul_course)
                             
                     break
 
@@ -78,6 +104,7 @@ class Matrix:
     def measure(self, students):
 
         score = 0
+        temp = 0
         # go through student array
         # matrix[s_key][blocks[b_key]][c_key]
         for s_key in students:
@@ -86,8 +113,10 @@ class Matrix:
                     #print(c_key, students[s_key])
                     if self.matrix[s_key][b][c_key] == 1 and c_key in students[s_key]:
                         score += 1
+            temp += len(students[s_key])
 
         print(score/6833*100, '%')
+        print("temp =", temp)
 
     def export_to_csv(self, filename, courseData):
         # Collect all blocks and unique courses with assigned value 1
