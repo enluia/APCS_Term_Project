@@ -45,4 +45,6 @@ class SystemManager:
     matrix.measure(parsed_student_data)
 
     matrix.export_to_csv('_matrixOuptput.csv', parsed_course_data)
+
+    matrix.get_student_timetable(str(1836), parsed_course_data)
     

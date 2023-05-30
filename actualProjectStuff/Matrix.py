@@ -152,6 +152,7 @@ class Matrix:
     
     def get_student_timetable(self, student, courseData):
 
+        print("\nTimetable for Student", student)
         timetable = {}
 
         for b in self.matrix[student]:
