@@ -50,7 +50,7 @@ class Matrix:
 
             # for every course
             for c_key in courses:
-
+#s
                 # if course is requested by student
                 if c_key in students[s_key]:
 
