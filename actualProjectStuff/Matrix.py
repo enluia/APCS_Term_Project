@@ -91,7 +91,7 @@ class Matrix:
 
         print(score, "/", temp)
 
-    def export_to_csv(self, filename):
+    def export_to_csv(self, filename, courseData):
         # Collect all blocks and unique courses with assigned value 1
         blocks = sorted(set(b for s_key in self.matrix for b in self.matrix[s_key]))
         block_courses = {b: list(set(c_key for s_key in self.matrix for c_key in self.matrix[s_key][b] if self.matrix[s_key][b][c_key] == 1)) for b in blocks}
@@ -108,5 +108,6 @@ class Matrix:
 
             # Iterate through the courses and write each row
             for c_key in courses:
-                row = [c_key if c_key in block_courses[b] else "" for b in blocks]
+                courseName = courseData[c_key]['name']
+                row = [courseName if c_key in block_courses[b] else "" for b in blocks]
                 writer.writerow([c_key] + row)
