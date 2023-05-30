@@ -78,7 +78,6 @@ class Matrix:
     def measure(self, students):
 
         score = 0
-        temp = 0
         # go through student array
         # matrix[s_key][blocks[b_key]][c_key]
         for s_key in students:
@@ -87,9 +86,8 @@ class Matrix:
                     #print(c_key, students[s_key])
                     if self.matrix[s_key][b][c_key] == 1 and c_key in students[s_key]:
                         score += 1
-            temp += len(students[s_key])
 
-        print(score, "/", temp)
+        print(score/6833*100, '%')
 
     def export_to_csv(self, filename, courseData):
         # Collect all blocks and unique courses with assigned value 1
