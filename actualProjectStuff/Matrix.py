@@ -100,7 +100,6 @@ class Matrix:
         print(my_sum)
 
     # counts percentage of correct course given to students
-    # count number of correctly assigned courses
     def measure(self, students):
 
         score = 0
@@ -115,8 +114,20 @@ class Matrix:
                         score += 1
             temp += len(students[s_key])
 
-        print(score/6833*100, '%')
-        print("temp =", temp)
+        print(score/7130*100, '%')
+
+        """TEMPORARY: COURSES NOT GIVEN"""
+        for s_key in students:
+            for c_key in students[s_key]:
+                course_freq = 0
+                for b in self.matrix[s_key]:
+                    if self.matrix[s_key][b].get(c_key) == None:
+                        print("Course code not found:")
+                        break
+                    course_freq += self.matrix[s_key][b][c_key] 
+                if course_freq == 0:
+                    print(s_key, c_key)
+        """============================"""
 
     def export_to_csv(self, filename, courseData):
         # Collect all blocks and unique courses with assigned value 1
