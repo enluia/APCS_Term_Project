@@ -111,3 +111,15 @@ class Matrix:
                 courseName = courseData[c_key]['name']
                 row = [courseName if c_key in block_courses[b] else "" for b in blocks]
                 writer.writerow([c_key] + row)
+    
+    def get_student_timetable(self, student, courseData):
+
+        timetable = {}
+
+        for b in self.matrix[student]:
+            for c_key in self.matrix[student][b]:
+                courseName = courseData[c_key]['name']
+                if self.matrix[student][b][c_key] == 1:
+                    timetable[b] = courseName
+        
+        print("\n".join("{}\t{}".format(k, v) for k, v in timetable.items()))
