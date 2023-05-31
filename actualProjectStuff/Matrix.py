@@ -18,10 +18,16 @@ class Matrix:
         # Define the matrix variable as a nested dictionary
         outside_timetable = ['MDNC-12--L', 'MDNCM12--L', 'MGMT-12L--', 'MCMCC12--L', 'MIMJB12--L', 
                              'MMUOR12S-L', 'YCPA-2AX-L', 'YCPA-2AXE-', 'MGRPR12--L', 'YED--2DX-L', 
-                             'YED--2FX-L', 'MWEX-2A--L', 'MWEX-2B--L', 'MDNC-11--L', 'MDNCM11--L', 
-                             'YCPA-1AX-L', 'YCPA-1AXE-', 'MGRPR11--L', 'MCMCC11--L', 'MMUOR11S-L', 
-                             'YCPA-0AX-L', 'MDNCM10--L', 'YED--0BX-L', 'MMUCC10--L', 'MMUOR10S-L', 
-                             'MDNC-10--L', 'MIDS-0C---', 'MMUJB10--L', 'XC---09--L', 'MDNC-09C-L', 
+                             'YED--2FX-L', 'MWEX-2A--L', 'MWEX-2B--L', 
+                             
+                             'MDNC-11--L', 'MDNCM11--L', 'MGMT-12L--', 'MCMCC11--L', 'MIMJB11--L',
+                             'MMUOR11S-L', 'YCPA-1AX-L', 'YCPA-1AXE-', 'MGRPR11--L', 'YED--1EX-L',
+                             'MWEX-2A--L', 'MWEX-2B--L',
+                             
+                             'YCPA-0AX-L', 'MDNCM10--L', 'YED--0BX-L', 'MMUCC10--L', 'YCPA-0AXE-',
+                             'MMUOR10S-L', 'MDNC-10--L', 'MIDS-0C---', 'MMUJB10--L',
+                             
+                             'XC---09--L', 'MDNC-09C-L', 
                              'MDNC-09M-L', 'XBA--09J-L', 'XLDCB09S-L']
 
         # Initialize the matrix
@@ -55,7 +61,7 @@ class Matrix:
                             break
 
                 # assign prereq
-                if postreq_count > 1:
+                if postreq_count > 0:
                     for b in blocks[0:4]:
                         if sum(self.matrix[s_key][b].values()) > 0:
                             continue
