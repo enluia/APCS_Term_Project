@@ -9,6 +9,7 @@ class Matrix:
     def start(self, students_original, blocks, courses_original, sequence, non_simul):
 
         # copy arrays just in case
+        # copy arrays just in case
         students = copy.deepcopy(students_original)
         courses = copy.deepcopy(courses_original)
 
@@ -18,6 +19,16 @@ class Matrix:
         # Define the matrix variable as a nested dictionary
         outside_timetable = ['MDNC-12--L', 'MDNCM12--L', 'MGMT-12L--', 'MCMCC12--L', 'MIMJB12--L', 'MIMJB11--L', 
                              'MMUOR12S-L', 'YCPA-2AX-L', 'YCPA-2AXE-', 'MGRPR12--L', 'YED--2DX-L', 
+                             'YED--2FX-L', 'MWEX-2A--L', 'MWEX-2B--L', 
+                             
+                             'MDNC-11--L', 'MDNCM11--L', 'MGMT-12L--', 'MCMCC11--L', 'MIMJB11--L',
+                             'MMUOR11S-L', 'YCPA-1AX-L', 'YCPA-1AXE-', 'MGRPR11--L', 'YED--1EX-L',
+                             'MWEX-2A--L', 'MWEX-2B--L',
+                             
+                             'YCPA-0AX-L', 'MDNCM10--L', 'YED--0BX-L', 'MMUCC10--L', 'YCPA-0AXE-',
+                             'MMUOR10S-L', 'MDNC-10--L', 'MIDS-0C---', 'MMUJB10--L',
+                             
+                             'XC---09--L', 'MDNC-09C-L', 
                              'YED--2FX-L', 'MWEX-2A--L', 'MWEX-2B--L', 
                              
                              'MDNC-11--L', 'MDNCM11--L', 'MGMT-12L--', 'MCMCC11--L', 'MIMJB11--L',
@@ -137,6 +148,20 @@ class Matrix:
         print()
         """============================"""
 
+        """TEMPORARY: COURSES NOT GIVEN"""
+        for s_key in students:
+            for c_key in students[s_key]:
+                course_freq = 0
+                for b in self.matrix[s_key]:
+                    if self.matrix[s_key][b].get(c_key) == None:
+                        print("Course code not found:")
+                        break
+                    course_freq += self.matrix[s_key][b][c_key] 
+                if course_freq == 0:
+                    print(s_key, c_key)
+        print()
+        """============================"""
+
         score = 0
         temp = 0
         # go through student array
@@ -149,6 +174,7 @@ class Matrix:
                         score += 1
             temp += len(students[s_key])
 
+        print(score, "/", 7130)
         print(score, "/", 7130)
 
 
