@@ -6,21 +6,28 @@ class Matrix:
     def __init__(self):
         self.matrix = {}
 
-    def start(self, students_original, blocks, courses, sequence, non_simul):
+    def start(self, students_original, blocks, courses_original, sequence, non_simul):
 
-        # copy students just in case
+        # copy arrays just in case
         students = copy.deepcopy(students_original)
+        courses = copy.deepcopy(courses_original)
 
         # Sort courses by priority
-        courses = sorted(courses, key=lambda d: courses[d]['priority'])
+        courses = dict(sorted(courses.items(), key=lambda x: x[1]['priority']))
 
         # Define the matrix variable as a nested dictionary
         outside_timetable = ['MDNC-12--L', 'MDNCM12--L', 'MGMT-12L--', 'MCMCC12--L', 'MIMJB12--L', 'MIMJB11--L', 
                              'MMUOR12S-L', 'YCPA-2AX-L', 'YCPA-2AXE-', 'MGRPR12--L', 'YED--2DX-L', 
-                             'YED--2FX-L', 'MWEX-2A--L', 'MWEX-2B--L', 'MDNC-11--L', 'MDNCM11--L', 
-                             'YCPA-1AX-L', 'YCPA-1AXE-', 'MGRPR11--L', 'MCMCC11--L', 'MMUOR11S-L', 
-                             'YCPA-0AX-L', 'MDNCM10--L', 'YED--0BX-L', 'MMUCC10--L', 'MMUOR10S-L', 
-                             'MDNC-10--L', 'MIDS-0C---', 'MMUJB10--L', 'XC---09--L', 'MDNC-09C-L', 
+                             'YED--2FX-L', 'MWEX-2A--L', 'MWEX-2B--L', 
+                             
+                             'MDNC-11--L', 'MDNCM11--L', 'MGMT-12L--', 'MCMCC11--L', 'MIMJB11--L',
+                             'MMUOR11S-L', 'YCPA-1AX-L', 'YCPA-1AXE-', 'MGRPR11--L', 'YED--1EX-L',
+                             'MWEX-2A--L', 'MWEX-2B--L',
+                             
+                             'YCPA-0AX-L', 'MDNCM10--L', 'YED--0BX-L', 'MMUCC10--L', 'YCPA-0AXE-',
+                             'MMUOR10S-L', 'MDNC-10--L', 'MIDS-0C---', 'MMUJB10--L',
+                             
+                             'XC---09--L', 'MDNC-09C-L', 
                              'MDNC-09M-L', 'XBA--09J-L', 'XLDCB09S-L']
 
         # Initialize the matrix
@@ -74,10 +81,15 @@ class Matrix:
 
                 # assign students requested course to next available block
                 for b in blocks[b_key:b_key + 8]:
-                    if sum(self.matrix[s_key][b].values()) > 0:
+                    if sum(self.matrix[s_key][b].values()) > 0 or courses[c_key].get("sections") == 0:
                         continue
 
                     self.matrix[s_key][b][c_key] = 1
+                    # courses[c_key]["max_enroll"] = int(courses[c_key]["max_enroll"]) - 1
+                    # if courses[c_key]["max_enroll"] == 0:
+                    #     courses[c_key]["sections"] = int(courses[c_key]["sections"]) - 1
+                    #     courses[c_key]["max_enroll"] = courses_original[c_key]["max_enroll"]
+                    #if self.matrix[s_key][b]
 
                     # add non simul courses
                     if non_simul.get(c_key):
@@ -87,6 +99,16 @@ class Matrix:
                                 students[s_key].remove(non_simul_course)
                             
                     break
+        
+        for c_key in courses:
+            count = 0
+            for s_key in self.matrix:
+                for b_key in self.matrix[s_key]:
+                    if self.matrix[s_key][b][c_key] == 1:
+                        count += 1
+            print(c_key, count)
+
+
 
         my_sum = 0
         # Loop through the matrix and print the values
@@ -101,6 +123,20 @@ class Matrix:
     # counts percentage of correct course given to students
     def measure(self, students):
 
+        """TEMPORARY: COURSES NOT GIVEN"""
+        for s_key in students:
+            for c_key in students[s_key]:
+                course_freq = 0
+                for b in self.matrix[s_key]:
+                    if self.matrix[s_key][b].get(c_key) == None:
+                        print("Course code not found:")
+                        break
+                    course_freq += self.matrix[s_key][b][c_key] 
+                if course_freq == 0:
+                    print(s_key, c_key)
+        print()
+        """============================"""
+
         score = 0
         temp = 0
         # go through student array
@@ -113,20 +149,8 @@ class Matrix:
                         score += 1
             temp += len(students[s_key])
 
-        print(score/7130*100, '%')
+        print(score, "/", 7130)
 
-        """TEMPORARY: COURSES NOT GIVEN"""
-        for s_key in students:
-            for c_key in students[s_key]:
-                course_freq = 0
-                for b in self.matrix[s_key]:
-                    if self.matrix[s_key][b].get(c_key) == None:
-                        print("Course code not found:")
-                        break
-                    course_freq += self.matrix[s_key][b][c_key] 
-                if course_freq == 0:
-                    print(s_key, c_key)
-        """============================"""
 
     def export_to_csv(self, filename, courseData):
         # Collect all blocks and unique courses with assigned value 1
@@ -161,5 +185,3 @@ class Matrix:
                     timetable[b] = courseName
         
         print("\n".join("{}\t{}".format(k, v) for k, v in timetable.items()))
-
-    def fixSections
