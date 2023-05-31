@@ -15,7 +15,7 @@ class Matrix:
         courses = sorted(courses, key=lambda d: courses[d]['priority'])
 
         # Define the matrix variable as a nested dictionary
-        outside_timetable = ['MDNC-12--L', 'MDNCM12--L', 'MGMT-12L--', 'MCMCC12--L', 'MIMJB12--L', 
+        outside_timetable = ['MDNC-12--L', 'MDNCM12--L', 'MGMT-12L--', 'MCMCC12--L', 'MIMJB12--L', 'MIMJB11--L', 
                              'MMUOR12S-L', 'YCPA-2AX-L', 'YCPA-2AXE-', 'MGRPR12--L', 'YED--2DX-L', 
                              'YED--2FX-L', 'MWEX-2A--L', 'MWEX-2B--L', 'MDNC-11--L', 'MDNCM11--L', 
                              'YCPA-1AX-L', 'YCPA-1AXE-', 'MGRPR11--L', 'MCMCC11--L', 'MMUOR11S-L', 
@@ -48,17 +48,16 @@ class Matrix:
                         for b in blocks[4:8]:
                             if sum(self.matrix[s_key][b].values()) > 0:
                                 continue
-
                             self.matrix[s_key][b][postreq] = 1
                             students[s_key].remove(postreq)
                             break
 
                 # assign prereq
-                if postreq_count > 1:
+                if postreq_count > 0:
                     for b in blocks[0:4]:
                         if sum(self.matrix[s_key][b].values()) > 0:
                             continue
-
+                        print(prereq)
                         self.matrix[s_key][b][prereq] = 1
                         students[s_key].remove(prereq)
                         break
@@ -95,7 +94,7 @@ class Matrix:
             for b in blocks:
                 for c_key in courses:
                     if self.matrix[s_key][b][c_key] == 1:
-                        print(s_key, b, c_key, self.matrix[s_key][b][c_key])
+                        #print(s_key, b, c_key, self.matrix[s_key][b][c_key])
                         my_sum += 1
         print(my_sum)
 
@@ -162,3 +161,5 @@ class Matrix:
                     timetable[b] = courseName
         
         print("\n".join("{}\t{}".format(k, v) for k, v in timetable.items()))
+
+    def fixSections
