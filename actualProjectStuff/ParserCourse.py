@@ -21,6 +21,9 @@ class ParserCourse:
                 current_set.setdefault('priority', row[12])
                 current_set.setdefault('sections', row[14])
 
+                for i in range(int(row[14])):
+                    current_set.setdefault(i, {"block": None, "students": []})
+
                 data.append(current_set)
 
         ParserCourse.write_parsed_to_csv(data, "Data for Project/_parsedCourseData.csv")

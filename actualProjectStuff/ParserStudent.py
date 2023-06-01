@@ -8,7 +8,9 @@ class ParserStudent:
 
         bad_courses = ['XLEAD09---',    'MGE--11',    'MGE--12', 'MKOR-10---',
                        'MKOR-11---', 'MKOR-12---', 'MIT--12---', 'MSPLG11---',
-                       'MJA--10---', 'MJA--11---', 'MJA--12---']
+                       'MJA--10---', 'MJA--11---', 'MJA--12---',
+                       
+                       'MLTST10---', 'MLTST10--L']
 
         with open(file_path, 'r') as file:
             reader = csv.reader(file)
