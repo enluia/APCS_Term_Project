@@ -5,7 +5,6 @@ class ParserConditions:
     # course sequencing
     def parse_sequence_csv(file_path):
         data = {}
-        current_set = None
 
         with open(file_path, 'r') as file:
             reader = csv.reader(file)
@@ -30,7 +29,7 @@ class ParserConditions:
 
             for row in reader:
                 
-                if row[1] == "" or row[1].startswith("Rule"):
+                if row[1] == "" or row[1].startswith("Rule") or "NotSimultaneous" not in row[2]:
                     continue
 
                 # only add those in nonsimul
@@ -43,6 +42,7 @@ class ParserConditions:
 
         return data
     
+    # simultaneous blocking
     def parse_simul_csv(file_path):
         data = {}
         current_set = None
@@ -52,15 +52,37 @@ class ParserConditions:
 
             for row in reader:
                 
-                if row[1] == "" or row[1].startswith("Rule"):
+                if row[1] == "" or row[1].startswith("Rule") or "Simultaneous" not in row[2]:
                     continue
 
                 # only add those in simul
                 current_set = row[2].split('Schedule')[1].split(' in a Simultaneous')[0].split(', ')
 
-                # create dictionary with every course blocked nonsimul-ly
-                for ns_key in current_set:
-                    data[ns_key] = current_set
-                    data[ns_key].remove(ns_key)
+                # create dictionary with every course blocked simul-ly
+                for simul_key in current_set:
+                    data[simul_key] = current_set
+                    data[simul_key].remove(simul_key)
+
+        return data
+  
+    # terms blocking
+    def parse_terms_csv(file_path):
+        data = {}
+        current_set = None
+
+        with open(file_path, 'r') as file:
+            reader = csv.reader(file)
+
+            for row in reader:
+                
+                if row[1] == "" or row[1].startswith("Rule") or "Terms" not in row[2]:
+                    continue
+
+                # only add those in terms
+                current_set = row[2].split('Schedule')[1].split(' in a Terms')[0].split(', ')
+
+                # haha its course sequencing now
+                print(current_set)
+                data[current_set[0]] = data[current_set[1]]
 
         return data

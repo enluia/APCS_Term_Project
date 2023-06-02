@@ -6,6 +6,12 @@ class ParserStudent:
         data = []
         current_set = None
 
+        bad_courses = ['XLEAD09---',    'MGE--11',    'MGE--12', 'MKOR-10---',
+                       'MKOR-11---', 'MKOR-12---', 'MIT--12---', 'MSPLG11---',
+                       'MJA--10---', 'MJA--11---', 'MJA--12---',
+                       
+                       'MLTST10---', 'MLTST10--L']
+
         with open(file_path, 'r') as file:
             reader = csv.reader(file)
 
@@ -24,6 +30,8 @@ class ParserStudent:
                 # Course data row
                 else:
                     course_id = row[0]
+                    if course_id in bad_courses:
+                        continue
                     current_set.setdefault('CourseIDs', []).append(course_id)
 
             if current_set is not None:

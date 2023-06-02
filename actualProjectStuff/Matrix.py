@@ -6,6 +6,11 @@ class Matrix:
     def __init__(self):
         self.matrix = {}
 
+    # sets the value of a certain location in the reference to 1
+    def assign(self, s_key, b, c_key):
+        self.matrix[s_key][b][c_key] = 1
+
+    # start the machine!!!
     def start(self, students_original, blocks, courses_original, sequence, non_simul):
 
         # copy arrays just in case
@@ -18,10 +23,16 @@ class Matrix:
         # Define the matrix variable as a nested dictionary
         outside_timetable = ['MDNC-12--L', 'MDNCM12--L', 'MGMT-12L--', 'MCMCC12--L', 'MIMJB12--L', 
                              'MMUOR12S-L', 'YCPA-2AX-L', 'YCPA-2AXE-', 'MGRPR12--L', 'YED--2DX-L', 
-                             'YED--2FX-L', 'MWEX-2A--L', 'MWEX-2B--L', 'MDNC-11--L', 'MDNCM11--L', 
-                             'YCPA-1AX-L', 'YCPA-1AXE-', 'MGRPR11--L', 'MCMCC11--L', 'MMUOR11S-L', 
-                             'YCPA-0AX-L', 'MDNCM10--L', 'YED--0BX-L', 'MMUCC10--L', 'MMUOR10S-L', 
-                             'MDNC-10--L', 'MIDS-0C---', 'MMUJB10--L', 'XC---09--L', 'MDNC-09C-L', 
+                             'YED--2FX-L', 'MWEX-2A--L', 'MWEX-2B--L', 
+                             
+                             'MDNC-11--L', 'MDNCM11--L', 'MGMT-12L--', 'MCMCC11--L', 'MIMJB11--L',
+                             'MMUOR11S-L', 'YCPA-1AX-L', 'YCPA-1AXE-', 'MGRPR11--L', 'YED--1EX-L',
+                             'MWEX-2A--L', 'MWEX-2B--L',
+                             
+                             'YCPA-0AX-L', 'MDNCM10--L', 'YED--0BX-L', 'MMUCC10--L', 'YCPA-0AXE-',
+                             'MMUOR10S-L', 'MDNC-10--L', 'MIDS-0C---', 'MMUJB10--L',
+                             
+                             'XC---09--L', 'MDNC-09C-L', 
                              'MDNC-09M-L', 'XBA--09J-L', 'XLDCB09S-L']
 
         # Initialize the matrix
@@ -49,18 +60,19 @@ class Matrix:
                         for b in blocks[4:8]:
                             if sum(self.matrix[s_key][b].values()) > 0:
                                 continue
-
-                            self.matrix[s_key][b][postreq] = 1
+                            
+                            self.assign(s_key, b, postreq)
+                            #self.matrix[s_key][b][postreq] = 1
                             students[s_key].remove(postreq)
                             break
 
                 # assign prereq
-                if postreq_count > 1:
+                if postreq_count > 0:
                     for b in blocks[0:4]:
                         if sum(self.matrix[s_key][b].values()) > 0:
                             continue
-
-                        self.matrix[s_key][b][prereq] = 1
+                        self.assign(s_key, b, prereq)
+                        #self.matrix[s_key][b][prereq] = 1
                         students[s_key].remove(prereq)
                         break
 
@@ -79,42 +91,50 @@ class Matrix:
                     if sum(self.matrix[s_key][b].values()) > 0 or courses[c_key].get("sections") == 0:
                         continue
 
-                    self.matrix[s_key][b][c_key] = 1
-                    courses[c_key]["max_enroll"] = int(courses[c_key]["max_enroll"]) - 1
-                    if courses[c_key]["max_enroll"] == 0:
-                        courses[c_key]["sections"] = int(courses[c_key]["sections"]) - 1
-                        courses[c_key]["max_enroll"] = courses_original[c_key]["max_enroll"]
+                    self.assign(s_key, b, c_key)
+                    #self.matrix[s_key][b][c_key] = 1
+                    # courses[c_key]["max_enroll"] = int(courses[c_key]["max_enroll"]) - 1
+                    # if courses[c_key]["max_enroll"] == 0:
+                    #     courses[c_key]["sections"] = int(courses[c_key]["sections"]) - 1
+                    #     courses[c_key]["max_enroll"] = courses_original[c_key]["max_enroll"]
+                    #if self.matrix[s_key][b]
 
                     # add non simul courses
                     if non_simul.get(c_key):
                         for non_simul_course in non_simul.get(c_key):
                             if non_simul_course in students[s_key]:
-                                self.matrix[s_key][b][non_simul_course] = 1
+                                self.assign(s_key, b, c_key)
+                                #self.matrix[s_key][b][non_simul_course] = 1
                                 students[s_key].remove(non_simul_course)
                             
                     break
+        
+        # count students in each course
+        for c_key in courses:
+            count = 0
+            for s_key in students:
+                for b in blocks:
+                    if self.matrix[s_key][b][c_key] == 1:
+                        count += 1
+            print(c_key, count)
 
-        my_sum = 0
-        # Loop through the matrix and print the values
+        # Loop through the matrix and print the location of the values of 1
         for s_key in students:
             for b in blocks:
                 for c_key in courses:
                     if self.matrix[s_key][b][c_key] == 1:
-                        print(s_key, b, c_key, self.matrix[s_key][b][c_key])
-                        my_sum += 1
-        print(my_sum)
+                        #print(s_key, b, c_key, self.matrix[s_key][b][c_key])
+                        pass
 
     # counts percentage of correct course given to students
     def measure(self, students):
 
         """TEMPORARY: COURSES NOT GIVEN"""
+        print("\nPeople who signed up for more than 8 courses:")
         for s_key in students:
-            for c_key in students[s_key]:
+            for c_key in students[s_key]: # for every course a student requested
                 course_freq = 0
                 for b in self.matrix[s_key]:
-                    if self.matrix[s_key][b].get(c_key) == None:
-                        print("Course code not found:")
-                        break
                     course_freq += self.matrix[s_key][b][c_key] 
                 if course_freq == 0:
                     print(s_key, c_key)
@@ -122,18 +142,15 @@ class Matrix:
         """============================"""
 
         score = 0
-        temp = 0
-        # go through student array
-        # matrix[s_key][blocks[b_key]][c_key]
+        total_requests = 0
         for s_key in students:
             for b in self.matrix[s_key]:
                 for c_key in self.matrix[s_key][b]:
-                    #print(c_key, students[s_key])
                     if self.matrix[s_key][b][c_key] == 1 and c_key in students[s_key]:
                         score += 1
-            temp += len(students[s_key])
+            total_requests += len(students[s_key])
 
-        print(score, "/", 7130)
+        print(score, "/", total_requests, "=", score / total_requests * 100)
 
 
     def export_to_csv(self, filename, courseData):

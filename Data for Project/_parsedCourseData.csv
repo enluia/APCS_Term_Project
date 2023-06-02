@@ -1,273 +1,274 @@
 ID,Name,Base Terms,Max Enrollment,Priority,Sections
-ACAL-12---,AP CALCULUS AB 12 external credential,2,29,10,1
-ACSC-2A---,AP COMPUTER SCIENCE A 12,2,24,10,1
-AELC-12---,AP ENGLISH LITERATURE & COMPOSITION 12,2,24,10,1
-APHM-12---,AP PHYSICS C (MECHANICS) 12 external credential,2,23,10,1
-ASTA-12---,AP STATISTICS 12,1,29,10,1
-MAC--11---,ACCOUNTING 11,2,29,50,3
-MACC-12---,ACCOUNTING 12,2,29,50,1
-MACLV11---,ACTIVE LIVING 11,2,29,50,2
-MACLV11G--,ACTIVE LIVING 11 Girls,2,29,50,1
-MACLV12---,ACTIVE LIVING 12,2,29,50,2
-MACLV12G--,ACTIVE LIVING 12 Girls,2,29,50,1
-MADD-09---,ADST - Drafting 9,2,24,50,5
-MADEM10---,ADST ? ENTREPRENEURSHIP AND MARKETING 10,2,29,50,2
-MADER09---,ADST - Electronics and Robotics,2,24,50,3
-MADFS09---,ADST - Food Studies 9,2,23,50,3
-MADGE09D--,ADST 9 - General Exploratns Design Innov & Inquiry,2,24,50,1
-MADGE09I--,INCLUSIVE INTRODUCTION TO TRADE SKILLS 9,2,24,50,1
-MADIT09---,ADST-Information and Communications Technologies 9,2,24,50,4
-MADW-09---,ADST - Woodwork 9,2,21,50,3
-MAE--09---,ARTS EDUCATION 9,2,29,50,4
-MATPH12---,ANATOMY AND PHYSIOLOGY 12,2,23,35,6
-MBIT-11,INTRODUCTORY ITALIAN 11,2,29,15,1
-MCALC12---,CALCULUS 12,2,29,20,3
-MCH--11---,CHEMISTRY 11,2,23,20,8
-MCH--12---,CHEMISTRY 12,2,23,35,6
-MCLC-12---,CAREER LIFE CONNECTIONS,2,20,50,2
-MCLC-12--L,CAREER LIFE CONNECTIONS Linear,1,300,0,2
-MCLE-10---,CAREER LIFE EDUCATION 10,2,29,50,8
-MCLE-10--L,CAREER LIFE EDUCATION 10 Linear,1,29,10,1
-MCMCC11--L,CHORAL MUSIC 11: CONCERT CHOIR Linear,1,50,50,1
-MCMCC12--L,CHORAL MUSIC 12: CONCERT CHOIR Linear,1,50,50,1
-MCMCL12---,COMPARATIVE CULTURES 12,2,24,20,3
-MCMPR11---,COMPUTER PROGRAMMING 11,2,24,50,2
-MCMPR11W--,WEB DEVELOPMENT,2,24,50,1
-MCMPR12W--,WEB DEVELOPMENT 12,2,24,50,2
-MCMPS10---,COMPOSITION 10,2,24,20,2
-MCMPS10C--,COMPOSITION 10 Challenge,2,24,10,2
-MCMPS11---,COMPOSITION 11,2,24,20,5
-MCSTU10---,ADST ? COMPUTER STUDIES 10,2,24,50,1
-MCTWR10---,CREATIVE WRITING 10,2,24,30,5
-MCTWR11---,CREATIVE WRITING 11,2,24,20,3
-MDCF-10---,DANCE FOUNDATIONS 10,2,29,50,1
-MDCF-11---,DANCE FOUNDATIONS 11,2,29,50,1
-MDCF-12---,DANCE FOUNDATIONS 12,2,29,50,1
-MDCOM11C--,COMPUTER STUDIES 11,2,24,50,1
-MDMD-12D--,3D ANIMATION 12,2,24,50,1
-MDNC-09C-L,DANCE 9 Choreography Linear,1,29,50,1
-MDNC-09F--,DANCE 9 Foundations,2,29,50,1
-MDNC-09H--,DANCE 9 HIP HOP,2,29,50,1
-MDNC-09M-L,DANCE 9 Company: Platform 61 Linear,1,29,50,1
-MDNC-09PT-,DANCE 9 Performance and Technique,2,29,10,1
-MDNC-10--L,DANCE 10: CHOREOGRAPHY Linear,1,29,50,1
-MDNC-11--L,DANCE 11: CHOREOGRAPHY Linear,1,29,50,1
-MDNC-12--L,DANCE 12: CHOREOGRAPHY Linear,1,29,50,1
-MDNCM10--L,DANCE COMPANY 10 Linear,1,29,50,1
-MDNCM11--L,DANCE COMPANY 11 Linear,1,29,50,1
-MDNCM12--L,DANCE COMPANY 12 Linear,1,29,50,1
-MDNCN11---,DANCE CONDITIONING 11,2,29,50,1
-MDNCN12---,DANCE CONDITIONING 12,2,29,50,1
-MDNTP10---,DANCE TECHNIQUE AND PERFORMANCE 10,2,29,10,1
-MDNTP11---,DANCE TECHNIQUE AND PERFORMANCE 11,2,29,10,1
-MDNTP12---,DANCE TECHNIQUE AND PERFORMANCE 12,2,29,10,1
-MDR--09---,DRAMA 9,2,29,50,1
-MDRM-10---,DRAMA 10,2,29,35,1
-MDRM-11---,DRAMA 11,2,29,50,1
-MDRM-12---,DRAMA 12,2,29,50,1
-MECOM12---,E-COMMERCE 12,2,29,50,1
-MEN--09---,ENGLISH LANGUAGE ARTS 9,2,24,20,6
-MEN--09A--,ENGLISH LANGUAGE ARTS 9 ADAPTED,4,15,10,1
-MEN--09C--,ENGLISH LANGUAGE ARTS 9 CHALLENGE,2,24,10,2
-MEN--09E--,ENGLISH 9 FOR ELL,2,24,10,1
-MENFP12---,ENGLISH FIRST PEOPLES 12,2,24,20,1
-MENFP12--Y,ENGLISH FIRST PEOPLES 12 Year,2,24,20,1
-MENFP12C--,ENGLISH FIRST PEOPLES 12 CHALLENGE,2,24,20,1
-MENST12---,ENGLISH STUDIES 12,2,24,20,9
-MENST12--Y,ENGLISH STUDIES 12 Year Long,2,24,10,4
-MENST12C--,ENGLISH STUDIES 12 CHALLENGE,2,24,10,1
-MENT-12---,ENTREPRENEURSHIP 12,2,29,50,3
-MEPSS11---,EXPLORATIONS IN SOCIAL STUDIES 11,2,24,20,5
-MEPSS11C--,EXPLORATIONS IN SOCIAL STUDIES 11 CHALLENGE,2,24,20,2
-MEVSC11---,ENVIRONMENTAL SCIENCE 11,2,23,35,2
-MEVSC12C--,ENVIRONMENTAL SCIENCE 12 - CLIMATE CHANGE,2,23,35,2
-MFMP-10---,FOUNDATIONS OF MATH AND PRE-CALCULUS 10,2,29,20,5
-MFMP-10C--,FOUNDATIONS OF MATH AND PRE-CALCULUS 10 CHALLENGE,2,29,20,2
-MFMP-10H--,FOUNDATIONS OF MATH AND PRE-CALCULUS 10 HONOURS,2,29,10,1
-MFOM-11---,FOUNDATIONS OF MATHEMATICS 11,2,29,10,2
-MFOOD10---,ADST ?  FOOD STUDIES 10,2,23,50,3
-MFOOD11---,FOOD STUDIES 11,2,23,50,4
-MFOOD12---,FOOD STUDIES 12,2,23,50,4
-MFR--09---,FRENCH 9,2,29,15,2
-MFR--10---,FRENCH 10,2,29,15,1
-MFR--11---,FRENCH 11,2,29,15,3
-MFR--12---,FRENCH 12,2,29,15,2
-MFTCD11---,FITNESS AND CONDITIONING 11,2,29,50,1
-MFTCD12---,FITNESS AND CONDITIONING 12,2,29,50,1
-MGMT-12L--,GEOMETRY 12,1,29,20,1
-MGRPR11--L,GRAPHIC PRODUCTION 11 LINEAR,1,50,50,1
-MGRPR12--L,GRAPHIC PRODUCTION 12 LINEAR,1,50,50,1
-MIDS-0A---,INDEPENDENT DIRECTED STUDIES 10A,0,29,0,6
-MIDS-0B---,INDEPENDENT DIRECTED STUDIES 10B,2,29,50,5
-MIDS-0C---,INDEPENDENT DIRECTED STUDIES 10C,1,20,20,1
-MIDS-1B---,INDEPENDENT DIRECTED STUDIES 11B,2,100,0,5
-MIMCB11--L,INSTRUMENTAL MUSIC 11: CONCERT BAND LINEAR,1,100,10,1
-MIMCB12--L,INSTRUMENTAL MUSIC 12: CONCERT BAND LINEAR,1,100,10,1
-MIMG-11---,INSTRUMENTAL MUSIC 11: GUITAR,2,29,50,2
-MIMG-12---,INSTRUMENTAL MUSIC 12: GUITAR,2,29,50,2
-MIMJB11--L,INSTRUMENTAL MUSIC 11: JAZZ BAND LINEAR,1,100,50,1
-MIMJB12--L,INSTRUMENTAL MUSIC 12: JAZZ BAND LINEAR,1,100,50,1
-MINST12---,CONTEMPORARY INDIGENOUS STUDIES 12,2,24,20,1
-MINST12C--,CONTEMPORARY INDIGENOUS STUDIES 12 CHALLENGE,2,24,20,2
-MIT--11---,ITALIAN 11,2,29,15,1
-MLFSC11---,LIFE SCIENCES 11,2,23,35,5
-MLST-12---,LAW STUDIES 12,2,24,20,7
-MLTST10---,LITERARY STUDIES 10,2,24,50,8
-MLTST10--L,LITERARY STUDIES 10 Linear,1,24,20,2
-MLTST10C--,LITERARY STUDIES 10 Challenge,2,24,20,2
-MLTST11---,LITERARY STUDIES 11,2,24,15,1
-MLTST11C--,LITERARY STUDIES 11 Challenge,2,24,20,2
-MLTST12---,LITERARY STUDIES 12,2,24,10,1
-MMA--09---,MATHEMATICS 9,2,29,20,4
-MMA--09C--,MATHEMATICS 9 CHALLENGE,2,29,20,2
-MMA--09H--,MATHEMATICS 9 HONOURS,2,29,20,1
-MMACS11---,COMPUTER SCIENCE 11,2,24,50,5
-MMACS12---,COMPUTER SCIENCE 12,2,24,50,5
-MMAN-10---,MANDARIN CHINESE 10,2,29,15,1
-MMAN-11---,MANDARIN CHINESE 11,2,29,50,2
-MMAP-11---,MARKETING AND PROMOTION 11,2,29,50,1
-MMEDD10---,ADST ? MEDIA DESIGN 10,2,24,50,2
-MMEDD11---,MEDIA DESIGN 11,2,24,50,2
-MMEDD12---,MEDIA DESIGN 12,2,24,50,2
-MMUCB10--L,INSTRUMENTAL MUSIC: CONCERT BAND 10 Linear,1,100,10,1
-MMUCC10--L,CHORAL MUSIC: CONCERT CHOIR 10 Linear,1,50,50,1
-MMUGT10---,INSTRUMENTAL MUSIC: GUITAR 10,2,29,50,2
-MMUJB10--L,INSTRUMENTAL MUSIC: JAZZ BAND 10 Linear,1,100,50,1
-MMUOR10S-L,INSTRUMENTAL MUSIC: ORCHESTRA 10 Strings LINEAR,1,100,50,1
-MMUOR11S-L,INSTRUMENTAL MUSIC: ORCHESTRA 11 Strings Linear,1,100,50,1
-MMUOR12S-L,INSTRUMENTAL MUSIC: ORCHESTRA 12 Strings Linear,1,100,50,1
-MNMD-10---,NEW MEDIA 10,2,24,50,3
-MNMD-11---,NEW MEDIA 11,2,24,20,2
-MODED11---,OUTDOOR EDUCATION 11,2,29,50,1
-MODED12---,OUTDOOR EDUCATION 12,2,29,50,1
-MPGEO12---,PHYSICAL GEOGRAPHY 12,2,24,10,1
-MPH--11---,PHYSICS 11,2,23,20,6
-MPH--12---,PHYSICS 12,2,23,35,5
-MPHE-09---,PHYSICAL AND HEALTH EDUCATION 9,2,29,35,3
-MPHE-09--L,PHYSICAL AND HEALTH EDUCATION 9 Linear,1,32,40,1
-MPHE-09B--,PHYSICAL AND HEALTH EDUCATION 9 Boys,2,29,35,5
-MPHE-09B-L,PHYSICAL AND HEALTH EDUCATION 9 Boys Linear,1,29,35,1
-MPHE-09G--,PHYSICAL AND HEALTH EDUCATION 9 Girls,2,29,35,4
-MPHE-09G-L,PHYSICAL AND HEALTH EDUCATION 9 Girls Linear,1,29,35,1
-MPHE-09Y--,PHYSICAL AND HEALTH EDUCATION 9 Yoga for Mindfulns,2,29,50,1
-MPHED10---,PHYSICAL AND HEALTH EDUCATION 10,2,29,35,4
-MPHED10--L,PHYSICAL AND HEALTH EDUCATION 10 LINEAR,1,29,35,2
-MPHED10B--,PHYSICAL AND HEALTH EDUCATION 10 Boys,2,29,35,5
-MPHED10B-L,PHYSICAL AND HEALTH EDUCATION 10 LINEAR Boys,1,29,35,1
-MPHED10G--,PHYSICAL AND HEALTH EDUCATION 10 Girls,2,29,35,4
-MPHED10G-L,PHYSICAL AND HEALTH EDUCATION 10 LINEAR Girls,1,29,35,1
-MPREC11---,PRE-CALCULUS 11,2,29,20,7
-MPREC11H--,PRE-CALCULUS 11 HONOURS,2,29,10,1
-MPREC12---,PRE-CALCULUS 12,2,29,20,6
-MPREC12H--,PRE-CALCULUS 12 HONOURS,2,29,10,1
-MSC--09---,SCIENCE 9,2,23,20,5
-MSC--09A--,SCIENCE 9: ADAPTED,4,15,10,1
-MSC--09C--,SCIENCE 9: CHALLENGE,2,23,20,2
-MSC--09D--,Science 9 Discovery,2,23,20,5
-MSC--10---,SCIENCE 10,2,23,20,8
-MSC--10C--,SCIENCE 10: CHALLENGE,2,23,20,2
-MSP--09---,SPANISH 9,2,29,35,2
-MSP--10---,SPANISH 10,2,29,35,2
-MSP--11---,SPANISH 11,2,29,35,2
-MSP--12---,SPANISH 12,2,29,35,1
-MSPLG10--L,SPOKEN LANGUAGE 10 LINEAR,2,24,10,2
-MSS--09---,SOCIAL STUDIES 9,2,24,20,5
-MSS--09C--,SOCIAL STUDIES 9 CHALLENGE,2,24,20,2
-MSS--10---,SOCIAL STUDIES 10,2,24,20,7
-MSS--10C--,SOCIAL STUDIES 10 CHALLENGE,2,24,20,2
-MSTAT12---,STATISTICS 12,2,29,15,1
-MSTAT12--L,STATISTICS 12 LINEAR,1,29,15,1
-MSTX-0A---,SKILLS EXPLORATION 10A,2,21,50,1
-MSTX-0AI--,INCLUSIVE INTRODUCTION TO TRADE SKILLS 10,2,21,50,1
-MSTX-1A---,SKILLS EXPLORATION 11A,2,21,50,2
-MSTX-1AI--,INCLUSIVE INTRODUCTION TO TRADE SKILLS 11,2,21,50,1
-MSTX-2A---,SKILLS EXPLORATION 12A,2,21,50,2
-MSTX-2AI--,INCLUSIVE INTRODUCTION TO TRADE SKILLS 12,2,21,50,1
-MTAUT11---,AUTOMOTIVE TECHNOLOGY 11,2,21,50,3
-MTAUT12---,AUTOMOTIVE TECHNOLOGY 12,2,21,50,3
-MTDRF10---,ADST ?  DRAFTING 10,2,24,50,5
-MTDRF11---,DRAFTING 11,2,24,50,5
-MTDRF12---,DRAFTING 12,2,24,50,5
-MTEAD12---,ENGINE AND DRIVETRAIN 12,2,21,50,3
-MTEAR10---,ADST ?  ELECTRONICS AND ROBOTICS 10,2,24,50,3
-MTEXP10D--,ADST-Technology Explorations 10 Design Innov & Inq,2,24,50,1
-MTPOW10---,ADST ?  POWER TECHNOLOGY 10,2,21,50,2
-MTROB11---,ROBOTICS 11,2,24,50,3
-MTROB12---,ROBOTICS 12,2,24,50,3
-MVAPH10---,VISUAL ARTS: PHOTOGRAPHY 10,2,24,50,2
-MVAPH11---,PHOTOGRAPHY 11,2,24,50,2
-MVAPH12---,PHOTOGRAPHY 12,2,24,50,2
-MVAST10---,VISUAL ARTS: ART STUDIO 10,2,29,50,5
-MVAST11---,ART STUDIO 11,2,29,50,3
-MVAST12---,ART STUDIO 12,2,29,50,3
-MWBDV10IT-,Information and Communications Technologies 10,2,24,50,4
-MWEX-2A---,WORK EXPERIENCE 12A,2,29,50,3
-MWEX-2A--L,WORK EXPERIENCE 12A LINEAR,1,29,50,1
-MWEX-2B---,WORK EXPERIENCE 12B,2,29,50,1
-MWEX-2B--L,WORK EXPERIENCE 12B LINEAR,1,29,50,1
-MWH--12---,20th CENTURY WORLD HISTORY 12,2,24,20,3
-MWPM-10---,WORKPLACE MATHEMATICS 10,2,29,10,1
-MWPM-11---,WORKPLACE MATHEMATICS 11,2,29,20,3
-MWWK-10---,ADST ?  WOODWORK 10,2,21,50,3
-MWWK-11---,WOODWORK 11,2,21,50,3
-MWWK-12---,WOODWORK 12,2,21,50,4
-PB---2A---,CAMOSUN COLLEGE COURSE 12A,2,29,50,3
-XAT--11---,ASSIGNED TIME 11,2,50,20,4
-XAT--12---,ASSIGNED TIME 12,2,50,20,4
-XBA--09B-L,BEGINNER BAND 9 LINEAR,1,100,10,1
-XBA--09C-L,CONCERT BAND 9 Linear,1,100,10,1
-XBA--09G--,CONCERT BAND 9 - Guitar,2,29,50,2
-XBA--09J-L,JAZZ BAND 9 LINEAR,1,100,50,1
-XC---09--L,CONCERT CHOIR 9 Linear,1,50,50,1
-XLDCB09LS-,LEARNING STRATEGIES 9 LD,2,29,50,8
-XLDCB09LSL,LEARNING STRATEGIES 9 LD LINEAR,1,29,50,2
-XLDCB09M--,TECH ED 9: MECHANICS LD,2,21,50,2
-XLDCB09S-L,STRINGS 9 LINEAR,1,100,50,1
-XLDCE09NM-,NUMERACY 9,2,29,10,1
-XSIEP1A---,IEP MODIFIED 11A LD,2,29,50,1
-XSIEP1B---,IEP MODIFIED 11B LD,2,29,50,1
-XSIEP1C---,IEP MODIFIED 11C LD,2,29,20,1
-XSIEP1D---,IEP MODIFIED 11D LD,2,29,20,1
-XSIEP1E---,IEP MODIFIED 11E LD,2,29,20,1
-XSIEP1F---,IEP MODIFIED 11F LD,2,29,20,1
-XSIEP1G---,IEP MODIFIED 11G LD,2,29,20,1
-XSIEP1H---,IEP MODIFIED 11H LD,2,29,20,1
-XSIEP2A---,IEP MODIFIED 12A LD,2,29,50,1
-XSIEP2C---,IEP MODIFIED 12C LD,2,29,20,1
-XSIEP2E---,IEP MODIFIED 12E LD,2,29,20,1
-XSPBK0A---,SUPPORT BLOCK 10A,2,29,50,1
-XSPBK1A---,SUPPORT BLOCK 11A,2,29,50,2
-XSPBK2A---,SUPPORT BLOCK 12A,2,29,50,2
-YCPA-0AX-L,COMMUNITY LEADERSHIP 10 Linear,1,200,50,1
-YCPA-0AXE-,COMMUNITY LEADERSHIP 10,1,50,50,1
-YCPA-1AX-L,COMMUNITY LEADERSHIP 11 Linear,1,200,50,1
-YCPA-1AXE-,COMMUNITY LEADERSHIP 11,1,50,50,1
-YCPA-2AX-L,COMMUNITY LEADERSHIP 12 Linear,1,200,50,1
-YCPA-2AXE-,COMMUNITY LEADERSHIP 12,1,50,50,1
-YCPA-2AXG-,COMMUNITY LEADERSHIP 12,1,50,50,1
-YED--0AX--,LEARNING STRATEGIES 10,2,20,50,10
-YED--0AX-L,LEARNING STRATEGIES 10 LINEAR,1,20,50,2
-YED--0BX-L,PEER TUTORING 10 LINEAR,1,50,50,1
-YED--1DX--,LEARNING STRATEGIES 11,2,20,50,9
-YED--1DX-L,LEARNING STRATEGIES 11 LINEAR,1,20,50,2
-YED--1EX-L,PEER TUTORING 11 LINEAR,1,50,50,1
-YED--1FX--,TEACHER ASSISTANT 11,2,29,50,1
-YED--2CX--,LEARNING STRATEGIES 12,2,20,50,9
-YED--2CX-L,LEARNING STRATEGIES 12 LINEAR,1,20,50,1
-YED--2DX-L,PEER TUTORING 12 LINEAR,1,50,50,1
-YED--2EX--,TEACHER ASSISTANT 12,2,29,50,11
-YED--2FX-L,SCHOLARSHIP PREPARATION 12 LINEAR,1,100,50,1
-YESFL0AX--,BEGINNERS ELL 10,2,24,50,1
-YESFL0AX-L,BEGINNERS ELL 10 Linear,2,24,10,2
-YESFL1CX--,ELL Academic Literacy 11,2,24,10,2
-YIA--2AI--,INTRODUCTION TO AVIATION 12,2,21,50,1
-YIA--2BS--,AVIATION SYSTEMS AND DESIGN 12,2,21,50,1
-YIA--2CF--,AVIATION FABRICATION 12,2,21,50,1
-YLAW-2CX--,CRIMINOLOGY 12,2,24,50,3
-YMIS-1DD--,DESIGN AND INNOVATION 11,2,24,50,1
-YMIS-2DD--,DESIGN AND INNOVATION 12,2,24,50,1
-YPA--0CX--,YOGA FOR MINDFULNESS 10,2,29,50,1
-YPA--1CX--,YOGA FOR MINDFULNESS 11,2,29,50,1
-YPA--2CX--,YOGA FOR MINDFULNESS 12,2,29,50,1
-YPR--0BX--,OUTDOOR EDUCATION 10,2,29,50,1
-YPSYC1AX--,PSYCHOLOGY 11,2,24,50,4
+ACAL-12---,AP CALCULUS AB 12 external credential,2,29,10,1,"{'block': None, 'students': []}"
+ACSC-2A---,AP COMPUTER SCIENCE A 12,2,24,10,1,"{'block': None, 'students': []}"
+AELC-12---,AP ENGLISH LITERATURE & COMPOSITION 12,2,24,10,1,"{'block': None, 'students': []}"
+APHM-12---,AP PHYSICS C (MECHANICS) 12 external credential,2,23,10,1,"{'block': None, 'students': []}"
+ASTA-12---,AP STATISTICS 12,1,29,10,1,"{'block': None, 'students': []}"
+MAC--11---,ACCOUNTING 11,2,29,50,3,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MACC-12---,ACCOUNTING 12,2,29,50,1,"{'block': None, 'students': []}"
+MACLV11---,ACTIVE LIVING 11,2,29,50,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MACLV11G--,ACTIVE LIVING 11 Girls,2,29,50,1,"{'block': None, 'students': []}"
+MACLV12---,ACTIVE LIVING 12,2,29,50,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MACLV12G--,ACTIVE LIVING 12 Girls,2,29,50,1,"{'block': None, 'students': []}"
+MADD-09---,ADST - Drafting 9,2,24,50,5,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MADEM10---,ADST ? ENTREPRENEURSHIP AND MARKETING 10,2,29,50,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MADER09---,ADST - Electronics and Robotics,2,24,50,3,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MADFS09---,ADST - Food Studies 9,2,23,50,3,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MADGE09D--,ADST 9 - General Exploratns Design Innov & Inquiry,2,24,50,1,"{'block': None, 'students': []}"
+MADGE09I--,INCLUSIVE INTRODUCTION TO TRADE SKILLS 9,2,24,50,1,"{'block': None, 'students': []}"
+MADIT09---,ADST-Information and Communications Technologies 9,2,24,50,4,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MADW-09---,ADST - Woodwork 9,2,21,50,3,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MAE--09---,ARTS EDUCATION 9,2,29,50,4,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MATPH12---,ANATOMY AND PHYSIOLOGY 12,2,23,35,6,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MBIT-11,INTRODUCTORY ITALIAN 11,2,29,15,1,"{'block': None, 'students': []}"
+MCALC12---,CALCULUS 12,2,29,20,3,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MCH--11---,CHEMISTRY 11,2,23,20,8,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MCH--12---,CHEMISTRY 12,2,23,35,6,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MCLC-12---,CAREER LIFE CONNECTIONS,2,20,50,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MCLC-12--L,CAREER LIFE CONNECTIONS Linear,1,300,0,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MCLE-10---,CAREER LIFE EDUCATION 10,2,29,50,8,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MCLE-10--L,CAREER LIFE EDUCATION 10 Linear,1,29,10,1,"{'block': None, 'students': []}"
+MCMCC11--L,CHORAL MUSIC 11: CONCERT CHOIR Linear,1,50,50,1,"{'block': None, 'students': []}"
+MCMCC12--L,CHORAL MUSIC 12: CONCERT CHOIR Linear,1,50,50,1,"{'block': None, 'students': []}"
+MCMCL12---,COMPARATIVE CULTURES 12,2,24,20,3,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MCMPR11---,COMPUTER PROGRAMMING 11,2,24,50,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MCMPR11W--,WEB DEVELOPMENT,2,24,50,1,"{'block': None, 'students': []}"
+MCMPR12W--,WEB DEVELOPMENT 12,2,24,50,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MCMPS10---,COMPOSITION 10,2,24,20,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MCMPS10C--,COMPOSITION 10 Challenge,2,24,10,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MCMPS11---,COMPOSITION 11,2,24,20,5,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MCSTU10---,ADST ? COMPUTER STUDIES 10,2,24,50,1,"{'block': None, 'students': []}"
+MCTWR10---,CREATIVE WRITING 10,2,24,30,5,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MCTWR11---,CREATIVE WRITING 11,2,24,20,3,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MDCF-10---,DANCE FOUNDATIONS 10,2,29,50,1,"{'block': None, 'students': []}"
+MDCF-11---,DANCE FOUNDATIONS 11,2,29,50,1,"{'block': None, 'students': []}"
+MDCF-12---,DANCE FOUNDATIONS 12,2,29,50,1,"{'block': None, 'students': []}"
+MDCOM11C--,COMPUTER STUDIES 11,2,24,50,1,"{'block': None, 'students': []}"
+MDMD-12D--,3D ANIMATION 12,2,24,50,1,"{'block': None, 'students': []}"
+MDNC-09C-L,DANCE 9 Choreography Linear,1,29,50,1,"{'block': None, 'students': []}"
+MDNC-09F--,DANCE 9 Foundations,2,29,50,1,"{'block': None, 'students': []}"
+MDNC-09H--,DANCE 9 HIP HOP,2,29,50,1,"{'block': None, 'students': []}"
+MDNC-09M-L,DANCE 9 Company: Platform 61 Linear,1,29,50,1,"{'block': None, 'students': []}"
+MDNC-09PT-,DANCE 9 Performance and Technique,2,29,10,1,"{'block': None, 'students': []}"
+MDNC-10--L,DANCE 10: CHOREOGRAPHY Linear,1,29,50,1,"{'block': None, 'students': []}"
+MDNC-11--L,DANCE 11: CHOREOGRAPHY Linear,1,29,50,1,"{'block': None, 'students': []}"
+MDNC-12--L,DANCE 12: CHOREOGRAPHY Linear,1,29,50,1,"{'block': None, 'students': []}"
+MDNCM10--L,DANCE COMPANY 10 Linear,1,29,50,1,"{'block': None, 'students': []}"
+MDNCM11--L,DANCE COMPANY 11 Linear,1,29,50,1,"{'block': None, 'students': []}"
+MDNCM12--L,DANCE COMPANY 12 Linear,1,29,50,1,"{'block': None, 'students': []}"
+MDNCN11---,DANCE CONDITIONING 11,2,29,50,1,"{'block': None, 'students': []}"
+MDNCN12---,DANCE CONDITIONING 12,2,29,50,1,"{'block': None, 'students': []}"
+MDNTP10---,DANCE TECHNIQUE AND PERFORMANCE 10,2,29,10,1,"{'block': None, 'students': []}"
+MDNTP11---,DANCE TECHNIQUE AND PERFORMANCE 11,2,29,10,1,"{'block': None, 'students': []}"
+MDNTP12---,DANCE TECHNIQUE AND PERFORMANCE 12,2,29,10,1,"{'block': None, 'students': []}"
+MDR--09---,DRAMA 9,2,29,50,1,"{'block': None, 'students': []}"
+MDRM-10---,DRAMA 10,2,29,35,1,"{'block': None, 'students': []}"
+MDRM-11---,DRAMA 11,2,29,50,1,"{'block': None, 'students': []}"
+MDRM-12---,DRAMA 12,2,29,50,1,"{'block': None, 'students': []}"
+MECOM12---,E-COMMERCE 12,2,29,50,1,"{'block': None, 'students': []}"
+MEN--09---,ENGLISH LANGUAGE ARTS 9,2,24,20,6,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MEN--09A--,ENGLISH LANGUAGE ARTS 9 ADAPTED,4,15,10,1,"{'block': None, 'students': []}"
+MEN--09C--,ENGLISH LANGUAGE ARTS 9 CHALLENGE,2,24,10,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MEN--09E--,ENGLISH 9 FOR ELL,2,24,10,1,"{'block': None, 'students': []}"
+MENFP12---,ENGLISH FIRST PEOPLES 12,2,24,20,1,"{'block': None, 'students': []}"
+MENFP12--Y,ENGLISH FIRST PEOPLES 12 Year,2,24,20,1,"{'block': None, 'students': []}"
+MENFP12C--,ENGLISH FIRST PEOPLES 12 CHALLENGE,2,24,20,1,"{'block': None, 'students': []}"
+MENST12---,ENGLISH STUDIES 12,2,24,20,9,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MENST12--Y,ENGLISH STUDIES 12 Year Long,2,24,10,4,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MENST12C--,ENGLISH STUDIES 12 CHALLENGE,2,24,10,1,"{'block': None, 'students': []}"
+MENT-12---,ENTREPRENEURSHIP 12,2,29,50,3,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MEPSS11---,EXPLORATIONS IN SOCIAL STUDIES 11,2,24,20,5,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MEPSS11C--,EXPLORATIONS IN SOCIAL STUDIES 11 CHALLENGE,2,24,20,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MEVSC11---,ENVIRONMENTAL SCIENCE 11,2,23,35,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MEVSC12C--,ENVIRONMENTAL SCIENCE 12 - CLIMATE CHANGE,2,23,35,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MFMP-10---,FOUNDATIONS OF MATH AND PRE-CALCULUS 10,2,29,20,5,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MFMP-10C--,FOUNDATIONS OF MATH AND PRE-CALCULUS 10 CHALLENGE,2,29,20,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MFMP-10H--,FOUNDATIONS OF MATH AND PRE-CALCULUS 10 HONOURS,2,29,10,1,"{'block': None, 'students': []}"
+MFOM-11---,FOUNDATIONS OF MATHEMATICS 11,2,29,10,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MFOOD10---,ADST ?  FOOD STUDIES 10,2,23,50,3,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MFOOD11---,FOOD STUDIES 11,2,23,50,4,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MFOOD12---,FOOD STUDIES 12,2,23,50,4,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MFR--09---,FRENCH 9,2,29,15,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MFR--10---,FRENCH 10,2,29,15,1,"{'block': None, 'students': []}"
+MFR--11---,FRENCH 11,2,29,15,3,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MFR--12---,FRENCH 12,2,29,15,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MFTCD11---,FITNESS AND CONDITIONING 11,2,29,50,1,"{'block': None, 'students': []}"
+MFTCD12---,FITNESS AND CONDITIONING 12,2,29,50,1,"{'block': None, 'students': []}"
+MGMT-12L--,GEOMETRY 12,1,29,20,1,"{'block': None, 'students': []}"
+MGRPR11--L,GRAPHIC PRODUCTION 11 LINEAR,1,50,50,1,"{'block': None, 'students': []}"
+MGRPR12--L,GRAPHIC PRODUCTION 12 LINEAR,1,50,50,1,"{'block': None, 'students': []}"
+MIDS-0A---,INDEPENDENT DIRECTED STUDIES 10A,0,29,0,6,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MIDS-0B---,INDEPENDENT DIRECTED STUDIES 10B,2,29,50,5,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MIDS-0C---,INDEPENDENT DIRECTED STUDIES 10C,1,20,20,1,"{'block': None, 'students': []}"
+MIDS-1B---,INDEPENDENT DIRECTED STUDIES 11B,2,100,0,5,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MIMCB11--L,INSTRUMENTAL MUSIC 11: CONCERT BAND LINEAR,1,100,10,1,"{'block': None, 'students': []}"
+MIMCB12--L,INSTRUMENTAL MUSIC 12: CONCERT BAND LINEAR,1,100,10,1,"{'block': None, 'students': []}"
+MIMG-11---,INSTRUMENTAL MUSIC 11: GUITAR,2,29,50,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MIMG-12---,INSTRUMENTAL MUSIC 12: GUITAR,2,29,50,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MIMJB11--L,INSTRUMENTAL MUSIC 11: JAZZ BAND LINEAR,1,100,50,1,"{'block': None, 'students': []}"
+MIMJB12--L,INSTRUMENTAL MUSIC 12: JAZZ BAND LINEAR,1,100,50,1,"{'block': None, 'students': []}"
+MINST12---,CONTEMPORARY INDIGENOUS STUDIES 12,2,24,20,1,"{'block': None, 'students': []}"
+MINST12C--,CONTEMPORARY INDIGENOUS STUDIES 12 CHALLENGE,2,24,20,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MIT--11---,ITALIAN 11,2,29,15,1,"{'block': None, 'students': []}"
+MLFSC11---,LIFE SCIENCES 11,2,23,35,5,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MLST-12---,LAW STUDIES 12,2,24,20,7,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MLTST10---,LITERARY STUDIES 10,2,24,50,8,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MLTST10--L,LITERARY STUDIES 10 Linear,1,24,20,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MLTST10C--,LITERARY STUDIES 10 Challenge,2,24,20,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MLTST11---,LITERARY STUDIES 11,2,24,15,1,"{'block': None, 'students': []}"
+MLTST11C--,LITERARY STUDIES 11 Challenge,2,24,20,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MLTST12---,LITERARY STUDIES 12,2,24,10,1,"{'block': None, 'students': []}"
+MMA--09---,MATHEMATICS 9,2,29,20,4,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MMA--09C--,MATHEMATICS 9 CHALLENGE,2,29,20,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MMA--09H--,MATHEMATICS 9 HONOURS,2,29,20,1,"{'block': None, 'students': []}"
+MMACS11---,COMPUTER SCIENCE 11,2,24,50,5,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MMACS12---,COMPUTER SCIENCE 12,2,24,50,5,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MMAN-10---,MANDARIN CHINESE 10,2,29,15,1,"{'block': None, 'students': []}"
+MMAN-11---,MANDARIN CHINESE 11,2,29,50,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MMAP-11---,MARKETING AND PROMOTION 11,2,29,50,1,"{'block': None, 'students': []}"
+MMEDD10---,ADST ? MEDIA DESIGN 10,2,24,50,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MMEDD11---,MEDIA DESIGN 11,2,24,50,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MMEDD12---,MEDIA DESIGN 12,2,24,50,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MMUCB10--L,INSTRUMENTAL MUSIC: CONCERT BAND 10 Linear,1,100,10,1,"{'block': None, 'students': []}"
+MMUCC10--L,CHORAL MUSIC: CONCERT CHOIR 10 Linear,1,50,50,1,"{'block': None, 'students': []}"
+MMUGT10---,INSTRUMENTAL MUSIC: GUITAR 10,2,29,50,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MMUJB10--L,INSTRUMENTAL MUSIC: JAZZ BAND 10 Linear,1,100,50,1,"{'block': None, 'students': []}"
+MMUOR10S-L,INSTRUMENTAL MUSIC: ORCHESTRA 10 Strings LINEAR,1,100,50,1,"{'block': None, 'students': []}"
+MMUOR11S-L,INSTRUMENTAL MUSIC: ORCHESTRA 11 Strings Linear,1,100,50,1,"{'block': None, 'students': []}"
+MMUOR12S-L,INSTRUMENTAL MUSIC: ORCHESTRA 12 Strings Linear,1,100,50,1,"{'block': None, 'students': []}"
+MNMD-10---,NEW MEDIA 10,2,24,50,3,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MNMD-11---,NEW MEDIA 11,2,24,20,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MODED11---,OUTDOOR EDUCATION 11,2,29,50,1,"{'block': None, 'students': []}"
+MODED12---,OUTDOOR EDUCATION 12,2,29,50,1,"{'block': None, 'students': []}"
+MPGEO12---,PHYSICAL GEOGRAPHY 12,2,24,10,1,"{'block': None, 'students': []}"
+MPH--11---,PHYSICS 11,2,23,20,6,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MPH--12---,PHYSICS 12,2,23,35,5,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MPHE-09---,PHYSICAL AND HEALTH EDUCATION 9,2,29,35,3,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MPHE-09--L,PHYSICAL AND HEALTH EDUCATION 9 Linear,1,32,40,1,"{'block': None, 'students': []}"
+MPHE-09B--,PHYSICAL AND HEALTH EDUCATION 9 Boys,2,29,35,5,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MPHE-09B-L,PHYSICAL AND HEALTH EDUCATION 9 Boys Linear,1,29,35,1,"{'block': None, 'students': []}"
+MPHE-09G--,PHYSICAL AND HEALTH EDUCATION 9 Girls,2,29,35,4,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MPHE-09G-L,PHYSICAL AND HEALTH EDUCATION 9 Girls Linear,1,29,35,1,"{'block': None, 'students': []}"
+MPHE-09Y--,PHYSICAL AND HEALTH EDUCATION 9 Yoga for Mindfulns,2,29,50,1,"{'block': None, 'students': []}"
+MPHED10---,PHYSICAL AND HEALTH EDUCATION 10,2,29,35,4,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MPHED10--L,PHYSICAL AND HEALTH EDUCATION 10 LINEAR,1,29,35,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MPHED10B--,PHYSICAL AND HEALTH EDUCATION 10 Boys,2,29,35,5,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MPHED10B-L,PHYSICAL AND HEALTH EDUCATION 10 LINEAR Boys,1,29,35,1,"{'block': None, 'students': []}"
+MPHED10G--,PHYSICAL AND HEALTH EDUCATION 10 Girls,2,29,35,4,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MPHED10G-L,PHYSICAL AND HEALTH EDUCATION 10 LINEAR Girls,1,29,35,1,"{'block': None, 'students': []}"
+MPREC11---,PRE-CALCULUS 11,2,29,20,7,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MPREC11H--,PRE-CALCULUS 11 HONOURS,2,29,10,1,"{'block': None, 'students': []}"
+MPREC12---,PRE-CALCULUS 12,2,29,20,6,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MPREC12H--,PRE-CALCULUS 12 HONOURS,2,29,10,1,"{'block': None, 'students': []}"
+MSC--09---,SCIENCE 9,2,23,20,5,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MSC--09A--,SCIENCE 9: ADAPTED,4,15,10,1,"{'block': None, 'students': []}"
+MSC--09C--,SCIENCE 9: CHALLENGE,2,23,20,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MSC--09D--,Science 9 Discovery,2,23,20,5,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MSC--10---,SCIENCE 10,2,23,20,8,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MSC--10C--,SCIENCE 10: CHALLENGE,2,23,20,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MSP--09---,SPANISH 9,2,29,35,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MSP--10---,SPANISH 10,2,29,35,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MSP--11---,SPANISH 11,2,29,35,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MSP--12---,SPANISH 12,2,29,35,1,"{'block': None, 'students': []}"
+MSPLG10--L,SPOKEN LANGUAGE 10 LINEAR,2,24,10,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MSS--09---,SOCIAL STUDIES 9,2,24,20,5,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MSS--09C--,SOCIAL STUDIES 9 CHALLENGE,2,24,20,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MSS--10---,SOCIAL STUDIES 10,2,24,20,7,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MSS--10C--,SOCIAL STUDIES 10 CHALLENGE,2,24,20,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MSTAT12---,STATISTICS 12,2,29,15,1,"{'block': None, 'students': []}"
+MSTAT12--L,STATISTICS 12 LINEAR,1,29,15,1,"{'block': None, 'students': []}"
+MSTX-0A---,SKILLS EXPLORATION 10A,2,21,50,1,"{'block': None, 'students': []}"
+MSTX-0AI--,INCLUSIVE INTRODUCTION TO TRADE SKILLS 10,2,21,50,1,"{'block': None, 'students': []}"
+MSTX-1A---,SKILLS EXPLORATION 11A,2,21,50,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MSTX-1AI--,INCLUSIVE INTRODUCTION TO TRADE SKILLS 11,2,21,50,1,"{'block': None, 'students': []}"
+MSTX-2A---,SKILLS EXPLORATION 12A,2,21,50,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MSTX-2AI--,INCLUSIVE INTRODUCTION TO TRADE SKILLS 12,2,21,50,1,"{'block': None, 'students': []}"
+MTAUT11---,AUTOMOTIVE TECHNOLOGY 11,2,21,50,3,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MTAUT12---,AUTOMOTIVE TECHNOLOGY 12,2,21,50,3,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MTDRF10---,ADST ?  DRAFTING 10,2,24,50,5,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MTDRF11---,DRAFTING 11,2,24,50,5,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MTDRF12---,DRAFTING 12,2,24,50,5,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MTEAD12---,ENGINE AND DRIVETRAIN 12,2,21,50,3,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MTEAR10---,ADST ?  ELECTRONICS AND ROBOTICS 10,2,24,50,3,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MTEXP10D--,ADST-Technology Explorations 10 Design Innov & Inq,2,24,50,1,"{'block': None, 'students': []}"
+MTPOW10---,ADST ?  POWER TECHNOLOGY 10,2,21,50,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MTROB11---,ROBOTICS 11,2,24,50,3,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MTROB12---,ROBOTICS 12,2,24,50,3,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MVAPH10---,VISUAL ARTS: PHOTOGRAPHY 10,2,24,50,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MVAPH11---,PHOTOGRAPHY 11,2,24,50,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MVAPH12---,PHOTOGRAPHY 12,2,24,50,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+MVAST10---,VISUAL ARTS: ART STUDIO 10,2,29,50,5,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MVAST11---,ART STUDIO 11,2,29,50,3,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MVAST12---,ART STUDIO 12,2,29,50,3,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MWBDV10IT-,Information and Communications Technologies 10,2,24,50,4,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MWEX-2A---,WORK EXPERIENCE 12A,2,29,50,3,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MWEX-2A--L,WORK EXPERIENCE 12A LINEAR,1,29,50,1,"{'block': None, 'students': []}"
+MWEX-2B---,WORK EXPERIENCE 12B,2,29,50,1,"{'block': None, 'students': []}"
+MWEX-2B--L,WORK EXPERIENCE 12B LINEAR,1,29,50,1,"{'block': None, 'students': []}"
+MWH--12---,20th CENTURY WORLD HISTORY 12,2,24,20,3,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MWPM-10---,WORKPLACE MATHEMATICS 10,2,29,10,1,"{'block': None, 'students': []}"
+MWPM-11---,WORKPLACE MATHEMATICS 11,2,29,20,3,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MWWK-10---,ADST ?  WOODWORK 10,2,21,50,3,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MWWK-11---,WOODWORK 11,2,21,50,3,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MWWK-12---,WOODWORK 12,2,21,50,4,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+PB---2A---,CAMOSUN COLLEGE COURSE 12A,2,29,50,3,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+XAT--11---,ASSIGNED TIME 11,2,50,20,4,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+XAT--12---,ASSIGNED TIME 12,2,50,20,4,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+XBA--09B-L,BEGINNER BAND 9 LINEAR,1,100,10,1,"{'block': None, 'students': []}"
+XBA--09C-L,CONCERT BAND 9 Linear,1,100,10,1,"{'block': None, 'students': []}"
+XBA--09G--,CONCERT BAND 9 - Guitar,2,29,50,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+XBA--09J-L,JAZZ BAND 9 LINEAR,1,100,50,1,"{'block': None, 'students': []}"
+XC---09--L,CONCERT CHOIR 9 Linear,1,50,50,1,"{'block': None, 'students': []}"
+XLDCB09LS-,LEARNING STRATEGIES 9 LD,2,29,50,8,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+XLDCB09LSL,LEARNING STRATEGIES 9 LD LINEAR,1,29,50,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+XLDCB09M--,TECH ED 9: MECHANICS LD,2,21,50,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+XLDCB09S-L,STRINGS 9 LINEAR,1,100,50,1,"{'block': None, 'students': []}"
+XLDCE09NM-,NUMERACY 9,2,29,10,1,"{'block': None, 'students': []}"
+XSIEP1A---,IEP MODIFIED 11A LD,2,29,50,1,"{'block': None, 'students': []}"
+XSIEP1B---,IEP MODIFIED 11B LD,2,29,50,1,"{'block': None, 'students': []}"
+XSIEP1C---,IEP MODIFIED 11C LD,2,29,20,1,"{'block': None, 'students': []}"
+XSIEP1D---,IEP MODIFIED 11D LD,2,29,20,1,"{'block': None, 'students': []}"
+XSIEP1E---,IEP MODIFIED 11E LD,2,29,20,1,"{'block': None, 'students': []}"
+XSIEP1F---,IEP MODIFIED 11F LD,2,29,20,1,"{'block': None, 'students': []}"
+XSIEP1G---,IEP MODIFIED 11G LD,2,29,20,1,"{'block': None, 'students': []}"
+XSIEP1H---,IEP MODIFIED 11H LD,2,29,20,1,"{'block': None, 'students': []}"
+XSIEP2A---,IEP MODIFIED 12A LD,2,29,50,1,"{'block': None, 'students': []}"
+XSIEP2C---,IEP MODIFIED 12C LD,2,29,20,1,"{'block': None, 'students': []}"
+XSIEP2E---,IEP MODIFIED 12E LD,2,29,20,1,"{'block': None, 'students': []}"
+XSPBK0A---,SUPPORT BLOCK 10A,2,29,50,1,"{'block': None, 'students': []}"
+XSPBK1A---,SUPPORT BLOCK 11A,2,29,50,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+XSPBK2A---,SUPPORT BLOCK 12A,2,29,50,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+YCPA-0AX-L,COMMUNITY LEADERSHIP 10 Linear,1,200,50,1,"{'block': None, 'students': []}"
+YCPA-0AXE-,COMMUNITY LEADERSHIP 10,1,50,50,1,"{'block': None, 'students': []}"
+YCPA-1AX-L,COMMUNITY LEADERSHIP 11 Linear,1,200,50,1,"{'block': None, 'students': []}"
+YCPA-1AXE-,COMMUNITY LEADERSHIP 11,1,50,50,1,"{'block': None, 'students': []}"
+YCPA-2AX-L,COMMUNITY LEADERSHIP 12 Linear,1,200,50,1,"{'block': None, 'students': []}"
+YCPA-2AXE-,COMMUNITY LEADERSHIP 12,1,50,50,1,"{'block': None, 'students': []}"
+YCPA-2AXG-,COMMUNITY LEADERSHIP 12,1,50,50,1,"{'block': None, 'students': []}"
+YED--0AX--,LEARNING STRATEGIES 10,2,20,50,10,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+YED--0AX-L,LEARNING STRATEGIES 10 LINEAR,1,20,50,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+YED--0BX-L,PEER TUTORING 10 LINEAR,1,50,50,1,"{'block': None, 'students': []}"
+YED--1DX--,LEARNING STRATEGIES 11,2,20,50,9,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+YED--1DX-L,LEARNING STRATEGIES 11 LINEAR,1,20,50,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+YED--1EX-L,PEER TUTORING 11 LINEAR,1,50,50,1,"{'block': None, 'students': []}"
+YED--1FX--,TEACHER ASSISTANT 11,2,29,50,1,"{'block': None, 'students': []}"
+YED--2CX--,LEARNING STRATEGIES 12,2,20,50,9,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+YED--2CX-L,LEARNING STRATEGIES 12 LINEAR,1,20,50,1,"{'block': None, 'students': []}"
+YED--2DX-L,PEER TUTORING 12 LINEAR,1,50,50,1,"{'block': None, 'students': []}"
+YED--2EX--,TEACHER ASSISTANT 12,2,29,50,11,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+YED--2FX-L,SCHOLARSHIP PREPARATION 12 LINEAR,1,100,50,1,"{'block': None, 'students': []}"
+YESFL0AX--,BEGINNERS ELL 10,2,24,50,1,"{'block': None, 'students': []}"
+YESFL0AX-L,BEGINNERS ELL 10 Linear,2,24,10,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+YESFL1CX--,ELL Academic Literacy 11,2,24,10,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"
+YIA--2AI--,INTRODUCTION TO AVIATION 12,2,21,50,1,"{'block': None, 'students': []}"
+YIA--2BS--,AVIATION SYSTEMS AND DESIGN 12,2,21,50,1,"{'block': None, 'students': []}"
+YIA--2CF--,AVIATION FABRICATION 12,2,21,50,1,"{'block': None, 'students': []}"
+YLAW-2CX--,CRIMINOLOGY 12,2,24,50,3,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+YMIS-1DD--,DESIGN AND INNOVATION 11,2,24,50,1,"{'block': None, 'students': []}"
+YMIS-2DD--,DESIGN AND INNOVATION 12,2,24,50,1,"{'block': None, 'students': []}"
+YPA--0CX--,YOGA FOR MINDFULNESS 10,2,29,50,1,"{'block': None, 'students': []}"
+YPA--1CX--,YOGA FOR MINDFULNESS 11,2,29,50,1,"{'block': None, 'students': []}"
+YPA--2CX--,YOGA FOR MINDFULNESS 12,2,29,50,1,"{'block': None, 'students': []}"
+YPR--0BX--,OUTDOOR EDUCATION 10,2,29,50,1,"{'block': None, 'students': []}"
+YPSYC1AX--,PSYCHOLOGY 11,2,24,50,4,"{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}","{'block': None, 'students': []}"
+MEFWR10---,ENGLISH FIRST PEOPLES: LITERARY STUDIES 10,2,24,20,2,"{'block': None, 'students': []}","{'block': None, 'students': []}"

@@ -36,15 +36,17 @@ class SystemManager:
 
     # conditions
     sequence = ParserConditions.parse_sequence_csv("Data for Project/Course Sequencing Rules.csv")
+    #sequence.update(ParserConditions.parse_terms_csv("Data for Project/Course Blocking Rules.csv"))
     non_simul = ParserConditions.parse_non_simul_csv("Data for Project/Course Blocking Rules.csv")
     simul = ParserConditions.parse_simul_csv("Data for Project/Course Blocking Rules.csv")
-    
     
     matrix.start(parsed_student_data, blocks, parsed_course_data, sequence, non_simul)
 
     matrix.measure(parsed_student_data)
 
+    #matrix.fixSections(parsed_student_data, parsed_course_data)
+
     matrix.export_to_csv('_matrixOuptput.csv', parsed_course_data)
 
-    matrix.get_student_timetable(str(1790), parsed_course_data)
+    matrix.get_student_timetable(str(1114), parsed_course_data)
     
