@@ -1,5 +1,6 @@
 import csv
 import copy
+import random
 
 class Matrix:
 
@@ -106,6 +107,8 @@ class Matrix:
                                 self.assign(s_key, b, c_key)
                                 #self.matrix[s_key][b][non_simul_course] = 1
                                 students[s_key].remove(non_simul_course)
+                    
+                    random.shuffle(courses)
                             
                     break
         
