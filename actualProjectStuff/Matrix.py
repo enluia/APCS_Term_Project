@@ -23,7 +23,7 @@ class Matrix:
         # Define the matrix variable as a nested dictionary
         outside_timetable = ['MDNC-12--L', 'MDNCM12--L', 'MGMT-12L--', 'MCMCC12--L', 'MIMJB12--L', 
                              'MMUOR12S-L', 'YCPA-2AX-L', 'YCPA-2AXE-', 'MGRPR12--L', 'YED--2DX-L', 
-                             'YED--2FX-L', 'MWEX-2A--L', 'MWEX-2B--L', 
+                             'YED--2FX-L', 'MWEX-2A--L', 'MWEX-2B--L', 'MCLC-12---',
                              
                              'MDNC-11--L', 'MDNCM11--L', 'MGMT-12L--', 'MCMCC11--L', 'MIMJB11--L',
                              'MMUOR11S-L', 'YCPA-1AX-L', 'YCPA-1AXE-', 'MGRPR11--L', 'YED--1EX-L',
@@ -32,8 +32,7 @@ class Matrix:
                              'YCPA-0AX-L', 'MDNCM10--L', 'YED--0BX-L', 'MMUCC10--L', 'YCPA-0AXE-',
                              'MMUOR10S-L', 'MDNC-10--L', 'MIDS-0C---', 'MMUJB10--L',
                              
-                             'XC---09--L', 'MDNC-09C-L', 
-                             'MDNC-09M-L', 'XBA--09J-L', 'XLDCB09S-L']
+                             'XC---09--L', 'MDNC-09C-L', 'MDNC-09M-L', 'XBA--09J-L', 'XLDCB09S-L']
 
         # Initialize the matrix
         for s_key in students:
@@ -62,7 +61,6 @@ class Matrix:
                                 continue
                             
                             self.assign(s_key, b, postreq)
-                            #self.matrix[s_key][b][postreq] = 1
                             students[s_key].remove(postreq)
                             break
 
@@ -72,7 +70,6 @@ class Matrix:
                         if sum(self.matrix[s_key][b].values()) > 0:
                             continue
                         self.assign(s_key, b, prereq)
-                        #self.matrix[s_key][b][prereq] = 1
                         students[s_key].remove(prereq)
                         break
 
@@ -92,19 +89,12 @@ class Matrix:
                         continue
 
                     self.assign(s_key, b, c_key)
-                    #self.matrix[s_key][b][c_key] = 1
-                    # courses[c_key]["max_enroll"] = int(courses[c_key]["max_enroll"]) - 1
-                    # if courses[c_key]["max_enroll"] == 0:
-                    #     courses[c_key]["sections"] = int(courses[c_key]["sections"]) - 1
-                    #     courses[c_key]["max_enroll"] = courses_original[c_key]["max_enroll"]
-                    #if self.matrix[s_key][b]
 
                     # add non simul courses
                     if non_simul.get(c_key):
                         for non_simul_course in non_simul.get(c_key):
                             if non_simul_course in students[s_key]:
                                 self.assign(s_key, b, c_key)
-                                #self.matrix[s_key][b][non_simul_course] = 1
                                 students[s_key].remove(non_simul_course)
                             
                     break
@@ -125,21 +115,13 @@ class Matrix:
                     if self.matrix[s_key][b][c_key] == 1:
                         #print(s_key, b, c_key, self.matrix[s_key][b][c_key])
                         pass
+                    if c_key in students[s_key]:
+                        pass
 
-    # counts percentage of correct course given to students
+
+    # counts percentage of correct courses given to students
     def measure(self, students):
 
-        """TEMPORARY: COURSES NOT GIVEN"""
-        print("\nPeople who signed up for more than 8 courses:")
-        for s_key in students:
-            for c_key in students[s_key]: # for every course a student requested
-                course_freq = 0
-                for b in self.matrix[s_key]:
-                    course_freq += self.matrix[s_key][b][c_key] 
-                if course_freq == 0:
-                    print(s_key, c_key)
-        print()
-        """============================"""
 
         score = 0
         total_requests = 0

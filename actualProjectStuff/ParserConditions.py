@@ -82,7 +82,6 @@ class ParserConditions:
                 current_set = row[2].split('Schedule')[1].split(' in a Terms')[0].split(', ')
 
                 # haha its course sequencing now
-                print(current_set)
-                data[current_set[0]] = data[current_set[1]]
+                data[current_set[0]] = current_set[1]
 
         return data
