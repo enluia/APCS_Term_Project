@@ -156,7 +156,7 @@ class Matrix:
 
 
     # counts percentage of correct courses given to students
-    def measure(self, students, courses):
+    def measure(self, students, courses, num_alternates):
 
         coursesPlaced = 0
         total_requests = 0

@@ -15,6 +15,7 @@ class SystemManager:
     # students
     ParserStudent.parse_raw_csv("Data for Project/Cleaned Student Requests.csv")
     parsed_student_data = ParserStudent.read_parsed_csv("Data for Project/_parsedStudentData.csv")
+    num_alternates = ParserStudent.count_alternates("Data for Project/Cleaned Student Requests.csv")
 
     students = []
 
@@ -39,11 +40,12 @@ class SystemManager:
     
     matrix.start(parsed_student_data, blocks, parsed_course_data, sequence, non_simul)
 
-    matrix.measure(parsed_student_data, parsed_course_data)
+    matrix.measure(parsed_student_data, parsed_course_data, num_alternates)
 
     #matrix.fixSections(parsed_student_data, parsed_course_data)
 
     matrix.export_to_csv('_matrixOuptput.csv', parsed_course_data)
 
-    matrix.get_student_timetable(str(1114), parsed_course_data)
+    #for s_key in parsed_student_data:
+    #    matrix.get_student_timetable(str(s_key), parsed_course_data)
     

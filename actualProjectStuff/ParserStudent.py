@@ -67,3 +67,20 @@ class ParserStudent:
                 data[set_id] = course_ids
 
         return data
+
+    # count requests for alternates
+    def count_alternates(file_path):
+        count = 0
+
+        with open(file_path, 'r') as file:
+            reader = csv.reader(file)
+
+            for row in reader:
+                
+                # ignore header rows
+                if row[0].startswith("ID") or row[0] == 'Course' or row[11] == "N":
+                    continue
+                    
+                count += 1
+
+            return count
