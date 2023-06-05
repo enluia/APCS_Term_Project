@@ -43,7 +43,7 @@ class Matrix:
                 for c_key in courses:
                     self.matrix[s_key][b][c_key] = 0
 
-        # assign courses to students
+# assign courses to students
         b_key = 0
 
         # start with courses that need prereq
@@ -99,7 +99,9 @@ class Matrix:
                                 students[s_key].remove(non_simul_course)
                             
                     break
-        
+
+        """other things we occasionally print"""
+
         # count students in each course
         for c_key in courses:
             count = 0
@@ -121,20 +123,33 @@ class Matrix:
 
 
     # counts percentage of correct courses given to students
-    def measure(self, students):
+    def measure(self, students, courses):
 
-
-        score = 0
+        coursesPlaced = 0
         total_requests = 0
         for s_key in students:
             for b in self.matrix[s_key]:
                 for c_key in self.matrix[s_key][b]:
                     if self.matrix[s_key][b][c_key] == 1 and c_key in students[s_key]:
-                        score += 1
+                        coursesPlaced += 1
             total_requests += len(students[s_key])
 
-        print(score, "/", total_requests, "=", score / total_requests * 100)
+        print(coursesPlaced, "/", total_requests, "=", coursesPlaced / total_requests * 100)
 
+        fullTimetable = 0
+        i = 0
+        for s_key in students:
+            coursesGiven = 0
+            for b in self.matrix[s_key]:
+                for c_key in self.matrix[s_key][b]:
+                    if self.matrix[s_key][b][c_key] == 1 and c_key in students[s_key]:
+                        coursesGiven += 1
+            if coursesGiven == 8:
+                fullTimetable += 1
+                if i < 3:
+                    self.get_student_timetable(str(s_key), courses)
+                    i += 1
+        print(fullTimetable, "students got 8/8 requested courses")
 
     def export_to_csv(self, filename, courseData):
         # Collect all blocks and unique courses with assigned value 1
