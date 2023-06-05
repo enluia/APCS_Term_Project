@@ -43,7 +43,7 @@ class Matrix:
                 for c_key in courses:
                     self.matrix[s_key][b][c_key] = 0
 
-        # assign courses to students
+# assign courses to students
         b_key = 0
 
         # start with courses that need prereq
@@ -99,7 +99,9 @@ class Matrix:
                                 students[s_key].remove(non_simul_course)
                             
                     break
-        
+
+        """other things we occasionally print"""
+
         # count students in each course
         for c_key in courses:
             count = 0
