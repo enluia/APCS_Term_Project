@@ -7,6 +7,15 @@ class Matrix:
     def __init__(self):
         self.matrix = {}
 
+    # randomness of courses maker
+    def shuffle_dict(self, dictionary, num_shuffles):
+        keys = list(dictionary.keys())
+        shuffled_dict = dictionary.copy()
+        for _ in range(num_shuffles):
+            random.shuffle(keys)
+            shuffled_dict = {key: shuffled_dict[key] for key in keys}
+        return shuffled_dict
+
     # sets the value of a certain location in the reference to 1
     def assign(self, s_key, b, c_key):
         self.matrix[s_key][b][c_key] = 1
@@ -20,6 +29,8 @@ class Matrix:
 
         # Sort courses by priority
         courses = dict(sorted(courses.items(), key=lambda x: x[1]['priority']))
+        num_shuffles = 20
+        courses = self.shuffle_dict(courses, 20)
 
         # Define the matrix variable as a nested dictionary
         outside_timetable = ['MDNC-12--L', 'MDNCM12--L', 'MGMT-12L--', 'MCMCC12--L', 'MIMJB12--L', 
@@ -36,48 +47,48 @@ class Matrix:
                              'XC---09--L', 'MDNC-09C-L', 'MDNC-09M-L', 'XBA--09J-L', 'XLDCB09S-L']
 
         # Initialize the matrix
-        for s_key in students:
-            self.matrix[s_key] = {}
+        for student_key in students:
+            self.matrix[student_key] = {}
             for b in blocks:
-                self.matrix[s_key][b] = {}
+                self.matrix[student_key][b] = {}
                 for c_key in courses:
-                    self.matrix[s_key][b][c_key] = 0
+                    self.matrix[student_key][b][c_key] = 0
 
         # assign courses to students
         b_key = 0
 
         # start with courses that need prereq
         for prereq in sequence.keys():
-            for s_key in students:
-                if prereq not in students[s_key]:
+            for student_key in students:
+                if prereq not in students[student_key]:
                     continue
 
                 # assign postreq
                 postreq_count = 0
                 for postreq in sequence[prereq]:
-                    if postreq in students[s_key]:
+                    if postreq in students[student_key]:
                         postreq_count += 1
                         for b in blocks[4:8]:
-                            if sum(self.matrix[s_key][b].values()) > 0:
+                            if sum(self.matrix[student_key][b].values()) > 0:
                                 continue
                             
-                            self.assign(s_key, b, postreq)
-                            students[s_key].remove(postreq)
+                            self.assign(student_key, b, postreq)
+                            students[student_key].remove(postreq)
                             break
 
                 # assign prereq
                 if postreq_count > 0:
                     for b in blocks[0:4]:
-                        if sum(self.matrix[s_key][b].values()) > 0:
+                        if sum(self.matrix[student_key][b].values()) > 0:
                             continue
-                        self.assign(s_key, b, prereq)
-                        students[s_key].remove(prereq)
+                        self.assign(student_key, b, prereq)
+                        students[student_key].remove(prereq)
                         break
 
         # then go through non-sequenced courses by priority
         for c_key in courses:
-            for s_key in students:
-                if c_key not in students[s_key]:
+            for student_key in students:
+                if c_key not in students[student_key]:
                     continue
                 if c_key in outside_timetable:
                     b_key = 8
@@ -86,39 +97,41 @@ class Matrix:
 
                 # assign students requested course to next available block
                 for b in blocks[b_key:b_key + 8]:
-                    if sum(self.matrix[s_key][b].values()) > 0 or courses[c_key].get("sections") == 0:
+                    if sum(self.matrix[student_key][b].values()) > 0 or courses[c_key].get("sections") == 0:
                         continue
 
-                    self.assign(s_key, b, c_key)
+                    self.assign(student_key, b, c_key)
 
                     # add non simul courses
                     if non_simul.get(c_key):
                         for non_simul_course in non_simul.get(c_key):
-                            if non_simul_course in students[s_key]:
-                                self.assign(s_key, b, c_key)
-                                students[s_key].remove(non_simul_course)
+                            if non_simul_course in students[student_key]:
+                                self.assign(student_key, b, c_key)
+                                students[student_key].remove(non_simul_course)
                             
                     break
         
         # count students in each course
         for c_key in courses:
             count = 0
-            for s_key in students:
+            for student_key in students:
                 for b in blocks:
-                    if self.matrix[s_key][b][c_key] == 1:
+                    if self.matrix[student_key][b][c_key] == 1:
                         count += 1
 #            print(c_key, count)
 
         # Loop through the matrix and print the location of the values of 1
-        for s_key in students:
+        for student_key in students:
             for b in blocks:
                 for c_key in courses:
-                    if self.matrix[s_key][b][c_key] == 1:
+                    if self.matrix[student_key][b][c_key] == 1:
                         #print(s_key, b, c_key, self.matrix[s_key][b][c_key])
                         pass
-                    if c_key in students[s_key]:
+                    if c_key in students[student_key]:
                         pass
 
+        for i in courses.keys():
+            print(i)
 
     # counts percentage of correct courses given to students
     def measure(self, students):
@@ -126,12 +139,13 @@ class Matrix:
 
         score = 0
         total_requests = 0
-        for s_key in students:
-            for b in self.matrix[s_key]:
-                for c_key in self.matrix[s_key][b]:
-                    if self.matrix[s_key][b][c_key] == 1 and c_key in students[s_key]:
+        for student_key in students:
+            for block_key in self.matrix[student_key]:
+                for course_key in self.matrix[student_key][block_key]:
+                    if self.matrix[student_key][block_key][course_key] == 1 and course_key in students[student_key]:
                         score += 1
-            total_requests += len(students[s_key])
+                print(score)
+            total_requests += len(students[student_key])
 
         print(score, "/", total_requests, "=", score / total_requests * 100)
 

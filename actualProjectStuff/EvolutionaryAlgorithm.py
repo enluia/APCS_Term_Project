@@ -8,6 +8,6 @@ class EvolutionaryAlgorithm:
     
     def evaluate(self):
         for i in self.population:
+            print()
             i.setScore(i.measure())
         
-    
