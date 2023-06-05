@@ -39,7 +39,7 @@ class SystemManager:
     
     matrix.start(parsed_student_data, blocks, parsed_course_data, sequence, non_simul)
 
-    matrix.measure(parsed_student_data)
+    matrix.measure(parsed_student_data, parsed_course_data)
 
     #matrix.fixSections(parsed_student_data, parsed_course_data)
 
