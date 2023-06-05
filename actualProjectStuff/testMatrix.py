@@ -29,8 +29,8 @@ class Matrix:
 
         # Sort courses by priority
         courses = dict(sorted(courses.items(), key=lambda x: x[1]['priority']))
-        num_shuffles = 20
-        courses = self.shuffle_dict(courses, 20)
+        num_shuffles = 80
+        courses = self.shuffle_dict(courses, num_shuffles)
 
         # Define the matrix variable as a nested dictionary
         outside_timetable = ['MDNC-12--L', 'MDNCM12--L', 'MGMT-12L--', 'MCMCC12--L', 'MIMJB12--L', 
@@ -139,13 +139,13 @@ class Matrix:
 
         score = 0
         total_requests = 0
-        for student_key in students:
-            for block_key in self.matrix[student_key]:
-                for course_key in self.matrix[student_key][block_key]:
-                    if self.matrix[student_key][block_key][course_key] == 1 and course_key in students[student_key]:
+
+        for student_key in range(len(students)):
+            for block_key in self.matrix[students[student_key].studentID]:
+                for course_key in self.matrix[students[student_key].studentID][block_key]:
+                    if self.matrix[students[student_key].studentID][block_key][course_key] == 1 and course_key in students[student_key].coursePreferences:
                         score += 1
-                print(score)
-            total_requests += len(students[student_key])
+            total_requests += len(students[student_key].coursePreferences)
 
         print(score, "/", total_requests, "=", score / total_requests * 100)
 
