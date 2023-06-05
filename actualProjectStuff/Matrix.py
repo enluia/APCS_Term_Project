@@ -61,7 +61,18 @@ class Matrix:
                             if sum(self.matrix[s_key][b].values()) > 0:
                                 continue
                             
-                            self.assign(s_key, b, postreq)
+                            for i in range(int(courses[postreq]['sections'])):
+                                if courses[postreq][i]['block'] == None:
+                                    self.assign(s_key, b, postreq)
+                                    courses[postreq][i]['students'].append(s_key)
+                                    courses[postreq][i]['block'] = b
+                                    break
+                                elif courses[postreq][i]['block'] == b and len(courses[postreq][i]['students']) < int(courses[postreq]['max_enroll']):
+                                    self.assign(s_key, b, postreq)
+                                    courses[postreq][i]['students'].append(s_key)
+                                    break
+                            
+                            #self.assign(s_key, b, postreq)
                             students[s_key].remove(postreq)
                             break
 
@@ -70,7 +81,16 @@ class Matrix:
                     for b in blocks[0:4]:
                         if sum(self.matrix[s_key][b].values()) > 0:
                             continue
-                        self.assign(s_key, b, prereq)
+                        for i in range(int(courses[prereq]['sections'])):
+                                if courses[prereq][i]['block'] == None:
+                                    self.assign(s_key, b, prereq)
+                                    courses[prereq][i]['students'].append(s_key)
+                                    courses[prereq][i]['block'] = b
+                                    break
+                                elif courses[prereq][i]['block'] == b and len(courses[prereq][i]['students']) < int(courses[prereq]['max_enroll']):
+                                    self.assign(s_key, b, prereq)
+                                    courses[prereq][i]['students'].append(s_key)
+                                    break
                         students[s_key].remove(prereq)
                         break
 
@@ -86,16 +106,29 @@ class Matrix:
 
                 # assign students requested course to next available block
                 for b in blocks[b_key:b_key + 8]:
-                    if sum(self.matrix[s_key][b].values()) > 0 or courses[c_key].get("sections") == 0:
+                    if sum(self.matrix[s_key][b].values()) > 0:
                         continue
-
-                    self.assign(s_key, b, c_key)
+                    save_i =0
+                    for i in range(int(courses[c_key]['sections'])):
+                        if courses[c_key][i]['block'] == None:
+                            save_i = i
+                            self.assign(s_key, b, c_key)
+                            courses[c_key][i]['students'].append(s_key)
+                            courses[c_key][i]['block'] = b
+                            break
+                        elif courses[c_key][i]['block'] == b and len(courses[c_key][i]['students']) < int(courses[c_key]['max_enroll']):
+                            save_i = i
+                            self.assign(s_key, b, c_key)
+                            courses[c_key][i]['students'].append(s_key)
+                            break
 
                     # add non simul courses
                     if non_simul.get(c_key):
                         for non_simul_course in non_simul.get(c_key):
                             if non_simul_course in students[s_key]:
-                                self.assign(s_key, b, c_key)
+                                self.assign(s_key, b, non_simul_course)
+                                courses[non_simul_course][save_i]['students'].append(s_key)
+                                courses[non_simul_course][save_i]['block'] = b
                                 students[s_key].remove(non_simul_course)
                             
                     break
