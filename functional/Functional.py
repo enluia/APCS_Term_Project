@@ -1,5 +1,6 @@
 import csv
 import copy
+import random
 
 """
 THINGS TO DO / FIX
@@ -22,6 +23,7 @@ PARSED_STUDENT_FILE = "Data for Project/_parsedStudentData.csv"
 PARSED_ALTERNATES_FILE = "Data for Project/_parsedAlternatesData.csv"
 PARSED_COURSE_FILE = "Data for Project/_parsedCourseData.csv"
 MATRIX_OUTPUT_FILE = "Data for Project/_matrixOutput.csv"
+COURSE_SHUFFLE_SEED = 40
 
 bad_courses = ['XLEAD09---',    'MGE--11',    'MGE--12', 'MKOR-10---', 'MKOR-11---',
                'MKOR-12---', 'MIT--12---', 'MSPLG11---', 'MJA--10---', 'MJA--11---',
@@ -236,8 +238,8 @@ def matrix_start():
                             continue
                         
                         save_i = None
+                        global courses
                         for i in range(int(courses[postreq]['sections'])):
-
                             # unassigned section
                             if courses[postreq][i]['block'] == None:
                                 courses[postreq][i]['block'] = b
@@ -279,7 +281,11 @@ def matrix_start():
 
     # then go through non-sequenced courses by priority
     b_key = 0
+    
+    courses = shuffle_dict(courses, COURSE_SHUFFLE_SEED)
+
     for c_key in courses:
+
         for s_key in requests:
             if c_key not in requests[s_key]:
                 continue
@@ -347,7 +353,7 @@ def matrix_measure():
         if coursesGiven == 8:
             fullTimetable += 1
             if i < 3:
-                matrix_get_student_timetable(str(s_key))
+                #matrix_get_student_timetable(str(s_key))
                 i += 1
     print_percent(fullTimetable, len(STUDENTS), "students got 8/8 requested courses")
     print_percent(fullTimetable, len(STUDENTS), "students got 8/8 requested or alternate courses")
@@ -428,6 +434,15 @@ def count_alternates():
         tot += len(ALTERNATES[s_key])
     return tot
 
+ # randomness of courses maker
+def shuffle_dict(dictionary, num_shuffles):
+    keys = list(dictionary.keys())
+    shuffled_dict = dictionary.copy()
+    for _ in range(num_shuffles):
+        random.shuffle(keys)
+        shuffled_dict = {key: shuffled_dict[key] for key in keys}
+    return shuffled_dict
+
 
 ###
 # MAIN
@@ -452,6 +467,6 @@ matrix_init()
 matrix_start()
 matrix_measure()
 matrix_export_to_csv(MATRIX_OUTPUT_FILE)
-matrix_get_student_timetable(1780)
+#matrix_get_student_timetable(1780)
 
 print('Program Terminated')
