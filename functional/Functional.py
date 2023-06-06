@@ -352,6 +352,14 @@ def matrix_measure():
     print_percent(fullTimetable, len(STUDENTS), "students got 8/8 requested courses")
     print_percent(fullTimetable, len(STUDENTS), "students got 8/8 requested or alternate courses")
 
+    # number of students with over 5 courses
+    coursesOver5 = 0
+    for s_key in STUDENTS:
+        if count_student_courses(s_key) > 5:
+            coursesOver5 += 1
+    
+    print_percent(coursesOver5, len(STUDENTS), "students got more than 5 courses")
+
 # get a student's timetable
 def matrix_get_student_timetable(student):
 
@@ -366,6 +374,20 @@ def matrix_get_student_timetable(student):
                 timetable[b] = course_name
 
     print("\n".join("{}\t{}".format(k, v) for k, v in timetable.items()))
+
+def count_student_courses(student):
+
+    counter = 0
+    student = str(student)
+    timetable = {}
+
+    for b in matrix[student]:
+        for c_key in matrix[student][b]:
+            course_name = courses[c_key]['name']
+            if matrix[student][b][c_key] == 1:
+                counter += 1
+
+    return counter
 
 # export matrix to csv
 def matrix_export_to_csv(filename):
