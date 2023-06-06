@@ -9,7 +9,7 @@ THINGS TO DO / FIX
 - iterating from there
 """
 
-#
+###
 # VARIABLES
 #
 
@@ -44,7 +44,8 @@ blocks = ['1A', '1B', '1C', '1D', '2A', '2B', '2C', '2D', '3A', '3B', '3C', '3D'
 
 print('Starting Program')
 
-#
+
+###
 # PARSING
 #
 
@@ -190,7 +191,8 @@ def read_blocking_csv(file_path, blocking_type):
 
     return data
 
-#
+
+###
 # MATRIX
 #
 
@@ -316,7 +318,6 @@ def matrix_start():
                     continue
                 break
 
-
 # measure scheduling successes
 def matrix_measure():
 
@@ -389,7 +390,8 @@ def matrix_export_to_csv(filename):
             row = [course_name if c_key in block_courses[b] else "" for b in blocks]
             writer.writerow([c_key] + row)
 
-#
+
+###
 # AUXILIARY
 #
 
@@ -404,7 +406,8 @@ def count_alternates():
         tot += len(ALTERNATES[s_key])
     return tot
 
-#
+
+###
 # MAIN
 #
 
