@@ -10,6 +10,9 @@ THINGS TO DO / FIX
 - iterating from there
 """
 
+print('\nStarting Program')
+t0 = time.time()
+
 ###
 # VARIABLES
 #
@@ -44,8 +47,6 @@ outside_timetable = ['MDNC-12--L', 'MDNCM12--L', 'MGMT-12L--', 'MCMCC12--L', 'MI
 
 blocks = ['1A', '1B', '1C', '1D', '2A', '2B', '2C', '2D', '3A', '3B', '3C', '3D', '3E', '3F', '3G', '3H', '3I', '3J', '3K', '3L', '3M']
 
-print('Starting Program')
-t0 = time.time()
 
 ###
 # PARSING
@@ -340,6 +341,7 @@ def matrix_measure():
     # accounting for ecs?
     fullTimetable = 0
     i = 0
+    disparr = []
     for s_key in STUDENTS:
         coursesGiven = 0
         for b in matrix[s_key]:
@@ -349,24 +351,17 @@ def matrix_measure():
         if coursesGiven == 8:
             fullTimetable += 1
             if i < 3:
-                matrix_get_student_timetable(str(s_key))
+                disparr.append(matrix_get_student_timetable(str(s_key)))
                 i += 1
     print_percent(fullTimetable, len(STUDENTS), "students got 8/8 requested courses")
     print_percent(fullTimetable, len(STUDENTS), "students got 8/8 requested or alternate courses")
-
-    # number of students with over 5 courses
-    coursesOver5 = 0
-    for s_key in STUDENTS:
-        if count_student_courses(s_key) > 5:
-            coursesOver5 += 1
-    
-    print_percent(coursesOver5, len(STUDENTS), "students got more than 5 courses")
+    print('\n' + "\n".join(disparr))
 
 # get a student's timetable
 def matrix_get_student_timetable(student):
 
     student = str(student)
-    print("\nTimetable for Student", student)
+    output = "Timetable for Student " + student
     timetable = {}
 
     for b in matrix[student]:
@@ -375,21 +370,7 @@ def matrix_get_student_timetable(student):
             if matrix[student][b][c_key] == 1:
                 timetable[b] = course_name
 
-    print("\n".join("{}\t{}".format(k, v) for k, v in timetable.items()))
-
-def count_student_courses(student):
-
-    counter = 0
-    student = str(student)
-    timetable = {}
-
-    for b in matrix[student]:
-        for c_key in matrix[student][b]:
-            course_name = courses[c_key]['name']
-            if matrix[student][b][c_key] == 1:
-                counter += 1
-
-    return counter
+    return output + "\n" + ("\n".join("{}\t{}".format(k, v) for k, v in timetable.items())) + '\n'
 
 # export matrix to csv
 def matrix_export_to_csv(filename):
@@ -452,6 +433,7 @@ def count_alternates():
 # MAIN
 #
 
+# variable declarations
 matrix = {}
 
 STUDENTS = read_student_csv(RAW_STUDENT_FILE).get('requests')
@@ -465,15 +447,17 @@ sequencing.update(read_blocking_csv(RAW_BLOCKING_FILE, "Terms"))
 non_simul = read_blocking_csv(RAW_BLOCKING_FILE, "NotSimultaneous")
 simul = read_blocking_csv(RAW_BLOCKING_FILE, "Simultaneous")
 
-print('File Reading Complete')
+print('File Reading Complete\n')
 
+# matrix operations
 matrix_init()
 matrix_start()
 matrix_measure()
 matrix_export_to_csv(MATRIX_OUTPUT_FILE)
 matrix_export_students(MATRIX_OUTPUT_STUDENT_FILE)
-matrix_get_student_timetable(1780)
+print(matrix_get_student_timetable(1780))
 
+# done!
 print('Program Terminated')
 t1 = time.time()
-print(t1-t0)
+print("Time Elapsed: ", t1-t0, "seconds\n")
