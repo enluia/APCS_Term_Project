@@ -1,5 +1,6 @@
 import csv
 import copy
+import time
 
 """
 THINGS TO DO / FIX
@@ -43,7 +44,7 @@ outside_timetable = ['MDNC-12--L', 'MDNCM12--L', 'MGMT-12L--', 'MCMCC12--L', 'MI
 blocks = ['1A', '1B', '1C', '1D', '2A', '2B', '2C', '2D', '3A', '3B', '3C', '3D', '3E', '3F', '3G', '3H', '3I', '3J', '3K', '3L', '3M']
 
 print('Starting Program')
-
+t0 = time.time()
 
 ###
 # PARSING
@@ -390,6 +391,11 @@ def matrix_export_to_csv(filename):
             row = [course_name if c_key in block_courses[b] else "" for b in blocks]
             writer.writerow([c_key] + row)
 
+# exprt student schedules to csv
+def matrix_export_students(filename):
+    
+    pass
+
 
 ###
 # AUXILIARY
@@ -433,3 +439,5 @@ matrix_export_to_csv(MATRIX_OUTPUT_FILE)
 matrix_get_student_timetable(1780)
 
 print('Program Terminated')
+t1 = time.time()
+print(t1-t0)
