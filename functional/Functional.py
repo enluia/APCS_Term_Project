@@ -1,6 +1,7 @@
 import csv
 import copy
 import random
+import time
 
 """
 THINGS TO DO / FIX
@@ -23,6 +24,7 @@ PARSED_STUDENT_FILE = "Data for Project/_parsedStudentData.csv"
 PARSED_ALTERNATES_FILE = "Data for Project/_parsedAlternatesData.csv"
 PARSED_COURSE_FILE = "Data for Project/_parsedCourseData.csv"
 MATRIX_OUTPUT_FILE = "Data for Project/_matrixOutput.csv"
+MATRIX_OUTPUT_STUDENT_FILE = "Data for Project/_matrixOutputStudents.csv"
 COURSE_SHUFFLE_SEED = 40
 
 bad_courses = ['XLEAD09---',    'MGE--11',    'MGE--12', 'MKOR-10---', 'MKOR-11---',
@@ -45,7 +47,7 @@ outside_timetable = ['MDNC-12--L', 'MDNCM12--L', 'MGMT-12L--', 'MCMCC12--L', 'MI
 blocks = ['1A', '1B', '1C', '1D', '2A', '2B', '2C', '2D', '3A', '3B', '3C', '3D', '3E', '3F', '3G', '3H', '3I', '3J', '3K', '3L', '3M']
 
 print('Starting Program')
-
+t0 = time.time()
 
 ###
 # PARSING
@@ -418,6 +420,23 @@ def matrix_export_to_csv(filename):
             row = [course_name if c_key in block_courses[b] else "" for b in blocks]
             writer.writerow([c_key] + row)
 
+# exprt student schedules to csv
+def matrix_export_students(filename):
+    
+    with open(filename, 'w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(['ID'] + blocks)
+
+        for s_key in STUDENTS:
+            stud_sched = [s_key] + [None] * len(blocks)
+            for b_key in range(len(blocks)):
+                stud_sched_block = ""
+                for c_key in courses:
+                    if matrix[s_key][blocks[b_key]][c_key] == 1:
+                        stud_sched_block += '\n' + courses[c_key]['name']
+                stud_sched[b_key + 1] = stud_sched_block[1:]
+            writer.writerow(stud_sched)
+
 
 ###
 # AUXILIARY
@@ -467,6 +486,9 @@ matrix_init()
 matrix_start()
 matrix_measure()
 matrix_export_to_csv(MATRIX_OUTPUT_FILE)
+matrix_export_students(MATRIX_OUTPUT_STUDENT_FILE)
 #matrix_get_student_timetable(1780)
 
 print('Program Terminated')
+t1 = time.time()
+print(t1-t0)
