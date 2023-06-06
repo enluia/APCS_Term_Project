@@ -1,5 +1,6 @@
 import csv
 import copy
+import random
 import time
 
 """
@@ -27,6 +28,7 @@ PARSED_ALTERNATES_FILE = "Data for Project/_parsedAlternatesData.csv"
 PARSED_COURSE_FILE = "Data for Project/_parsedCourseData.csv"
 MATRIX_OUTPUT_FILE = "Data for Project/_matrixOutput.csv"
 MATRIX_OUTPUT_STUDENT_FILE = "Data for Project/_matrixOutputStudents.csv"
+COURSE_SHUFFLE_SEED = 40
 
 bad_courses = ['XLEAD09---',    'MGE--11',    'MGE--12', 'MKOR-10---', 'MKOR-11---',
                'MKOR-12---', 'MIT--12---', 'MSPLG11---', 'MJA--10---', 'MJA--11---',
@@ -239,8 +241,8 @@ def matrix_start():
                             continue
                         
                         save_i = None
+                        global courses
                         for i in range(int(courses[postreq]['sections'])):
-
                             # unassigned section
                             if courses[postreq][i]['block'] == None:
                                 courses[postreq][i]['block'] = b
@@ -282,7 +284,11 @@ def matrix_start():
 
     # then go through non-sequenced courses by priority
     b_key = 0
+    
+    courses = shuffle_dict(courses, COURSE_SHUFFLE_SEED)
+
     for c_key in courses:
+
         for s_key in requests:
             if c_key not in requests[s_key]:
                 continue
@@ -427,6 +433,15 @@ def count_alternates():
     for s_key in ALTERNATES:
         tot += len(ALTERNATES[s_key])
     return tot
+
+ # randomness of courses maker
+def shuffle_dict(dictionary, num_shuffles):
+    keys = list(dictionary.keys())
+    shuffled_dict = dictionary.copy()
+    for _ in range(num_shuffles):
+        random.shuffle(keys)
+        shuffled_dict = {key: shuffled_dict[key] for key in keys}
+    return shuffled_dict
 
 
 ###
