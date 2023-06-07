@@ -1,5 +1,6 @@
 import csv
 import copy
+from collections import defaultdict
 
 """
 THINGS TO DO / FIX
@@ -217,6 +218,16 @@ def matrix_assign(s_key, b, c_key, section_num):
     # remove class from student's active requests
     requests[s_key].remove(c_key)
 
+def alternate_assign(s_key, b, c_key, section_num):
+
+    # assign a course to a block for a student
+    matrix[s_key][b][c_key] = 1
+
+    # add student to class list
+    courses[c_key][section_num]['students'].append(s_key)
+
+    ALTERNATES[s_key].remove(c_key)
+
 # start filling the matrix using a modified greedy algorithm
 def matrix_start():
 
@@ -317,22 +328,57 @@ def matrix_start():
                 if save_i is None:
                     continue
                 break
+    
+
+    """"
+    # alternates
+    for c_key in courses:
+        for s_key in ALTERNATES:
+            if c_key not in ALTERNATES[s_key]:
+                continue
+            for b in blocks[b_key:b_key + 8]:
+                if sum(matrix[s_key][b].values()) > 0:
+                    continue
+                save_i = None
+                for i in range(int(courses[c_key]['sections'])):
+
+                    # unassigned section
+                    if courses[c_key][i]['block'] == None:
+                        courses[c_key][i]['block'] = b
+
+                    # class with space in correct block
+                    if courses[c_key][i]['block'] == b and len(courses[c_key][i]['students']) < int(courses[c_key]['max_enroll']):
+                        matrix_assign(s_key, b, c_key, i, True)
+                        print("sumi")
+                        save_i = i
+                        break
+
+                # student has space but course in block does not
+                if save_i is None:
+                    continue
+                break
+    """
+
 
 # measure scheduling successes
 def matrix_measure():
 
     # percentage of total requests received
     coursesPlaced = 0
+    coursesWithAlts = 0
     total_requests = 0
     for s_key in STUDENTS:
-        for b in matrix[s_key]:
-            for c_key in matrix[s_key][b]:
-                if matrix[s_key][b][c_key] == 1 and c_key in STUDENTS[s_key]:
-                    coursesPlaced += 1
+        for b in blocks:
+            for c_key in courses:
+                if matrix[s_key][b][c_key] == 1:
+                    if c_key in STUDENTS[s_key]:
+                        coursesPlaced += 1
+                    if c_key in ALTERNATES[s_key]:
+                        coursesWithAlts += 1
         total_requests += len(STUDENTS[s_key])
 
     print_percent(coursesPlaced, total_requests, "fulfilled requests sans alternates")
-    print_percent(coursesPlaced, total_requests + num_alternates, "fulfilled requests with alternates")
+    print_percent(coursesPlaced + coursesWithAlts, total_requests + num_alternates, "fulfilled requests with alternates")
 
     # number of students with full timetables
     # accounting for ecs?
@@ -347,7 +393,7 @@ def matrix_measure():
         if coursesGiven == 8:
             fullTimetable += 1
             if i < 3:
-                matrix_get_student_timetable(str(s_key))
+                print(matrix_get_student_timetable(str(s_key)))
                 i += 1
     print_percent(fullTimetable, len(STUDENTS), "students got 8/8 requested courses")
     print_percent(fullTimetable, len(STUDENTS), "students got 8/8 requested or alternate courses")
@@ -365,7 +411,7 @@ def matrix_get_student_timetable(student):
             if matrix[student][b][c_key] == 1:
                 timetable[b] = course_name
 
-    print("\n".join("{}\t{}".format(k, v) for k, v in timetable.items()))
+    return "\n".join("{}\t{}".format(k, v) for k, v in timetable.items())
 
 # export matrix to csv
 def matrix_export_to_csv(filename):
@@ -390,7 +436,16 @@ def matrix_export_to_csv(filename):
             row = [course_name if c_key in block_courses[b] else "" for b in blocks]
             writer.writerow([c_key] + row)
 
+# def timetable_to_csv(filename):
 
+#     timetables = {}
+
+#     for s_key in STUDENTS:
+#         timetables[s_key] = matrix_get_student_timetable(s_key)
+
+#     with open(filename, 'w', newline='') as csvfile:
+#         writer = csv.writer(csvfile, delimiter='\t')
+#         writer.writerows(timetables.items())
 ###
 # AUXILIARY
 #
@@ -428,8 +483,14 @@ print('File Reading Complete')
 
 matrix_init()
 matrix_start()
+write_dict_csv(['skey','ckeys'], requests, "filenamegobr.csv")
+requests = copy.deepcopy(ALTERNATES)
+write_dict_csv(['skey','ckeys'], requests, "filenamegobrrrrrr.csv")
+matrix_start()
 matrix_measure()
 matrix_export_to_csv(MATRIX_OUTPUT_FILE)
-matrix_get_student_timetable(1780)
+print(matrix_get_student_timetable(1790))
+
+
 
 print('Program Terminated')
