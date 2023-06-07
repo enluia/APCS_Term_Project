@@ -222,15 +222,8 @@ def matrix_assign(s_key, b, c_key, section_num):
     # remove class from student's active requests
     requests[s_key].remove(c_key)
 
-def alternate_assign(s_key, b, c_key, section_num):
-
-    # assign a course to a block for a student
-    matrix[s_key][b][c_key] = 1
-
-    # add student to class list
-    courses[c_key][section_num]['students'].append(s_key)
-
-    ALTERNATES[s_key].remove(c_key)
+    if courses[c_key]['base_terms'] == "1" and c_key not in outside_timetable:
+        print(s_key, b, c_key, courses[c_key]['name'])
 
 # start filling the matrix using a modified greedy algorithm
 def matrix_start():
@@ -251,7 +244,6 @@ def matrix_start():
                             continue
                         
                         save_i = None
-                        global courses
                         for i in range(int(courses[postreq]['sections'])):
                             # unassigned section
                             if courses[postreq][i]['block'] == None:
@@ -295,7 +287,7 @@ def matrix_start():
     # then go through non-sequenced courses by priority
     b_key = 0
     
-    courses = shuffle_dict(courses, COURSE_SHUFFLE_SEED)
+    #courses = shuffle_dict(courses, COURSE_SHUFFLE_SEED)
 
     for c_key in courses:
 
@@ -336,37 +328,6 @@ def matrix_start():
                 if save_i is None:
                     continue
                 break
-    
-
-    """"
-    # alternates
-    for c_key in courses:
-        for s_key in ALTERNATES:
-            if c_key not in ALTERNATES[s_key]:
-                continue
-            for b in blocks[b_key:b_key + 8]:
-                if sum(matrix[s_key][b].values()) > 0:
-                    continue
-                save_i = None
-                for i in range(int(courses[c_key]['sections'])):
-
-                    # unassigned section
-                    if courses[c_key][i]['block'] == None:
-                        courses[c_key][i]['block'] = b
-
-                    # class with space in correct block
-                    if courses[c_key][i]['block'] == b and len(courses[c_key][i]['students']) < int(courses[c_key]['max_enroll']):
-                        matrix_assign(s_key, b, c_key, i, True)
-                        print("sumi")
-                        save_i = i
-                        break
-
-                # student has space but course in block does not
-                if save_i is None:
-                    continue
-                break
-    """
-
 
 # measure scheduling successes
 def matrix_measure():
@@ -482,7 +443,7 @@ def count_alternates():
         tot += len(ALTERNATES[s_key])
     return tot
 
- # randomness of courses maker
+# randomness of courses maker
 def shuffle_dict(dictionary, num_shuffles):
     keys = list(dictionary.keys())
     shuffled_dict = dictionary.copy()
@@ -490,6 +451,14 @@ def shuffle_dict(dictionary, num_shuffles):
         random.shuffle(keys)
         shuffled_dict = {key: shuffled_dict[key] for key in keys}
     return shuffled_dict
+
+def numCoursesSad():
+    
+    for c_key in courses:
+        for i in range(int(courses[c_key]['sections'])):
+            if len(courses[c_key][i]['students']) <= 5:
+                print(c_key, courses[c_key][i]['students'])
+
 
 
 ###
@@ -515,16 +484,19 @@ print('File Reading Complete\n')
 # matrix operations
 matrix_init()
 matrix_start()
-write_dict_csv(['skey','ckeys'], requests, "filenamegobr.csv")
+
 requests = copy.deepcopy(ALTERNATES)
-write_dict_csv(['skey','ckeys'], requests, "filenamegobrrrrrr.csv")
 matrix_start()
+
 matrix_measure()
 matrix_export_to_csv(MATRIX_OUTPUT_FILE)
 matrix_export_students(MATRIX_OUTPUT_STUDENT_FILE)
 print(matrix_get_student_timetable(1780))
 
+numCoursesSad()
 # done!
 print('Program Terminated')
 t1 = time.time()
 print("Time Elapsed: ", t1-t0, "seconds\n")
+
+print(courses['MGMT-12L--'])
