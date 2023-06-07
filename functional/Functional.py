@@ -1,6 +1,7 @@
 import csv
 import copy
-from collections import defaultdict
+import random
+import time
 
 """
 THINGS TO DO / FIX
@@ -9,6 +10,9 @@ THINGS TO DO / FIX
 - filling spares
 - iterating from there
 """
+
+print('\nStarting Program')
+t0 = time.time()
 
 ###
 # VARIABLES
@@ -23,6 +27,8 @@ PARSED_STUDENT_FILE = "Data for Project/_parsedStudentData.csv"
 PARSED_ALTERNATES_FILE = "Data for Project/_parsedAlternatesData.csv"
 PARSED_COURSE_FILE = "Data for Project/_parsedCourseData.csv"
 MATRIX_OUTPUT_FILE = "Data for Project/_matrixOutput.csv"
+MATRIX_OUTPUT_STUDENT_FILE = "Data for Project/_matrixOutputStudents.csv"
+COURSE_SHUFFLE_SEED = 40
 
 bad_courses = ['XLEAD09---',    'MGE--11',    'MGE--12', 'MKOR-10---', 'MKOR-11---',
                'MKOR-12---', 'MIT--12---', 'MSPLG11---', 'MJA--10---', 'MJA--11---',
@@ -42,8 +48,6 @@ outside_timetable = ['MDNC-12--L', 'MDNCM12--L', 'MGMT-12L--', 'MCMCC12--L', 'MI
                      'XC---09--L', 'MDNC-09C-L', 'MDNC-09M-L', 'XBA--09J-L', 'XLDCB09S-L']
 
 blocks = ['1A', '1B', '1C', '1D', '2A', '2B', '2C', '2D', '3A', '3B', '3C', '3D', '3E', '3F', '3G', '3H', '3I', '3J', '3K', '3L', '3M']
-
-print('Starting Program')
 
 
 ###
@@ -247,8 +251,8 @@ def matrix_start():
                             continue
                         
                         save_i = None
+                        global courses
                         for i in range(int(courses[postreq]['sections'])):
-
                             # unassigned section
                             if courses[postreq][i]['block'] == None:
                                 courses[postreq][i]['block'] = b
@@ -290,7 +294,11 @@ def matrix_start():
 
     # then go through non-sequenced courses by priority
     b_key = 0
+    
+    courses = shuffle_dict(courses, COURSE_SHUFFLE_SEED)
+
     for c_key in courses:
+
         for s_key in requests:
             if c_key not in requests[s_key]:
                 continue
@@ -384,6 +392,7 @@ def matrix_measure():
     # accounting for ecs?
     fullTimetable = 0
     i = 0
+    disparr = []
     for s_key in STUDENTS:
         coursesGiven = 0
         for b in matrix[s_key]:
@@ -393,16 +402,17 @@ def matrix_measure():
         if coursesGiven == 8:
             fullTimetable += 1
             if i < 3:
-                print(matrix_get_student_timetable(str(s_key)))
+                disparr.append(matrix_get_student_timetable(str(s_key)))
                 i += 1
     print_percent(fullTimetable, len(STUDENTS), "students got 8/8 requested courses")
     print_percent(fullTimetable, len(STUDENTS), "students got 8/8 requested or alternate courses")
+    print('\n' + "\n".join(disparr))
 
 # get a student's timetable
 def matrix_get_student_timetable(student):
 
     student = str(student)
-    print("\nTimetable for Student", student)
+    output = "Timetable for Student " + student
     timetable = {}
 
     for b in matrix[student]:
@@ -411,7 +421,7 @@ def matrix_get_student_timetable(student):
             if matrix[student][b][c_key] == 1:
                 timetable[b] = course_name
 
-    return "\n".join("{}\t{}".format(k, v) for k, v in timetable.items())
+    return output + "\n" + ("\n".join("{}\t{}".format(k, v) for k, v in timetable.items())) + '\n'
 
 # export matrix to csv
 def matrix_export_to_csv(filename):
@@ -436,12 +446,23 @@ def matrix_export_to_csv(filename):
             row = [course_name if c_key in block_courses[b] else "" for b in blocks]
             writer.writerow([c_key] + row)
 
-# def timetable_to_csv(filename):
+# exprt student schedules to csv
+def matrix_export_students(filename):
+    
+    with open(filename, 'w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(['ID'] + blocks)
 
-#     timetables = {}
+        for s_key in STUDENTS:
+            stud_sched = [s_key] + [None] * len(blocks)
+            for b_key in range(len(blocks)):
+                stud_sched_block = ""
+                for c_key in courses:
+                    if matrix[s_key][blocks[b_key]][c_key] == 1:
+                        stud_sched_block += '\n' + courses[c_key]['name']
+                stud_sched[b_key + 1] = stud_sched_block[1:]
+            writer.writerow(stud_sched)
 
-#     for s_key in STUDENTS:
-#         timetables[s_key] = matrix_get_student_timetable(s_key)
 
 #     with open(filename, 'w', newline='') as csvfile:
 #         writer = csv.writer(csvfile, delimiter='\t')
@@ -461,11 +482,21 @@ def count_alternates():
         tot += len(ALTERNATES[s_key])
     return tot
 
+ # randomness of courses maker
+def shuffle_dict(dictionary, num_shuffles):
+    keys = list(dictionary.keys())
+    shuffled_dict = dictionary.copy()
+    for _ in range(num_shuffles):
+        random.shuffle(keys)
+        shuffled_dict = {key: shuffled_dict[key] for key in keys}
+    return shuffled_dict
+
 
 ###
 # MAIN
 #
 
+# variable declarations
 matrix = {}
 
 STUDENTS = read_student_csv(RAW_STUDENT_FILE).get('requests')
@@ -479,8 +510,9 @@ sequencing.update(read_blocking_csv(RAW_BLOCKING_FILE, "Terms"))
 non_simul = read_blocking_csv(RAW_BLOCKING_FILE, "NotSimultaneous")
 simul = read_blocking_csv(RAW_BLOCKING_FILE, "Simultaneous")
 
-print('File Reading Complete')
+print('File Reading Complete\n')
 
+# matrix operations
 matrix_init()
 matrix_start()
 write_dict_csv(['skey','ckeys'], requests, "filenamegobr.csv")
@@ -489,8 +521,10 @@ write_dict_csv(['skey','ckeys'], requests, "filenamegobrrrrrr.csv")
 matrix_start()
 matrix_measure()
 matrix_export_to_csv(MATRIX_OUTPUT_FILE)
-print(matrix_get_student_timetable(1790))
+matrix_export_students(MATRIX_OUTPUT_STUDENT_FILE)
+print(matrix_get_student_timetable(1780))
 
-
-
+# done!
 print('Program Terminated')
+t1 = time.time()
+print("Time Elapsed: ", t1-t0, "seconds\n")
