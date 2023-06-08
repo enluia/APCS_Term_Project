@@ -213,20 +213,73 @@ def matrix_init():
 # assign student to course
 def matrix_assign(s_key, b, c_key, section_num):
 
-    # assign a course to a block for a student
+    # assign course to block for student
     matrix[s_key][b][c_key] = 1
 
-    # add student to class list
+    # add student to class lists and remove active request from student
     courses[c_key][section_num]['students'].append(s_key)
-
-    # remove class from student's active requests
     requests[s_key].remove(c_key)
+
+    # simul
+    if simul.get(c_key):
+        for simul_course in simul.get(c_key):
+            courses[simul_course][section_num]['students'].append(s_key)
 
     if courses[c_key]['base_terms'] == "1" and c_key not in outside_timetable:
         print(s_key, b, c_key, courses[c_key]['name'])
 
+# assign students requested course to next available block if possible
+def matrix_try_assign(c_key, s_key, b_key, b_key_range):
+
+    for b in blocks[b_key:b_key + b_key_range]:
+
+        if sum(matrix[s_key][b].values()) > 0:
+            continue
+
+        save_i = None
+        for i in range(int(courses[c_key]['sections'])):
+
+            # unassigned section
+            if courses[c_key][i]['block'] == None:
+                courses[c_key][i]['block'] = b
+
+                # simul
+                if simul.get(c_key):
+                    for simul_course in simul.get(c_key):
+                        courses[simul_course][i]['block'] = b
+
+            # class with space in correct block
+            if courses[c_key][i]['block'] == b and len(courses[c_key][i]['students']) < int(courses[c_key]['max_enroll']):
+                matrix_assign(s_key, b, c_key, i)
+                save_i = i
+                break
+
+        # add non simul courses if they exist and blockee was added
+        if non_simul.get(c_key) and save_i is not None:
+            for non_simul_course in non_simul.get(c_key):
+                if non_simul_course in requests[s_key]:
+                    matrix_assign(s_key, b, non_simul_course, save_i)
+                    courses[non_simul_course][save_i]['block'] = b
+        
+        # student has space but course in block does not
+        if save_i is None:
+            continue
+        break
+
 # start filling the matrix using a modified greedy algorithm
 def matrix_start():
+
+    # outside the timetable
+    for c_key in courses:
+
+        if c_key not in outside_timetable:
+            continue
+
+        for s_key in requests:
+            if c_key not in requests[s_key]:
+                continue
+            
+            # this is where outside timetable is assigned
 
     # start with courses that need prereq
     for prereq in sequencing.keys():
@@ -239,56 +292,19 @@ def matrix_start():
             for postreq in sequencing[prereq]:
                 if postreq in requests[s_key]:
                     postreq_count += 1
-                    for b in blocks[4:8]:
-                        if sum(matrix[s_key][b].values()) > 0:
-                            continue
-                        
-                        save_i = None
-                        for i in range(int(courses[postreq]['sections'])):
-                            # unassigned section
-                            if courses[postreq][i]['block'] == None:
-                                courses[postreq][i]['block'] = b
-
-                            # class with space in correct block
-                            if courses[postreq][i]['block'] == b and len(courses[postreq][i]['students']) < int(courses[postreq]['max_enroll']):
-                                matrix_assign(s_key, b, postreq, i)
-                                save_i = i
-                                break
-
-                        # student has space but course in block does not
-                        if save_i is None:
-                            continue
-                        break
+                    matrix_try_assign(postreq, s_key, 4, 8)
 
             # assign prereq
             if postreq_count > 0:
-                for b in blocks[0:4]:
-                    if sum(matrix[s_key][b].values()) > 0:
-                        continue
-
-                    save_i = None
-                    for i in range(int(courses[prereq]['sections'])):
-                            
-                        # unassigned section
-                        if courses[prereq][i]['block'] == None:
-                            courses[prereq][i]['block'] = b
-
-                        # class with space in correct block
-                        if courses[prereq][i]['block'] == b and len(courses[prereq][i]['students']) < int(courses[prereq]['max_enroll']):
-                            matrix_assign(s_key, b, prereq, i)
-                            save_i = i
-                            break
-
-                    # student has space but course in block does not
-                    if save_i is None:
-                        continue
-                    break
+                matrix_try_assign(prereq, s_key, 0, 4)
+    
+    #linearity stuff
+    for c_key in courses:
+        if courses[c_key]['base_terms'] == '1':
+            for s_key in requests:
+                pass
 
     # then go through non-sequenced courses by priority
-    b_key = 0
-    
-    #courses = shuffle_dict(courses, COURSE_SHUFFLE_SEED)
-
     for c_key in courses:
 
         for s_key in requests:
@@ -300,34 +316,10 @@ def matrix_start():
                 b_key = 0
 
             # assign students requested course to next available block
-            for b in blocks[b_key:b_key + 8]:
-                if sum(matrix[s_key][b].values()) > 0:
-                    continue
+            matrix_try_assign(c_key, s_key, b_key, 8)
 
-                save_i = None
-                for i in range(int(courses[c_key]['sections'])):
 
-                    # unassigned section
-                    if courses[c_key][i]['block'] == None:
-                        courses[c_key][i]['block'] = b
-
-                    # class with space in correct block
-                    if courses[c_key][i]['block'] == b and len(courses[c_key][i]['students']) < int(courses[c_key]['max_enroll']):
-                        matrix_assign(s_key, b, c_key, i)
-                        save_i = i
-                        break
-
-                # add non simul courses if they exist and blockee was added
-                if non_simul.get(c_key) and save_i is not None:
-                    for non_simul_course in non_simul.get(c_key):
-                        if non_simul_course in requests[s_key]:
-                            matrix_assign(s_key, b, non_simul_course, save_i)
-                            courses[non_simul_course][save_i]['block'] = b
-                
-                # student has space but course in block does not
-                if save_i is None:
-                    continue
-                break
+    #courses = shuffle_dict(courses, COURSE_SHUFFLE_SEED)
 
 # measure scheduling successes
 def matrix_measure():
@@ -342,7 +334,7 @@ def matrix_measure():
                 if matrix[s_key][b][c_key] == 1:
                     if c_key in STUDENTS[s_key]:
                         coursesPlaced += 1
-                    if c_key in ALTERNATES[s_key]:
+                    elif c_key in ALTERNATES[s_key]:
                         coursesWithAlts += 1
         total_requests += len(STUDENTS[s_key])
 
@@ -352,21 +344,28 @@ def matrix_measure():
     # number of students with full timetables
     # accounting for ecs?
     fullTimetable = 0
+    fullWithAlts = 0
     i = 0
     disparr = []
     for s_key in STUDENTS:
         coursesGiven = 0
+        altsGiven = 0
         for b in matrix[s_key]:
             for c_key in matrix[s_key][b]:
-                if matrix[s_key][b][c_key] == 1 and c_key in STUDENTS[s_key]:
-                    coursesGiven += 1
-        if coursesGiven == 8:
+                if matrix[s_key][b][c_key] == 1 and c_key not in outside_timetable:
+                    if c_key in STUDENTS[s_key]:
+                        coursesGiven += 1
+                    elif c_key in ALTERNATES[s_key]:
+                        altsGiven += 1
+        if coursesGiven >= 8:
             fullTimetable += 1
             if i < 3:
                 disparr.append(matrix_get_student_timetable(str(s_key)))
                 i += 1
+        elif coursesGiven + altsGiven >= 8:
+            fullWithAlts += 1
     print_percent(fullTimetable, len(STUDENTS), "students got 8/8 requested courses")
-    print_percent(fullTimetable, len(STUDENTS), "students got 8/8 requested or alternate courses")
+    print_percent(fullTimetable + fullWithAlts, len(STUDENTS), "students got 8/8 requested or alternate courses")
     print('\n' + "\n".join(disparr))
 
 # get a student's timetable
@@ -425,9 +424,6 @@ def matrix_export_students(filename):
             writer.writerow(stud_sched)
 
 
-#     with open(filename, 'w', newline='') as csvfile:
-#         writer = csv.writer(csvfile, delimiter='\t')
-#         writer.writerows(timetables.items())
 ###
 # AUXILIARY
 #
@@ -493,10 +489,9 @@ matrix_export_to_csv(MATRIX_OUTPUT_FILE)
 matrix_export_students(MATRIX_OUTPUT_STUDENT_FILE)
 print(matrix_get_student_timetable(1780))
 
-numCoursesSad()
+#numCoursesSad()
+
 # done!
 print('Program Terminated')
 t1 = time.time()
 print("Time Elapsed: ", t1-t0, "seconds\n")
-
-print(courses['MGMT-12L--'])
