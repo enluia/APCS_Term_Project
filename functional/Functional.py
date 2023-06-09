@@ -47,7 +47,7 @@ outside_timetable = ['MDNC-12--L', 'MDNCM12--L', 'MGMT-12L--', 'MCMCC12--L', 'MI
                      
                      'XC---09--L', 'MDNC-09C-L', 'MDNC-09M-L', 'XBA--09J-L', 'XLDCB09S-L']
 
-blocks = ['1A', '1B', '1C', '1D', '2A', '2B', '2C', '2D', '3A', '3B', '3C', '3D', '3E', '3F', '3G', '3H', '3I', '3J', '3K', '3L', '3M']
+blocks = ['1A', '1B', '1C', '1D', '2A', '2B', '2C', '2D', 'Outside']
 
 
 ###
@@ -211,7 +211,7 @@ def matrix_init():
                 matrix[s_key][b][c_key] = 0
 
 # assign student to course
-def matrix_assign(s_key, b, c_key, section_num):
+def matrix_assign(s_key, b, c_key, section_num, is_linear_and_not_ot = False):
 
     # assign course to block for student
     matrix[s_key][b][c_key] = 1
@@ -227,8 +227,6 @@ def matrix_assign(s_key, b, c_key, section_num):
 
     if courses[c_key]['base_terms'] == "1" and c_key not in outside_timetable:
         print(s_key, b, c_key, courses[c_key]['name'])
-    # if courses[c_key]['base_terms'] == "1" and c_key not in outside_timetable:
-    #     print(s_key, b, c_key, courses[c_key]['name'])
 
 def matrix_linear_assign(s_key, b, c_key, section_num):
 
@@ -238,12 +236,8 @@ def matrix_linear_assign(s_key, b, c_key, section_num):
     # add student to class list
     courses[c_key][section_num]['students'].append(s_key)
 
-# assign students requested course to next available block
-#def matrix_try_assign(c_key, s_key, b_key, b_key_range):
-    
-
 # assign students requested course to next available block if possible
-def matrix_try_assign(c_key, s_key, b_key, b_key_range):
+def matrix_try_assign(c_key, s_key, b_key, b_key_range, is_linear_and_not_ot = False):
 
     for b in blocks[b_key:b_key + b_key_range]:
 
@@ -283,18 +277,20 @@ def matrix_try_assign(c_key, s_key, b_key, b_key_range):
 # start filling the matrix using a modified greedy algorithm
 def matrix_start():
 
-    # outside the timetable
+    # outside the timetable courses
     for c_key in courses:
 
         if c_key not in outside_timetable:
             continue
 
+        # only requested by students
         for s_key in requests:
             if c_key not in requests[s_key]:
                 continue
-            
-            # this is where outside timetable is assigned
 
+            # assign outside timetable
+            matrix_assign(s_key, blocks[8], c_key, 0)
+                
     # start with courses that need prereq
     for prereq in sequencing.keys():
         for s_key in requests:
@@ -312,18 +308,22 @@ def matrix_start():
             if postreq_count > 0:
                 matrix_try_assign(prereq, s_key, 0, 4)
     
-    #linearity stuff
+    # linearity stuff
     for c_key in courses:
+
         if courses[c_key]['base_terms'] == '1':
+
             for s_key in requests:
+
                 if c_key not in requests[s_key]:
                     continue
-                #b_key = 0
 
+                """
                 for b in blocks[0:4]:
 
                     if c_key not in requests[s_key]:
-                        print("AHHHH")
+                        #print("AHHHH")
+                        pass
 
                     if sum(matrix[s_key][b].values()) > 0:
                         continue
@@ -357,7 +357,7 @@ def matrix_start():
                                     break
                         if toBreakOrNotToBreak:
                             break
-    #courses = shuffle_dict(courses, COURSE_SHUFFLE_SEED)
+                """
 
     # then go through non-sequenced courses by priority
     for c_key in courses:
@@ -365,14 +365,9 @@ def matrix_start():
         for s_key in requests:
             if c_key not in requests[s_key]:
                 continue
-            if c_key in outside_timetable:
-                b_key = 8
-            else: 
-                b_key = 0
 
             # assign students requested course to next available block
-            matrix_try_assign(c_key, s_key, b_key, 8)
-
+            matrix_try_assign(c_key, s_key, 0, 8)
 
     #courses = shuffle_dict(courses, COURSE_SHUFFLE_SEED)
 
@@ -397,7 +392,6 @@ def matrix_measure():
     print_percent(coursesPlaced + coursesWithAlts, total_requests + num_alternates, "fulfilled requests with alternates")
 
     # number of students with full timetables
-    # accounting for ecs?
     fullTimetable = 0
     fullWithAlts = 0
     i = 0
@@ -414,7 +408,7 @@ def matrix_measure():
                         altsGiven += 1
         if coursesGiven >= 8:
             fullTimetable += 1
-            if i < 3:
+            if i < 0: ########################################### change this to 3 to print 3 students with full timetables
                 disparr.append(matrix_get_student_timetable(str(s_key)))
                 i += 1
         elif coursesGiven + altsGiven >= 8:
@@ -428,15 +422,15 @@ def matrix_get_student_timetable(student):
 
     student = str(student)
     output = "Timetable for Student " + student
-    timetable = {}
+    timetable = []
 
     for b in matrix[student]:
         for c_key in matrix[student][b]:
             course_name = courses[c_key]['name']
             if matrix[student][b][c_key] == 1:
-                timetable[b] = course_name
+                timetable.append({"block": b, "course": course_name})
 
-    return output + "\n" + ("\n".join("{}\t{}".format(k, v) for k, v in timetable.items())) + '\n'
+    return output + "\n" + ("\n".join("{}\t{}".format(i["block"], i["course"]) for i in timetable)) + '\n'
 
 # export matrix to csv
 def matrix_export_to_csv(filename):
@@ -549,8 +543,7 @@ matrix_start()
 matrix_measure()
 matrix_export_to_csv(MATRIX_OUTPUT_FILE)
 matrix_export_students(MATRIX_OUTPUT_STUDENT_FILE)
-print(matrix_get_student_timetable(1780))
-print(matrix_get_student_timetable(1809))
+print(matrix_get_student_timetable(1787))
 
 #numCoursesSad()
 
