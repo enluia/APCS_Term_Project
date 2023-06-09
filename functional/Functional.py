@@ -357,7 +357,6 @@ def matrix_start():
                                     break
                         if toBreakOrNotToBreak:
                             break
-    #courses = shuffle_dict(courses, COURSE_SHUFFLE_SEED)
 
     # then go through non-sequenced courses by priority
     for c_key in courses:
@@ -503,12 +502,63 @@ def shuffle_dict(dictionary, num_shuffles):
         shuffled_dict = {key: shuffled_dict[key] for key in keys}
     return shuffled_dict
 
-#def check_timetable_feasibility():
+def check_timetable_feasibility():
+    
+    for i in STUDENTS:
+        print(i)
     
 
-def mutate_timetable():
-    course, block = "randomBlock"
-    swap_course, swap_block = "randomBlockToSwitchWith"
+def mutate(matrix, num_blocks, courses):
+    """
+    Mutate a timetable by randomly changing a course assignment.
+
+    Args:
+        matrix (dict): The timetable to mutate.
+        num_blocks (int): The total number of blocks.
+        courses (dict): The courses dictionary.
+    """
+
+    # Get a list of all student keys
+    student_keys = list(matrix.keys())
+    # Randomly select a student
+    student_key = random.choice(student_keys)
+
+    # Get a list of all block indices
+    block_indices = list(range(num_blocks))
+    # Randomly select a block
+    block_index = random.choice(block_indices)
+
+    # Get a list of all course keys
+    course_keys = list(courses.keys())
+    # Randomly select a course
+    course_key = random.choice(course_keys)
+
+    # Get the current assignment
+    current_assignment = matrix[student_key][block_index][course_key]
+    
+    # Flip the assignment
+    # If the current assignment is 1, set it to 0.
+    # If it's 0, set it to 1.
+    matrix[student_key][block_index][course_key] = 1 if current_assignment == 0 else 0
+
+    return matrix
+
+ #   randomBlockKey = random.randint(0, len(courses))
+  #  print("random", randomBlockKey, len(courses))
+#
+ #   randomBlocks = []
+  #  for i in range(COURSE_SHUFFLE_SEED):
+   #     print(courses)
+    #    random.randint(0, len(courses))
+#
+ #       randomBlocks.append(courses[random.randint(0, len(courses))])
+  #      print(randomBlocks[i])
+#
+ #   
+  #  for block_key in matrix[1000]:
+   #     for course_key in matrix[1000][block_key]:
+    #        print(course_key)
+            
 
 def numCoursesSad():
     
@@ -558,3 +608,5 @@ print(matrix_get_student_timetable(1809))
 print('Program Terminated')
 t1 = time.time()
 print("Time Elapsed: ", t1-t0, "seconds\n")
+
+mutate()
