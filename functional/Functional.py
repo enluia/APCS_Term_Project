@@ -512,7 +512,7 @@ def check_timetable_feasibility():
         print(i)
     
 
-def mutate(matrix, num_blocks, courses):
+def mutate(matrix):
     """
     Mutate a timetable by randomly changing a course assignment.
 
@@ -527,23 +527,23 @@ def mutate(matrix, num_blocks, courses):
     # Randomly select a student
     student_key = random.choice(student_keys)
 
-    # Get a list of all block indices
-    block_indices = list(range(num_blocks))
+    # Get a list of all block keys for the chosen student
+    block_keys = list(matrix[student_key].keys())
     # Randomly select a block
-    block_index = random.choice(block_indices)
+    block_key = random.choice(block_keys)
 
-    # Get a list of all course keys
-    course_keys = list(courses.keys())
+    # Get a list of all course keys for the chosen student and block
+    course_keys = list(matrix[student_key][block_key].keys())
     # Randomly select a course
     course_key = random.choice(course_keys)
 
     # Get the current assignment
-    current_assignment = matrix[student_key][block_index][course_key]
+    current_assignment = matrix[student_key][block_key][course_key]
     
     # Flip the assignment
     # If the current assignment is 1, set it to 0.
     # If it's 0, set it to 1.
-    matrix[student_key][block_index][course_key] = 1 if current_assignment == 0 else 0
+    matrix[student_key][block_key][course_key] = 1 if current_assignment == 0 else 0
 
     return matrix
 
@@ -563,6 +563,120 @@ def mutate(matrix, num_blocks, courses):
    #     for course_key in matrix[1000][block_key]:
     #        print(course_key)
             
+
+def crossover(matrix1, matrix2):
+    """
+    Perform a crossover operation on two timetables.
+
+    Args:
+        matrix1 (dict): The first timetable.
+        matrix2 (dict): The second timetable.
+        
+    Returns:
+        dict: A new timetable that is a result of the crossover.
+    """
+
+    # Copy the first matrix to initiate the offspring
+    offspring = dict(matrix1)
+
+    # Get a list of all student keys
+    student_keys = list(matrix1.keys())
+
+    # Select a random crossover point
+    crossover_point = random.randint(1, len(student_keys))
+
+    # Iterate over the student keys
+    for i, student_key in enumerate(student_keys):
+        # If the current key is beyond the crossover point, replace the offspring's 
+        # corresponding blocks with those of the second parent
+        if i >= crossover_point:
+            offspring[student_key] = dict(matrix2[student_key])
+
+    return offspring
+
+def calculate_fitness(matrix):
+    """
+    Evaluate the fitness of a given timetable.
+
+    This function should evaluate the fitness of a timetable based
+    on your specific requirements. It should return a higher score for
+    more suitable timetables.
+
+    Args:
+        matrix (dict): The timetable to evaluate.
+        
+    Returns:
+        float: The fitness score of the timetable.
+    """
+    # Implement your fitness calculation here
+    
+    return matrix_measure( )
+
+def selection(population, scores):
+    """
+    Select the fittest individuals for reproduction.
+    
+    Args:
+        population (list): The population of timetables.
+        scores (list): The fitness scores for the population.
+        
+    Returns:
+        list: The selected parents for reproduction.
+    """
+    # Zip together the population and scores, sort by scores
+    sorted_population = sorted(zip(population, scores), key=lambda x: x[1], reverse=True)
+
+    # Select the top half of the population
+    selected = sorted_population[:len(sorted_population)//2]
+
+    # Return only the individuals, not their scores
+    return [individual for individual, score in selected]
+
+def evolutionary_algorithm(population_size, num_generations):
+    """
+    Run the evolutionary algorithm to optimize the timetable.
+    
+    Args:
+        population_size (int): The size of the population to evolve.
+        num_generations (int): The number of generations to run the evolution for.
+        
+    Returns:
+        dict: The best timetable found.
+    """
+    # Initialize a population
+    population = [matrix_start() for _ in range(population_size)]
+
+    for generation in range(num_generations):
+        # Calculate fitness for each individual in the population
+        scores = [calculate_fitness(matrix) for matrix in population]
+
+        # Select the fittest individuals for reproduction
+        parents = selection(population, scores)
+
+        # Initialize an empty list for the new population
+        new_population = []
+
+        while len(new_population) < population_size:
+            # Select two parents randomly
+            parent1, parent2 = random.sample(parents, 2)
+
+            # Perform crossover
+            offspring = crossover(parent1, parent2)
+
+            # Perform mutation
+            offspring = mutate(offspring, len(blocks), courses)
+
+            # Add the offspring to the new population
+            new_population.append(offspring)
+
+        # Replace the old population with the new population
+        population = new_population
+
+    # After all generations have completed, select the best individual from the final population
+    scores = [calculate_fitness(matrix) for matrix in population]
+    best_matrix = max(zip(population, scores), key=lambda x: x[1])[0]
+
+    return best_matrix
 
 def numCoursesSad():
     
@@ -612,4 +726,9 @@ print('Program Terminated')
 t1 = time.time()
 print("Time Elapsed: ", t1-t0, "seconds\n")
 
-#mutate()
+#matrix = selection()
+#matrix = crossover(matrix)
+#matrix = mutate(matrix)
+#matrix_measure()
+
+evolutionary_algorithm(10, 10)
