@@ -139,7 +139,12 @@ def read_course_csv(file_path):
 
             # space for each section
             for i in range(int(row[14])):
-                current_set.setdefault(i, {"block": None, "students": []})
+                v = {"block": None, "students": []}
+                
+                # linear
+                if int(row[7]) == 1:
+                    v = {"block": None, "block2": None, "students": []}
+                current_set.setdefault(i, v)
 
             data.setdefault(row[0], current_set)
 
@@ -218,23 +223,27 @@ def matrix_assign(s_key, b, c_key, section_num, is_linear_and_not_ot = False):
 
     # add student to class lists and remove active request from student
     courses[c_key][section_num]['students'].append(s_key)
-    requests[s_key].remove(c_key)
+    if c_key in requests[s_key]:
+        requests[s_key].remove(c_key)
 
     # simul
     if simul.get(c_key):
         for simul_course in simul.get(c_key):
+
             courses[simul_course][section_num]['students'].append(s_key)
+            if simul_course in requests[s_key]:
+                requests[s_key].remove(simul_course)
 
     if courses[c_key]['base_terms'] == "1" and c_key not in outside_timetable:
         print(s_key, b, c_key, courses[c_key]['name'])
 
-def matrix_linear_assign(s_key, b, c_key, section_num):
-
-    # assign a course to a block for a student
-    matrix[s_key][b][c_key] = 1
-
-    # add student to class list
-    courses[c_key][section_num]['students'].append(s_key)
+# add non simul courses
+def matrix_assign_non_simuls(s_key, b, c_key, i, the_block = 'block'):
+    if non_simul.get(c_key):
+        for non_simul_course in non_simul[c_key]:
+            if non_simul_course in requests[s_key]:
+                matrix_assign(s_key, b, non_simul_course, i)
+                courses[non_simul_course][i][the_block] = b
 
 # assign students requested course to next available block if possible
 def matrix_try_assign(c_key, s_key, b_key, b_key_range, is_linear_and_not_ot = False):
@@ -244,7 +253,7 @@ def matrix_try_assign(c_key, s_key, b_key, b_key_range, is_linear_and_not_ot = F
         if sum(matrix[s_key][b].values()) > 0:
             continue
 
-        save_i = None
+        successful_assignment = False
         for i in range(int(courses[c_key]['sections'])):
 
             # unassigned section
@@ -259,18 +268,14 @@ def matrix_try_assign(c_key, s_key, b_key, b_key_range, is_linear_and_not_ot = F
             # class with space in correct block
             if courses[c_key][i]['block'] == b and len(courses[c_key][i]['students']) < int(courses[c_key]['max_enroll']):
                 matrix_assign(s_key, b, c_key, i)
-                save_i = i
+                successful_assignment = True
+                
+                # add non simul courses
+                matrix_assign_non_simuls(s_key, b, c_key, i)
                 break
-
-        # add non simul courses if they exist and blockee was added
-        if non_simul.get(c_key) and save_i is not None:
-            for non_simul_course in non_simul.get(c_key):
-                if non_simul_course in requests[s_key]:
-                    matrix_assign(s_key, b, non_simul_course, save_i)
-                    courses[non_simul_course][save_i]['block'] = b
         
         # student has space but course in block does not
-        if save_i is None:
+        if not successful_assignment:
             continue
         break
 
@@ -314,25 +319,18 @@ def matrix_start():
         if courses[c_key]['base_terms'] == '1':
 
             for s_key in requests:
-
                 if c_key not in requests[s_key]:
                     continue
 
-                """
                 for b in blocks[0:4]:
-
-                    if c_key not in requests[s_key]:
-                        #print("AHHHH")
-                        pass
 
                     if sum(matrix[s_key][b].values()) > 0:
                         continue
 
-                    save_i = None
-
+                    successful_assignment = False
                     for i in range(int(courses[c_key]['sections'])):
 
-                        toBreakOrNotToBreak = False
+                        both_fit = False
 
                         # unassigned section
                         if courses[c_key][i]['block'] == None:
@@ -341,25 +339,38 @@ def matrix_start():
                         # class with space in correct block
                         if courses[c_key][i]['block'] == b and len(courses[c_key][i]['students']) < int(courses[c_key]['max_enroll']):
                             
-                            for b1 in blocks[4:8]:
-                                if courses[c_key][i]['block'] == None:
-                                    courses[c_key][i]['block'] = b
-                                
-                                if courses[c_key][i]['block'] == b and len(courses[c_key][i]['students']) < int(courses[c_key]['max_enroll']):
-                                    matrix_linear_assign(s_key, b, c_key, i)
-                                    matrix_linear_assign(s_key, b1, c_key, i)
-                                    if c_key in requests[s_key]:
-                                        requests[s_key].remove(c_key)
-                                    #else:
-                                        #print(requests[s_key], c_key)
-                                    save_i = i
-                                    toBreakOrNotToBreak = True
-                                    break
-                        if toBreakOrNotToBreak:
-                            break
-                """
+                            for b2 in blocks[4:8]:
 
-    # then go through non-sequenced courses by priority
+                                if sum(matrix[s_key][b2].values()) > 0:
+                                    continue
+
+                                # unassigned section (block2)
+                                if courses[c_key][i]['block2'] == None:
+                                    courses[c_key][i]['block2'] = b2
+                                    
+                                if courses[c_key][i]['block2'] == b2:
+                                    both_fit = True
+                                    matrix_assign(s_key, b, c_key, i)
+                                    matrix_assign(s_key, b2, c_key, i)
+                                    successful_assignment = True
+
+                                    # add non simul courses
+                                    matrix_assign_non_simuls(s_key, b, c_key, i)
+                                    matrix_assign_non_simuls(s_key, b2, c_key, i, 'block2')
+
+                                    break
+                                
+                                continue
+                                    
+                        if not both_fit:
+                            courses[c_key][i]['block'] = None
+
+                    # student has space but course in block does not
+                    if not successful_assignment:
+                        continue
+                    break
+
+    # then go through non-sequenced non-linear courses by priority
     for c_key in courses:
 
         for s_key in requests:
@@ -368,8 +379,6 @@ def matrix_start():
 
             # assign students requested course to next available block
             matrix_try_assign(c_key, s_key, 0, 8)
-
-    #courses = shuffle_dict(courses, COURSE_SHUFFLE_SEED)
 
 # measure scheduling successes
 def matrix_measure():
@@ -594,7 +603,7 @@ matrix_start()
 matrix_measure()
 matrix_export_to_csv(MATRIX_OUTPUT_FILE)
 matrix_export_students(MATRIX_OUTPUT_STUDENT_FILE)
-print(matrix_get_student_timetable(1787))
+print(matrix_get_student_timetable(1002))
 
 #numCoursesSad()
 
@@ -603,4 +612,4 @@ print('Program Terminated')
 t1 = time.time()
 print("Time Elapsed: ", t1-t0, "seconds\n")
 
-mutate()
+#mutate()
