@@ -122,7 +122,7 @@ MGMT-12L--,,GEOMETRY 12,Mathematics,,N,,1,1,29,1.00,,20,,1,,,,Y
 MGRPR11--L,,GRAPHIC PRODUCTION 11 LINEAR,Applied Skills,,N,,1,1,50,2.00,,50,,1,,,,Y
 MGRPR12--L,,GRAPHIC PRODUCTION 12 LINEAR,Applied Skills,,N,,1,1,50,2.00,,50,,1,,,,Y
 MIDS-0A---,,INDEPENDENT DIRECTED STUDIES 10A,Personal Development,,N,,0,1,29,0.00,,0,,6,,,,Y
-MIDS-0B---,,INDEPENDENT DIRECTED STUDIES 10B,Personal Development,,N,,2,1,29,2.00,,50,,5,,,,Y
+MIDS-0B---,,INDEPENDENT DIRECTED STUDIES 10B,Personal Development,,N,,2,1,29,2.00,,50,,1,,,,Y
 MIDS-0C---,,INDEPENDENT DIRECTED STUDIES 10C,Personal Development,,N,,1,1,20,2.00,,20,,1,,,,Y
 MIDS-1A---,,INDEPENDENT DIRECTED STUDIES 11A,Personal Development,,N,,0,1,0,0.00,,50,,5,,,,Y
 MIDS-1B---,,INDEPENDENT DIRECTED STUDIES 11B,Personal Development,,N,,2,1,100,2.00,,0,,5,,,,Y
@@ -179,7 +179,7 @@ MODED12---,,OUTDOOR EDUCATION 12,Physical Education,,N,,2,1,29,2.00,,50,,1,,,,Y
 MPGEO12---,,PHYSICAL GEOGRAPHY 12,Social Studies,,N,,2,1,24,2.00,,10,,1,,,,Y
 MPH--11---,,PHYSICS 11,Science,,N,,2,1,23,2.00,,20,,6,,,,Y
 MPH--12---,,PHYSICS 12,Science,,N,,2,1,23,2.00,,35,,5,,,,Y
-MPHE-09---,,PHYSICAL AND HEALTH EDUCATION 9,Physical Education,,N,,2,1,29,2.00,,35,,3,,,,Y
+MPHE-09---,,PHYSICAL AND HEALTH EDUCATION 9,Physical Education,,N,,2,1,29,2.00,,35,,4,,,,Y
 MPHE-09--L,,PHYSICAL AND HEALTH EDUCATION 9 Linear,Physical Education,,N,,1,1,32,2.00,,40,,1,,,,Y
 MPHE-09B--,,PHYSICAL AND HEALTH EDUCATION 9 Boys,Physical Education,,N,,2,1,29,2.00,,35,,5,,,,Y
 Greater Victoria,,,,,,,,,,,,,Mount Douglas Secondary,,,,,
