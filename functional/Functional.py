@@ -183,11 +183,11 @@ def read_blocking_csv(file_path, blocking_type):
 
         for row in reader:
             
-            if row[1] == "" or row[1].startswith("Rule") or blocking_type not in row[2]:
+            if row[1] == "" or row[1].startswith("Rule") or (" " + blocking_type) not in row[2]:
                 continue
 
             # only add those in blocks
-            current_set = row[2].split('Schedule')[1].split(' in a ' + blocking_type)[0].split(', ')
+            current_set = row[2].split('Schedule ')[1].split(' in a ' + blocking_type)[0].split(', ')
 
             if blocking_type == "Terms":
                 # haha its course sequencing now
@@ -196,8 +196,13 @@ def read_blocking_csv(file_path, blocking_type):
             else:
                 # create dictionary with every course blocked simul-ly
                 for blocking_key in current_set:
-                    data[blocking_key] = current_set
-                    data[blocking_key].remove(blocking_key)
+                    if data.get(blocking_key) is None:
+                        data[blocking_key] = current_set
+                        data[blocking_key].remove(blocking_key)
+                    else:
+                        for blocking_value in current_set:
+                            if blocking_value not in data[blocking_key] and blocking_value != blocking_key:
+                                data[blocking_key] += [blocking_value]
 
     return data
 
