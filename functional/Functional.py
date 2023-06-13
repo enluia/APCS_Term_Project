@@ -235,7 +235,8 @@ def matrix_assign(s_key, b, c_key, section_num, is_linear_and_not_ot = False):
                 requests[s_key].remove(simul_course)
 
     if courses[c_key]['base_terms'] == "1" and c_key not in outside_timetable:
-        print(s_key, b, c_key, courses[c_key]['name'])
+        #print(s_key, b, c_key, courses[c_key]['name'])
+        pass
 
 # add non simul courses
 def matrix_assign_non_simuls(s_key, b, c_key, i, the_block = 'block'):
@@ -682,8 +683,12 @@ def numCoursesSad():
     
     for c_key in courses:
         for i in range(int(courses[c_key]['sections'])):
-            if len(courses[c_key][i]['students']) <= 5:
+
+            if 0 < len(courses[c_key][i]['students']) < int(courses[c_key]['max_enroll']) - 5:
                 print(c_key, courses[c_key][i]['students'])
+
+            if 0 < len(courses[c_key][i]['students']) <= 5:
+                pass
 
 
 
@@ -717,9 +722,9 @@ matrix_start()
 matrix_measure()
 matrix_export_to_csv(MATRIX_OUTPUT_FILE)
 matrix_export_students(MATRIX_OUTPUT_STUDENT_FILE)
-print(matrix_get_student_timetable(1002))
+print(matrix_get_student_timetable(1780))
 
-#numCoursesSad()
+numCoursesSad()
 
 # done!
 print('Program Terminated')
@@ -731,4 +736,4 @@ print("Time Elapsed: ", t1-t0, "seconds\n")
 #matrix = mutate(matrix)
 #matrix_measure()
 
-evolutionary_algorithm(10, 10)
+#evolutionary_algorithm(10, 10)
