@@ -692,8 +692,12 @@ def numCoursesSad():
     
     for c_key in courses:
         for i in range(int(courses[c_key]['sections'])):
-            if len(courses[c_key][i]['students']) <= 5:
+
+            if 0 < len(courses[c_key][i]['students']) < int(courses[c_key]['max_enroll']) - 5:
                 print(c_key, courses[c_key][i]['students'])
+
+            if 0 < len(courses[c_key][i]['students']) <= 5:
+                pass
 
 
 
@@ -727,9 +731,9 @@ matrix_start()
 matrix_measure()
 matrix_export_to_csv(MATRIX_OUTPUT_FILE)
 matrix_export_students(MATRIX_OUTPUT_STUDENT_FILE)
-print(matrix_get_student_timetable(1091))
+print(matrix_get_student_timetable(1780))
 
-#numCoursesSad()
+numCoursesSad()
 
 # done!
 print('Program Terminated')
