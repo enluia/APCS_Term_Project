@@ -229,23 +229,29 @@ def matrix_assign(s_key, b, c_key, section_num, is_linear_and_not_ot = False):
     # simul
     if simul.get(c_key):
         for simul_course in simul.get(c_key):
-            courses[simul_course][section_num]['students'].append(s_key)
+            if courses[simul_course].get(section_num):
+                courses[simul_course][section_num]['students'].append(s_key)
+            if simul_course in requests[s_key] and not is_linear_and_not_ot:
+                requests[s_key].remove(simul_course)
 
     if courses[c_key]['base_terms'] == "1" and c_key not in outside_timetable:
         #print(s_key, b, c_key, courses[c_key]['name'])
         pass
 
 # add non simul courses
-def matrix_assign_non_simuls(s_key, b, c_key, i, the_block = 'block'):
+def matrix_assign_non_simuls(s_key, b, c_key, i, the_block = 'block', is_linear_and_not_ot = False):
 
+    if c_key == "MCLE-10--L":
+        print(s_key)
+        
     if non_simul.get(c_key):
         for non_simul_course in non_simul[c_key]:
             if non_simul_course in requests[s_key]:
-                matrix_assign(s_key, b, non_simul_course, i)
+                matrix_assign(s_key, b, non_simul_course, i, is_linear_and_not_ot)
                 courses[non_simul_course][i][the_block] = b
 
 # assign students requested course to next available block if possible
-def matrix_try_assign(c_key, s_key, b_key, b_key_range, is_linear_and_not_ot = False):
+def matrix_try_assign(c_key, s_key, b_key, b_key_range):
 
     for b in blocks[b_key:b_key + b_key_range]:
 
@@ -262,9 +268,8 @@ def matrix_try_assign(c_key, s_key, b_key, b_key_range, is_linear_and_not_ot = F
                 # simul
                 if simul.get(c_key):
                     for simul_course in simul.get(c_key):
-                        print(courses[c_key])
-                        print(courses[simul_course])
-                        courses[simul_course][i]['block'] = b
+                        if courses[simul_course].get(i):
+                            courses[simul_course][i]['block'] = b
 
             # class with space in correct block
             if courses[c_key][i]['block'] == b and len(courses[c_key][i]['students']) < int(courses[c_key]['max_enroll']):
@@ -710,8 +715,6 @@ def numCoursesSad():
             if 0 < len(courses[c_key][i]['students']) <= 5:
                 pass
 
-
-
 ###
 # MAIN
 #
@@ -749,7 +752,7 @@ print(matrix_get_student_timetable(1002))
 # done!
 print('Program Terminated')
 t1 = time.time()
-print("Time Elapsed: ", t1-t0, "seconds\n")
+print("Time Elapsed: ", t1 - t0, "seconds\n")
 
 #matrix = selection()
 #matrix = crossover(matrix)
