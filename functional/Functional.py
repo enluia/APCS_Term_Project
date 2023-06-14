@@ -246,12 +246,13 @@ def matrix_assign(s_key, b, c_key, section_num, is_linear_and_not_ot = False):
 
 # add non simul courses
 def matrix_assign_non_simuls(s_key, b, c_key, i, the_block = 'block', is_linear_and_not_ot = False):
-
-    if c_key == "MCLE-10--L":
-        print(s_key)
         
     if non_simul.get(c_key):
         for non_simul_course in non_simul[c_key]:
+            
+            if c_key == "MCLE-10--L":
+                print(s_key, non_simul_course in requests[s_key])
+
             if non_simul_course in requests[s_key]:
                 matrix_assign(s_key, b, non_simul_course, i, is_linear_and_not_ot)
                 courses[non_simul_course][i][the_block] = b
