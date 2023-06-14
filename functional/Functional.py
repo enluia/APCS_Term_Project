@@ -139,12 +139,7 @@ def read_course_csv(file_path):
 
             # space for each section
             for i in range(int(row[14])):
-                v = {"block": None, "students": []}
-                
-                # linear
-                if int(row[7]) == 1:
-                    v = {"block": None, "block2": None, "students": []}
-                current_set.setdefault(i, v)
+                current_set.setdefault(i, {"block": None, "students": []})
 
             data.setdefault(row[0], current_set)
 
@@ -229,16 +224,12 @@ def matrix_assign(s_key, b, c_key, section_num, is_linear_and_not_ot = False):
 
     # add student to class lists and remove active request from student
     courses[c_key][section_num]['students'].append(s_key)
-    if c_key in requests[s_key]:
-        requests[s_key].remove(c_key)
+    requests[s_key].remove(c_key)
 
     # simul
     if simul.get(c_key):
         for simul_course in simul.get(c_key):
-
             courses[simul_course][section_num]['students'].append(s_key)
-            if simul_course in requests[s_key]:
-                requests[s_key].remove(simul_course)
 
     if courses[c_key]['base_terms'] == "1" and c_key not in outside_timetable:
         #print(s_key, b, c_key, courses[c_key]['name'])
@@ -261,7 +252,7 @@ def matrix_try_assign(c_key, s_key, b_key, b_key_range, is_linear_and_not_ot = F
         if sum(matrix[s_key][b].values()) > 0:
             continue
 
-        successful_assignment = False
+        save_i = None
         for i in range(int(courses[c_key]['sections'])):
 
             # unassigned section
@@ -278,19 +269,25 @@ def matrix_try_assign(c_key, s_key, b_key, b_key_range, is_linear_and_not_ot = F
             # class with space in correct block
             if courses[c_key][i]['block'] == b and len(courses[c_key][i]['students']) < int(courses[c_key]['max_enroll']):
                 matrix_assign(s_key, b, c_key, i)
-                successful_assignment = True
-                
-                # add non simul courses
-                matrix_assign_non_simuls(s_key, b, c_key, i)
+                save_i = i
                 break
+
+        # add non simul courses if they exist and blockee was added
+        if non_simul.get(c_key) and save_i is not None:
+            for non_simul_course in non_simul.get(c_key):
+                if non_simul_course in requests[s_key]:
+                    matrix_assign(s_key, b, non_simul_course, save_i)
+                    courses[non_simul_course][save_i]['block'] = b
         
         # student has space but course in block does not
-        if not successful_assignment:
+        if save_i is None:
             continue
         break
 
 # start filling the matrix using a modified greedy algorithm
 def matrix_start():
+
+    global courses
 
     # outside the timetable courses
     for c_key in courses:
@@ -329,18 +326,25 @@ def matrix_start():
         if courses[c_key]['base_terms'] == '1':
 
             for s_key in requests:
+
                 if c_key not in requests[s_key]:
                     continue
 
+                """
                 for b in blocks[0:4]:
+
+                    if c_key not in requests[s_key]:
+                        #print("AHHHH")
+                        pass
 
                     if sum(matrix[s_key][b].values()) > 0:
                         continue
 
-                    successful_assignment = False
+                    save_i = None
+
                     for i in range(int(courses[c_key]['sections'])):
 
-                        both_fit = False
+                        toBreakOrNotToBreak = False
 
                         # unassigned section
                         if courses[c_key][i]['block'] == None:
@@ -349,46 +353,38 @@ def matrix_start():
                         # class with space in correct block
                         if courses[c_key][i]['block'] == b and len(courses[c_key][i]['students']) < int(courses[c_key]['max_enroll']):
                             
-                            for b2 in blocks[4:8]:
-
-                                if sum(matrix[s_key][b2].values()) > 0:
-                                    continue
-
-                                # unassigned section (block2)
-                                if courses[c_key][i]['block2'] == None:
-                                    courses[c_key][i]['block2'] = b2
-                                    
-                                if courses[c_key][i]['block2'] == b2:
-                                    both_fit = True
-                                    matrix_assign(s_key, b, c_key, i)
-                                    matrix_assign(s_key, b2, c_key, i)
-                                    successful_assignment = True
-
-                                    # add non simul courses
-                                    matrix_assign_non_simuls(s_key, b, c_key, i)
-                                    matrix_assign_non_simuls(s_key, b2, c_key, i, 'block2')
-
-                                    break
+                            for b1 in blocks[4:8]:
+                                if courses[c_key][i]['block'] == None:
+                                    courses[c_key][i]['block'] = b
                                 
-                                continue
-                                    
-                        if not both_fit:
-                            courses[c_key][i]['block'] = None
+                                if courses[c_key][i]['block'] == b and len(courses[c_key][i]['students']) < int(courses[c_key]['max_enroll']):
+                                    matrix_linear_assign(s_key, b, c_key, i)
+                                    matrix_linear_assign(s_key, b1, c_key, i)
+                                    if c_key in requests[s_key]:
+                                        requests[s_key].remove(c_key)
+                                    #else:
+                                        #print(requests[s_key], c_key)
+                                    save_i = i
+                                    toBreakOrNotToBreak = True
+                                    break
+                        if toBreakOrNotToBreak:
+                            break
+                """
 
-                    # student has space but course in block does not
-                    if not successful_assignment:
-                        continue
-                    break
+    # then go through non-sequenced courses by priority
 
-    # then go through non-sequenced non-linear courses by priority
     for c_key in courses:
-
+        courses = shuffle_dict(courses, COURSE_SHUFFLE_SEED)
         for s_key in requests:
             if c_key not in requests[s_key]:
                 continue
 
             # assign students requested course to next available block
             matrix_try_assign(c_key, s_key, 0, 8)
+
+    #courses = shuffle_dict(courses, COURSE_SHUFFLE_SEED)
+
+    return matrix
 
 # measure scheduling successes
 def matrix_measure():
@@ -560,7 +556,6 @@ def mutate(matrix):
         num_blocks (int): The total number of blocks.
         courses (dict): The courses dictionary.
     """
-
     # Get a list of all student keys
     student_keys = list(matrix.keys())
     # Randomly select a student
@@ -615,6 +610,9 @@ def crossover(matrix1, matrix2):
         dict: A new timetable that is a result of the crossover.
     """
 
+    if matrix1 is None or matrix2 is None:
+        raise ValueError("Both matrices must be not None")
+
     # Copy the first matrix to initiate the offspring
     offspring = dict(matrix1)
 
@@ -630,7 +628,6 @@ def crossover(matrix1, matrix2):
         # corresponding blocks with those of the second parent
         if i >= crossover_point:
             offspring[student_key] = dict(matrix2[student_key])
-
     return offspring
 
 def calculate_fitness(matrix):
@@ -648,8 +645,10 @@ def calculate_fitness(matrix):
         float: The fitness score of the timetable.
     """
     # Implement your fitness calculation here
-    
-    return matrix_measure( )
+    print("yes")
+    if matrix_measure() == None:
+        return 0
+    return matrix_measure()
 
 def selection(population, scores):
     """
@@ -672,50 +671,33 @@ def selection(population, scores):
     return [individual for individual, score in selected]
 
 def evolutionary_algorithm(population_size, num_generations):
-    """
-    Run the evolutionary algorithm to optimize the timetable.
-    
-    Args:
-        population_size (int): The size of the population to evolve.
-        num_generations (int): The number of generations to run the evolution for.
-        
-    Returns:
-        dict: The best timetable found.
-    """
     # Initialize a population
     population = [matrix_start() for _ in range(population_size)]
-
+    
     for generation in range(num_generations):
-        # Calculate fitness for each individual in the population
+        # Calculate the fitness scores for the population
         scores = [calculate_fitness(matrix) for matrix in population]
-
-        # Select the fittest individuals for reproduction
+        
+        # Perform selection
         parents = selection(population, scores)
+        
+        # Crossover and mutation
+        next_generation = []
+        for i in range(population_size // 2):
+            parent1 = random.choice(parents)
+            parent2 = random.choice(parents)
+            child1 = crossover(parent1, parent2)  # ignoring the third (and subsequent) values
+            #print(child1)
+            #print(child2)
+            next_generation.append(mutate(child1))
+            #next_generation.append(mutate(child2))
 
-        # Initialize an empty list for the new population
-        new_population = []
-
-        while len(new_population) < population_size:
-            # Select two parents randomly
-            parent1, parent2 = random.sample(parents, 2)
-
-            # Perform crossover
-            offspring = crossover(parent1, parent2)
-
-            # Perform mutation
-            offspring = mutate(offspring, len(blocks), courses)
-
-            # Add the offspring to the new population
-            new_population.append(offspring)
-
-        # Replace the old population with the new population
-        population = new_population
-
-    # After all generations have completed, select the best individual from the final population
+        population = next_generation
+    
+    # Return the best timetable in the last generation
     scores = [calculate_fitness(matrix) for matrix in population]
-    best_matrix = max(zip(population, scores), key=lambda x: x[1])[0]
-
-    return best_matrix
+    best_index = scores.index(max(scores))
+    return population[best_index]
 
 def numCoursesSad():
     
@@ -760,7 +742,7 @@ matrix_start()
 matrix_measure()
 matrix_export_to_csv(MATRIX_OUTPUT_FILE)
 matrix_export_students(MATRIX_OUTPUT_STUDENT_FILE)
-print(matrix_get_student_timetable(1780))
+print(matrix_get_student_timetable(1002))
 
 numCoursesSad()
 
@@ -774,4 +756,4 @@ print("Time Elapsed: ", t1-t0, "seconds\n")
 #matrix = mutate(matrix)
 #matrix_measure()
 
-#evolutionary_algorithm(10, 10)
+evolutionary_algorithm(10, 10)
