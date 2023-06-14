@@ -294,6 +294,8 @@ def matrix_try_assign(c_key, s_key, b_key, b_key_range):
 # start filling the matrix using a modified greedy algorithm
 def matrix_start():
 
+    global courses
+
     # outside the timetable courses
     for c_key in courses:
 
@@ -494,6 +496,7 @@ def matrix_export_students(filename):
             writer.writerow(stud_sched)
 
 
+
 ###
 # AUXILIARY
 #
@@ -533,7 +536,6 @@ def mutate(matrix):
         num_blocks (int): The total number of blocks.
         courses (dict): The courses dictionary.
     """
-
     # Get a list of all student keys
     student_keys = list(matrix.keys())
     # Randomly select a student
@@ -587,6 +589,10 @@ def crossover(matrix1, matrix2):
     Returns:
         dict: A new timetable that is a result of the crossover.
     """
+    if matrix1 is None: print("1 none")
+    if matrix2 is None: print("2 none")
+    if matrix1 is None or matrix2 is None:
+        raise ValueError("Both matrices must be not None")
 
     # Copy the first matrix to initiate the offspring
     offspring = dict(matrix1)
@@ -603,7 +609,6 @@ def crossover(matrix1, matrix2):
         # corresponding blocks with those of the second parent
         if i >= crossover_point:
             offspring[student_key] = dict(matrix2[student_key])
-
     return offspring
 
 def calculate_fitness(matrix):
@@ -621,8 +626,10 @@ def calculate_fitness(matrix):
         float: The fitness score of the timetable.
     """
     # Implement your fitness calculation here
-    
-    return matrix_measure( )
+    print("yes")
+    if matrix_measure() == None:
+        return 0
+    return matrix_measure()
 
 def selection(population, scores):
     """
@@ -645,50 +652,37 @@ def selection(population, scores):
     return [individual for individual, score in selected]
 
 def evolutionary_algorithm(population_size, num_generations):
-    """
-    Run the evolutionary algorithm to optimize the timetable.
-    
-    Args:
-        population_size (int): The size of the population to evolve.
-        num_generations (int): The number of generations to run the evolution for.
-        
-    Returns:
-        dict: The best timetable found.
-    """
     # Initialize a population
     population = [matrix_start() for _ in range(population_size)]
-
+    
     for generation in range(num_generations):
-        # Calculate fitness for each individual in the population
+        # Calculate the fitness scores for the population
         scores = [calculate_fitness(matrix) for matrix in population]
-
-        # Select the fittest individuals for reproduction
+        
+        # Perform selection
         parents = selection(population, scores)
+        
+        # Crossover and mutation
+        next_generation = []
+        for i in range(population_size // 2):
+            
+            parent1 = random.choice(parents)
+            parent2 = random.choice(parents)
+            if parent1 is None: print("1 none")
+            if parent2 is None: print("2 none")
+            child1 = crossover(parent1, parent2)  # ignoring the third (and subsequent) values
+            #print(child1)
+            #print(child2)
+            next_generation.append(mutate(child1))
+            #next_generation.append(mutate(child2))
 
-        # Initialize an empty list for the new population
-        new_population = []
-
-        while len(new_population) < population_size:
-            # Select two parents randomly
-            parent1, parent2 = random.sample(parents, 2)
-
-            # Perform crossover
-            offspring = crossover(parent1, parent2)
-
-            # Perform mutation
-            offspring = mutate(offspring, len(blocks), courses)
-
-            # Add the offspring to the new population
-            new_population.append(offspring)
-
-        # Replace the old population with the new population
-        population = new_population
-
-    # After all generations have completed, select the best individual from the final population
+        population = next_generation
+    
+    # Return the best timetable in the last generation
     scores = [calculate_fitness(matrix) for matrix in population]
-    best_matrix = max(zip(population, scores), key=lambda x: x[1])[0]
+    best_index = scores.index(max(scores))
+    return population[best_index]
 
-    return best_matrix
 
 def numCoursesSad():
     
@@ -745,4 +739,4 @@ print("Time Elapsed: ", t1 - t0, "seconds\n")
 #matrix = mutate(matrix)
 #matrix_measure()
 
-#evolutionary_algorithm(10, 10)
+evolutionary_algorithm(10, 10)
