@@ -412,7 +412,11 @@ def matrix_measure():
 
     # number of students with full timetables
     fullTimetable = 0
+    seven = 0
+    six = 0
     fullWithAlts = 0
+    sevenWithAlts = 0
+    sixWithAlts = 0
     i = 0
     disparr = []
     for s_key in STUDENTS:
@@ -430,12 +434,37 @@ def matrix_measure():
             if i < 0: ########################################### change this to 3 to print 3 students with full timetables
                 disparr.append(matrix_get_student_timetable(str(s_key)))
                 i += 1
-        elif coursesGiven + altsGiven >= 8:
-            fullWithAlts += 1
+        elif coursesGiven == 7:
+            seven += 1
+        elif coursesGiven == 6:
+            six += 1
+        
+        if coursesGiven + altsGiven >= 8:
+            fullWithAlts += 1;
+        elif coursesGiven + altsGiven == 7:
+            sevenWithAlts += 1
+        elif coursesGiven + altsGiven == 6:
+            sixWithAlts += 1
     print_percent(fullTimetable, len(STUDENTS), "students got 8/8 requested courses")
+    print_percent(seven, len(STUDENTS), "students got 7/8 requested courses")
+    print_percent(six, len(STUDENTS), "students got 6/8 requested courses")
+    print(fullTimetable/len(STUDENTS) + seven/len(STUDENTS) + six/len(STUDENTS))
     print_percent(fullTimetable + fullWithAlts, len(STUDENTS), "students got 8/8 requested or alternate courses")
+    
     print('\n' + "\n".join(disparr))
 
+    #8/8, 7/7, 6/6 stuff
+    for s_key in STUDENTS:
+        for b in blocks:
+            for c_key in courses:
+                if matrix[s_key][b][c_key] == 1:
+                    if c_key in STUDENTS[s_key]:
+                        coursesPlaced += 1
+                    elif c_key in ALTERNATES[s_key]:
+                        coursesWithAlts += 1
+        total_requests += len(STUDENTS[s_key])
+
+    
 # get a student's timetable
 def matrix_get_student_timetable(student):
 
