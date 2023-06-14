@@ -178,11 +178,11 @@ def read_blocking_csv(file_path, blocking_type):
 
         for row in reader:
             
-            if row[1] == "" or row[1].startswith("Rule") or blocking_type not in row[2]:
+            if row[1] == "" or row[1].startswith("Rule") or (" " + blocking_type) not in row[2]:
                 continue
 
             # only add those in blocks
-            current_set = row[2].split('Schedule')[1].split(' in a ' + blocking_type)[0].split(', ')
+            current_set = row[2].split('Schedule ')[1].split(' in a ' + blocking_type)[0].split(', ')
 
             if blocking_type == "Terms":
                 # haha its course sequencing now
@@ -191,8 +191,14 @@ def read_blocking_csv(file_path, blocking_type):
             else:
                 # create dictionary with every course blocked simul-ly
                 for blocking_key in current_set:
-                    data[blocking_key] = current_set
-                    data[blocking_key].remove(blocking_key)
+
+                    if data.get(blocking_key) is None:
+                        data[blocking_key] = copy.deepcopy(current_set)
+                        data[blocking_key].remove(blocking_key)
+                    else:
+                        for blocking_value in current_set:
+                            if blocking_value not in data[blocking_key] and blocking_value != blocking_key:
+                                data[blocking_key] += [blocking_value]
 
     return data
 
@@ -226,15 +232,17 @@ def matrix_assign(s_key, b, c_key, section_num, is_linear_and_not_ot = False):
             courses[simul_course][section_num]['students'].append(s_key)
 
     if courses[c_key]['base_terms'] == "1" and c_key not in outside_timetable:
-        print(s_key, b, c_key, courses[c_key]['name'])
+        #print(s_key, b, c_key, courses[c_key]['name'])
+        pass
 
-def matrix_linear_assign(s_key, b, c_key, section_num):
+# add non simul courses
+def matrix_assign_non_simuls(s_key, b, c_key, i, the_block = 'block'):
 
-    # assign a course to a block for a student
-    matrix[s_key][b][c_key] = 1
-
-    # add student to class list
-    courses[c_key][section_num]['students'].append(s_key)
+    if non_simul.get(c_key):
+        for non_simul_course in non_simul[c_key]:
+            if non_simul_course in requests[s_key]:
+                matrix_assign(s_key, b, non_simul_course, i)
+                courses[non_simul_course][i][the_block] = b
 
 # assign students requested course to next available block if possible
 def matrix_try_assign(c_key, s_key, b_key, b_key_range, is_linear_and_not_ot = False):
@@ -254,6 +262,8 @@ def matrix_try_assign(c_key, s_key, b_key, b_key_range, is_linear_and_not_ot = F
                 # simul
                 if simul.get(c_key):
                     for simul_course in simul.get(c_key):
+                        print(courses[c_key])
+                        print(courses[simul_course])
                         courses[simul_course][i]['block'] = b
 
             # class with space in correct block
@@ -664,8 +674,12 @@ def numCoursesSad():
     
     for c_key in courses:
         for i in range(int(courses[c_key]['sections'])):
-            if len(courses[c_key][i]['students']) <= 5:
+
+            if 0 < len(courses[c_key][i]['students']) < int(courses[c_key]['max_enroll']) - 5:
                 print(c_key, courses[c_key][i]['students'])
+
+            if 0 < len(courses[c_key][i]['students']) <= 5:
+                pass
 
 
 
@@ -699,9 +713,9 @@ matrix_start()
 matrix_measure()
 matrix_export_to_csv(MATRIX_OUTPUT_FILE)
 matrix_export_students(MATRIX_OUTPUT_STUDENT_FILE)
-print(matrix_get_student_timetable(1787))
+print(matrix_get_student_timetable(1002))
 
-#numCoursesSad()
+numCoursesSad()
 
 # done!
 print('Program Terminated')

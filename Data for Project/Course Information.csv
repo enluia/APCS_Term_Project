@@ -8,7 +8,7 @@ AELC-12---,,AP ENGLISH LITERATURE & COMPOSITION 12,English,,N,,2,1,24,2.00,,10,,
 APHM-12---,,AP PHYSICS C (MECHANICS) 12 external credential,Sciences,,N,,2,1,23,2.00,,10,,1,,,,Y
 ASTA-12---,,AP STATISTICS 12,Mathematics,,N,,1,1,29,2.00,,10,,1,,,,Y
 MAC--11---,,ACCOUNTING 11,Business Education,,N,,2,1,29,2.00,,50,,3,,,,Y
-MACC-12---,,ACCOUNTING 12,Business Education,,N,,2,1,29,2.00,,50,,1,,,,Y
+MACC-12---,,ACCOUNTING 12,Business Education,,N,,2,1,29,2.00,,50,,3,,,,Y
 MACLV11---,,ACTIVE LIVING 11,Physical Education,,N,,2,1,29,2.00,,50,,2,,,,Y
 MACLV11G--,,ACTIVE LIVING 11 Girls,Physical Education,,N,,2,1,29,2.00,,50,,1,,,,Y
 MACLV12---,,ACTIVE LIVING 12,Physical Education,,N,,2,1,29,2.00,,50,,2,,,,Y
@@ -122,7 +122,7 @@ MGMT-12L--,,GEOMETRY 12,Mathematics,,N,,1,1,29,1.00,,20,,1,,,,Y
 MGRPR11--L,,GRAPHIC PRODUCTION 11 LINEAR,Applied Skills,,N,,1,1,50,2.00,,50,,1,,,,Y
 MGRPR12--L,,GRAPHIC PRODUCTION 12 LINEAR,Applied Skills,,N,,1,1,50,2.00,,50,,1,,,,Y
 MIDS-0A---,,INDEPENDENT DIRECTED STUDIES 10A,Personal Development,,N,,0,1,29,0.00,,0,,6,,,,Y
-MIDS-0B---,,INDEPENDENT DIRECTED STUDIES 10B,Personal Development,,N,,2,1,29,2.00,,50,,5,,,,Y
+MIDS-0B---,,INDEPENDENT DIRECTED STUDIES 10B,Personal Development,,N,,2,1,29,2.00,,50,,1,,,,Y
 MIDS-0C---,,INDEPENDENT DIRECTED STUDIES 10C,Personal Development,,N,,1,1,20,2.00,,20,,1,,,,Y
 MIDS-1A---,,INDEPENDENT DIRECTED STUDIES 11A,Personal Development,,N,,0,1,0,0.00,,50,,5,,,,Y
 MIDS-1B---,,INDEPENDENT DIRECTED STUDIES 11B,Personal Development,,N,,2,1,100,2.00,,0,,5,,,,Y
@@ -179,7 +179,7 @@ MODED12---,,OUTDOOR EDUCATION 12,Physical Education,,N,,2,1,29,2.00,,50,,1,,,,Y
 MPGEO12---,,PHYSICAL GEOGRAPHY 12,Social Studies,,N,,2,1,24,2.00,,10,,1,,,,Y
 MPH--11---,,PHYSICS 11,Science,,N,,2,1,23,2.00,,20,,6,,,,Y
 MPH--12---,,PHYSICS 12,Science,,N,,2,1,23,2.00,,35,,5,,,,Y
-MPHE-09---,,PHYSICAL AND HEALTH EDUCATION 9,Physical Education,,N,,2,1,29,2.00,,35,,3,,,,Y
+MPHE-09---,,PHYSICAL AND HEALTH EDUCATION 9,Physical Education,,N,,2,1,29,2.00,,35,,4,,,,Y
 MPHE-09--L,,PHYSICAL AND HEALTH EDUCATION 9 Linear,Physical Education,,N,,1,1,32,2.00,,40,,1,,,,Y
 MPHE-09B--,,PHYSICAL AND HEALTH EDUCATION 9 Boys,Physical Education,,N,,2,1,29,2.00,,35,,5,,,,Y
 Greater Victoria,,,,,,,,,,,,,Mount Douglas Secondary,,,,,
@@ -216,7 +216,7 @@ MSC--10C--,,SCIENCE 10: CHALLENGE,Science,,N,,2,1,23,2.00,,20,,2,,,,Y
 MSP--09---,,SPANISH 9,Modern Languages,,N,,2,1,29,2.00,,35,,2,,,,Y
 MSP--10---,,SPANISH 10,Modern Languages,,N,,2,1,29,2.00,,35,,2,,,,Y
 MSP--11---,,SPANISH 11,Modern Languages,,N,,2,1,29,2.00,,35,,2,,,,Y
-MSP--12---,,SPANISH 12,Modern Languages,,N,,2,1,29,2.00,,35,,1,,,,Y
+MSP--12---,,SPANISH 12,Modern Languages,,N,,2,1,29,2.00,,35,,2,,,,Y
 MSPLG10--L,,SPOKEN LANGUAGE 10 LINEAR,English,,N,,2,1,24,2.00,,10,,2,,,,Y
 MSS--09---,,SOCIAL STUDIES 9,Social Studies,,N,,2,1,24,2.00,,20,,5,,,,Y
 MSS--09C--,,SOCIAL STUDIES 9 CHALLENGE,Social Studies,,N,,2,1,24,2.00,,20,,2,,,,Y
