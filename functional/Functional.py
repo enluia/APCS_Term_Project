@@ -416,7 +416,11 @@ def matrix_measure():
 
     # number of students with full timetables
     fullTimetable = 0
+    seven = 0
+    six = 0
     fullWithAlts = 0
+    sevenWithAlts = 0
+    sixWithAlts = 0
     i = 0
     disparr = []
     for s_key in STUDENTS:
@@ -434,10 +438,25 @@ def matrix_measure():
             if i < 0: ########################################### change this to 3 to print 3 students with full timetables
                 disparr.append(matrix_get_student_timetable(str(s_key)))
                 i += 1
-        elif coursesGiven + altsGiven >= 8:
-            fullWithAlts += 1
+        elif coursesGiven == 7:
+            seven += 1
+        elif coursesGiven == 6:
+            six += 1
+        
+        if coursesGiven + altsGiven >= 8:
+            fullWithAlts += 1;
+        elif coursesGiven + altsGiven == 7:
+            sevenWithAlts += 1
+        elif coursesGiven + altsGiven == 6:
+            sixWithAlts += 1
     print_percent(fullTimetable, len(STUDENTS), "students got 8/8 requested courses")
-    print_percent(fullTimetable + fullWithAlts, len(STUDENTS), "students got 8/8 requested or alternate courses")
+    print_percent(seven, len(STUDENTS), "students got 7/8 requested courses")
+    print_percent(six, len(STUDENTS), "students got 6/8 requested courses")
+    print_percent(fullTimetable + seven + six, len(STUDENTS), "students got 8/8, 7/7, or 6/8 requested courses")
+    print_percent(fullWithAlts, len(STUDENTS), "students got 8/8 requested or alternate courses")
+    print_percent(sevenWithAlts, len(STUDENTS), "students got 7/8 requested or alternate courses")
+    print_percent(sixWithAlts, len(STUDENTS), "students got 6/8 requested or alternate courses")
+    print_percent(fullWithAlts + sevenWithAlts + sixWithAlts, len(STUDENTS), "students got 8/8, 7/7, or 6/8 requested or alternate courses")
     print('\n' + "\n".join(disparr))
 
 # get a student's timetable
@@ -654,14 +673,14 @@ def selection(population, scores):
 def evolutionary_algorithm(population_size, num_generations):
     # Initialize a population
     population = [matrix_start() for _ in range(population_size)]
-    
+    print("WHY ISNT IT WORKING")
+    print(population_size)
     for generation in range(num_generations):
         # Calculate the fitness scores for the population
         scores = [calculate_fitness(matrix) for matrix in population]
-        
+
         # Perform selection
         parents = selection(population, scores)
-        
         # Crossover and mutation
         next_generation = []
         for i in range(population_size // 2):
