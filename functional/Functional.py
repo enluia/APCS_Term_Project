@@ -237,7 +237,7 @@ def matrix_assign(s_key, b, c_key, section_num, is_linear_and_not_ot = False):
         for simul_course in simul.get(c_key):
             if courses[simul_course].get(section_num):
                 courses[simul_course][section_num]['students'].append(s_key)
-            if simul_course in requests[s_key] and not is_linear_and_not_ot:
+            if simul_course in requests[s_key]:
                 requests[s_key].remove(simul_course)
 
     if courses[c_key]['base_terms'] == "1" and c_key not in outside_timetable:
