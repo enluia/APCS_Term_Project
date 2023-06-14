@@ -744,7 +744,7 @@ matrix_export_to_csv(MATRIX_OUTPUT_FILE)
 matrix_export_students(MATRIX_OUTPUT_STUDENT_FILE)
 print(matrix_get_student_timetable(1002))
 
-numCoursesSad()
+#numCoursesSad()
 
 # done!
 print('Program Terminated')
