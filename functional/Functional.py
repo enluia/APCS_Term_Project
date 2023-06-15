@@ -382,7 +382,6 @@ def matrix_start():
                     if not successful_assignment:
                         continue
                     break
-    return matrix
 
     # then go through non-sequenced non-linear courses by priority
     for c_key in courses:
@@ -393,6 +392,8 @@ def matrix_start():
 
             # assign students requested course to next available block
             matrix_try_assign(c_key, s_key, 0, 8)
+
+    return matrix
 
 # measure scheduling successes
 def matrix_measure():
