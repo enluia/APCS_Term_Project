@@ -295,8 +295,6 @@ def matrix_try_assign(c_key, s_key, b_key, b_key_range):
 # start filling the matrix using a modified greedy algorithm
 def matrix_start():
 
-    global courses
-
     # outside the timetable courses
     for c_key in courses:
 
