@@ -759,4 +759,4 @@ print("Time Elapsed: ", t1 - t0, "seconds\n")
 #matrix = mutate(matrix)
 #matrix_measure()
 
-#evolutionary_algorithm(10, 10)
+evolutionary_algorithm(10, 10)
