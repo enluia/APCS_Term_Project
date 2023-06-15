@@ -368,8 +368,8 @@ def matrix_start():
                                     successful_assignment = True
 
                                     # add non simul courses
-                                    matrix_assign_non_simuls(s_key, b, c_key, i)
-                                    matrix_assign_non_simuls(s_key, b2, c_key, i, 'block2', True)
+                                    matrix_assign_non_simuls(s_key, b, c_key, i, 'block', True)
+                                    matrix_assign_non_simuls(s_key, b2, c_key, i, 'block2')
 
                                     break
                                 
@@ -436,16 +436,13 @@ def matrix_measure():
                         altsGiven += 1
         if coursesGiven >= 8:
             fullTimetable += 1
-            if i < 0: ########################################### change this to 3 to print 3 students with full timetables
-                disparr.append(matrix_get_student_timetable(str(s_key)))
-                i += 1
         elif coursesGiven == 7:
             seven += 1
         elif coursesGiven == 6:
             six += 1
         
         if coursesGiven + altsGiven >= 8:
-            fullWithAlts += 1;
+            fullWithAlts += 1
         elif coursesGiven + altsGiven == 7:
             sevenWithAlts += 1
         elif coursesGiven + altsGiven == 6:
@@ -760,4 +757,4 @@ print("Time Elapsed: ", t1 - t0, "seconds\n")
 #matrix = mutate(matrix)
 #matrix_measure()
 
-evolutionary_algorithm(10, 10)
+#evolutionary_algorithm(10, 10)
