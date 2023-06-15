@@ -553,28 +553,13 @@ def mutate(matrix):
         num_blocks (int): The total number of blocks.
         courses (dict): The courses dictionary.
     """
-    # Get a list of all student keys
-    student_keys = list(matrix.keys())
-    # Randomly select a student
-    student_key = random.choice(student_keys)
+    num_mutations = random.randint(1, len(STUDENTS)*len(blocks))
 
-    # Get a list of all block keys for the chosen student
-    block_keys = list(matrix[student_key].keys())
-    # Randomly select a block
-    block_key = random.choice(block_keys)
-
-    # Get a list of all course keys for the chosen student and block
-    course_keys = list(matrix[student_key][block_key].keys())
-    # Randomly select a course
-    course_key = random.choice(course_keys)
-
-    # Get the current assignment
-    current_assignment = matrix[student_key][block_key][course_key]
-    
-    # Flip the assignment
-    # If the current assignment is 1, set it to 0.
-    # If it's 0, set it to 1.
-    matrix[student_key][block_key][course_key] = 1 if current_assignment == 0 else 0
+    for _ in range(num_mutations):
+        student_key = random.choice(list(matrix.keys()))
+        block_index = random.choice(range(len(blocks)))
+        course_key = random.choice(range(len(courses)))
+        matrix[student_key][block_index][course_key] = random.choice(courses)
 
     return matrix
 
@@ -611,22 +596,27 @@ def crossover(matrix1, matrix2):
     if matrix1 is None or matrix2 is None:
         raise ValueError("Both matrices must be not None")
 
-    # Copy the first matrix to initiate the offspring
-    offspring = dict(matrix1)
+    # Determine the number of crossover points
+    num_crossovers = random.randint(1, len(blocks)-1)
+    crossover_points = sorted(random.sample(range(len(blocks)), num_crossovers))
 
-    # Get a list of all student keys
-    student_keys = list(matrix1.keys())
+    child = dict(matrix1)
 
-    # Select a random crossover point
-    crossover_point = random.randint(1, len(student_keys))
+    # Alternate between segments from parent1 and parent2
+    for i in range(len(crossover_points) + 1):
+        start = crossover_points[i-1] if i > 0 else 0
+        end = crossover_points[i] if i < len(crossover_points) else len(blocks)
 
-    # Iterate over the student keys
-    for i, student_key in enumerate(student_keys):
-        # If the current key is beyond the crossover point, replace the offspring's 
-        # corresponding blocks with those of the second parent
-        if i >= crossover_point:
-            offspring[student_key] = dict(matrix2[student_key])
-    return offspring
+        for student in STUDENTS:
+            print(student)
+            for block_index in range(start, end):
+                if block_index in matrix1[student] and block_index in matrix2[student]:
+                    if i % 2 == 0:
+                        child[student][block_index] = matrix1[student][block_index]
+                    else:
+                        child[student][block_index] = matrix2[student][block_index]
+
+    return child
 
 def calculate_fitness(matrix):
     """
@@ -757,4 +747,4 @@ print("Time Elapsed: ", t1 - t0, "seconds\n")
 #matrix = mutate(matrix)
 #matrix_measure()
 
-#evolutionary_algorithm(10, 10)
+evolutionary_algorithm(10, 10)
