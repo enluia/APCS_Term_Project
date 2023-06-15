@@ -382,6 +382,7 @@ def matrix_start():
                     if not successful_assignment:
                         continue
                     break
+    return matrix
 
     # then go through non-sequenced non-linear courses by priority
     for c_key in courses:
@@ -668,6 +669,7 @@ def selection(population, scores):
 
 def evolutionary_algorithm(population_size, num_generations):
     # Initialize a population
+    print(population_size)
     population = [matrix_start() for _ in range(population_size)]
     print("WHY ISNT IT WORKING")
     print(population_size)
@@ -681,7 +683,6 @@ def evolutionary_algorithm(population_size, num_generations):
         next_generation = []
         for i in range(population_size // 2):
             if parents is None: print("parents none")
-            print(parents)
             parent1 = random.choice(parents)
             parent2 = random.choice(parents)
             if parent1 is None: print("parent1 none")
