@@ -5,9 +5,6 @@ import time
 
 """
 THINGS TO DO / FIX
-- linearity
-- simultaneous blocking
-- filling spares
 - iterating from there
 """
 
@@ -74,6 +71,8 @@ def read_student_csv(file_path):
     alternate_set = []
     current_student = 0
     headers = ['ID', 'Courses']
+    temp_num_req = [0] * 10
+    temp_num_ec = 0
 
     with open(file_path, 'r') as file:
         reader = csv.reader(file)
@@ -82,15 +81,19 @@ def read_student_csv(file_path):
 
             # start of a new set
             if row[0].startswith("ID"):
+
                 if current_set == None:
                     current_student = row[1]
                     current_set = []
                     continue
                 data['requests'].setdefault(current_student, current_set)
                 data['alternates'].setdefault(current_student, alternate_set)
+                temp_num_req[len(current_set) - temp_num_ec] += 1
+
                 current_student = row[1]
                 current_set = []
                 alternate_set = []
+                temp_num_ec = 0
 
             # skip headers
             elif row[0] == 'Course':
@@ -102,6 +105,10 @@ def read_student_csv(file_path):
                 if course_id in bad_courses:
                     continue
 
+                # temp
+                if course_id in outside_timetable:
+                    temp_num_ec += 1
+
                 if row[11] == 'N':
                     current_set.append(course_id)
 
@@ -111,10 +118,13 @@ def read_student_csv(file_path):
         # end of file
         data['requests'].setdefault(current_student, current_set)
         data['alternates'].setdefault(current_student, alternate_set)
+        temp_num_req[len(current_set) - temp_num_ec] += 1
 
     # verify results
     write_dict_csv(headers, data['requests'], PARSED_STUDENT_FILE)
     write_dict_csv(headers, data['alternates'], PARSED_ALTERNATES_FILE)
+
+    print(temp_num_req)
 
     return data
 
@@ -240,18 +250,11 @@ def matrix_assign(s_key, b, c_key, section_num, is_linear_and_not_ot = False):
                     courses[simul_course][section_num]['students'].append(s_key)
                 requests[s_key].remove(simul_course)
 
-    if courses[c_key]['base_terms'] == "1" and c_key not in outside_timetable:
-        #print(s_key, b, c_key, courses[c_key]['name'])
-        pass
-
 # add non simul courses
 def matrix_assign_non_simuls(s_key, b, c_key, i, the_block = 'block', is_linear_and_not_ot = False):
         
     if non_simul.get(c_key):
         for non_simul_course in non_simul[c_key]:
-            
-            if c_key == "MCLE-10--L":
-                print(s_key, non_simul_course in requests[s_key])
 
             if non_simul_course in requests[s_key]:
                 matrix_assign(s_key, b, non_simul_course, i, is_linear_and_not_ot)
@@ -335,7 +338,7 @@ def matrix_start():
                 if c_key not in requests[s_key]:
                     continue
 
-                for b in blocks[0:4]:
+                for b in reversed(blocks[0:4]):
 
                     if sum(matrix[s_key][b].values()) > 0:
                         continue
@@ -352,7 +355,7 @@ def matrix_start():
                         # class with space in correct block
                         if courses[c_key][i]['block'] == b and len(courses[c_key][i]['students']) < int(courses[c_key]['max_enroll']):
                             
-                            for b2 in blocks[4:8]:
+                            for b2 in reversed(blocks[4:8]):
 
                                 if sum(matrix[s_key][b2].values()) > 0:
                                     continue
@@ -414,6 +417,7 @@ def matrix_measure():
 
     print_percent(coursesPlaced, total_requests, "fulfilled requests sans alternates")
     print_percent(coursesPlaced + coursesWithAlts, total_requests + num_alternates, "fulfilled requests with alternates")
+    print()
 
     # number of students with full timetables
     fullTimetable = 0
@@ -422,8 +426,7 @@ def matrix_measure():
     fullWithAlts = 0
     sevenWithAlts = 0
     sixWithAlts = 0
-    i = 0
-    disparr = []
+
     for s_key in STUDENTS:
         coursesGiven = 0
         altsGiven = 0
@@ -434,6 +437,7 @@ def matrix_measure():
                         coursesGiven += 1
                     elif c_key in ALTERNATES[s_key]:
                         altsGiven += 1
+        
         if coursesGiven >= 8:
             fullTimetable += 1
         elif coursesGiven == 7:
@@ -447,15 +451,21 @@ def matrix_measure():
             sevenWithAlts += 1
         elif coursesGiven + altsGiven == 6:
             sixWithAlts += 1
+
     print_percent(fullTimetable, len(STUDENTS), "students got 8/8 requested courses")
     print_percent(seven, len(STUDENTS), "students got 7/8 requested courses")
     print_percent(six, len(STUDENTS), "students got 6/8 requested courses")
     print_percent(fullTimetable + seven + six, len(STUDENTS), "students got 8/8, 7/7, or 6/8 requested courses")
+    print()
+
     print_percent(fullWithAlts, len(STUDENTS), "students got 8/8 requested or alternate courses")
     print_percent(sevenWithAlts, len(STUDENTS), "students got 7/8 requested or alternate courses")
     print_percent(sixWithAlts, len(STUDENTS), "students got 6/8 requested or alternate courses")
     print_percent(fullWithAlts + sevenWithAlts + sixWithAlts, len(STUDENTS), "students got 8/8, 7/7, or 6/8 requested or alternate courses")
-    print('\n' + "\n".join(disparr))
+    print()
+
+    print_percent(len(STUDENTS) - fullWithAlts - sevenWithAlts - sixWithAlts, len(STUDENTS), "students with 5 or fewer requested or alternate courses")
+    print()
 
 # get a student's timetable
 def matrix_get_student_timetable(student):
@@ -529,6 +539,18 @@ def count_alternates():
         tot += len(ALTERNATES[s_key])
     return tot
 
+# number of courses that are sad :(
+def numCoursesSad(threshold):
+    
+    for c_key in courses:
+        for i in range(int(courses[c_key]['sections'])):
+
+            if 0 < len(courses[c_key][i]['students']) < int(courses[c_key]['max_enroll']) - threshold:
+                print(c_key, courses[c_key][i]['students'])
+
+            if 0 < len(courses[c_key][i]['students']) <= threshold:
+                pass
+
 # randomness of courses maker
 def shuffle_dict(dictionary, num_shuffles):
     keys = list(dictionary.keys())
@@ -543,6 +565,10 @@ def check_timetable_feasibility():
     for i in STUDENTS:
         print(i)
     
+###
+# EVOLUTIONARY
+#
+
 
 def mutate(matrix):
     """
@@ -692,17 +718,6 @@ def evolutionary_algorithm(population_size, num_generations):
     return population[best_index]
 
 
-def numCoursesSad():
-    
-    for c_key in courses:
-        for i in range(int(courses[c_key]['sections'])):
-
-            if 0 < len(courses[c_key][i]['students']) < int(courses[c_key]['max_enroll']) - 5:
-                print(c_key, courses[c_key][i]['students'])
-
-            if 0 < len(courses[c_key][i]['students']) <= 5:
-                pass
-
 ###
 # MAIN
 #
@@ -710,8 +725,9 @@ def numCoursesSad():
 # variable declarations
 matrix = {}
 
-STUDENTS = read_student_csv(RAW_STUDENT_FILE).get('requests')
-ALTERNATES = read_student_csv(RAW_STUDENT_FILE).get('alternates')
+STUDENTS_CSV = read_student_csv(RAW_STUDENT_FILE)
+STUDENTS = STUDENTS_CSV.get('requests')
+ALTERNATES = STUDENTS_CSV.get('alternates')
 requests = copy.deepcopy(STUDENTS)
 num_alternates = count_alternates()
 courses = read_course_csv(RAW_COURSE_FILE)
@@ -735,7 +751,7 @@ matrix_export_to_csv(MATRIX_OUTPUT_FILE)
 matrix_export_students(MATRIX_OUTPUT_STUDENT_FILE)
 print(matrix_get_student_timetable(1002))
 
-#numCoursesSad()
+#numCoursesSad(5)
 
 # done!
 print('Program Terminated')
