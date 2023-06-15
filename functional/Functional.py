@@ -413,6 +413,7 @@ def matrix_measure():
 
     print_percent(coursesPlaced, total_requests, "fulfilled requests sans alternates")
     print_percent(coursesPlaced + coursesWithAlts, total_requests + num_alternates, "fulfilled requests with alternates")
+    print()
 
     # number of students with full timetables
     fullTimetable = 0
@@ -446,15 +447,18 @@ def matrix_measure():
             sevenWithAlts += 1
         elif coursesGiven + altsGiven == 6:
             sixWithAlts += 1
+
     print_percent(fullTimetable, len(STUDENTS), "students got 8/8 requested courses")
     print_percent(seven, len(STUDENTS), "students got 7/8 requested courses")
     print_percent(six, len(STUDENTS), "students got 6/8 requested courses")
     print_percent(fullTimetable + seven + six, len(STUDENTS), "students got 8/8, 7/7, or 6/8 requested courses")
+    print()
+
     print_percent(fullWithAlts, len(STUDENTS), "students got 8/8 requested or alternate courses")
     print_percent(sevenWithAlts, len(STUDENTS), "students got 7/8 requested or alternate courses")
     print_percent(sixWithAlts, len(STUDENTS), "students got 6/8 requested or alternate courses")
     print_percent(fullWithAlts + sevenWithAlts + sixWithAlts, len(STUDENTS), "students got 8/8, 7/7, or 6/8 requested or alternate courses")
-    print('\n' + "\n".join(disparr))
+    print()
 
 # get a student's timetable
 def matrix_get_student_timetable(student):
