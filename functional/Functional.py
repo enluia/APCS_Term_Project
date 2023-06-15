@@ -382,7 +382,6 @@ def matrix_start():
                     if not successful_assignment:
                         continue
                     break
-    return matrix
 
     # then go through non-sequenced non-linear courses by priority
     for c_key in courses:
@@ -393,9 +392,10 @@ def matrix_start():
 
             # assign students requested course to next available block
             matrix_try_assign(c_key, s_key, 0, 8)
+    return matrix
 
 # measure scheduling successes
-def matrix_measure():
+def matrix_measure(matrix):
 
     # percentage of total requests received
     coursesPlaced = 0
@@ -542,6 +542,31 @@ def check_timetable_feasibility():
     for i in STUDENTS:
         print(i)
     
+def matrix_courses_per_block():
+
+    coursesPerBlock = []
+    for b in blocks:
+        Courses = 0
+        simulCount = 0;
+        nonSimulCount = 0
+        for c_key in courses:
+            for i in range(int(courses[c_key]['sections'])):
+                if Courses[j][i]['block'] == b:
+                    for j in simul:
+
+                        if Courses[j][i]['block'] == b:
+                            simulCount += 1
+                        j += len(simul[j])
+
+                    for j in non_simul:
+                        if Courses[j][i]['block'] == b:
+                            nonSimulCount += 1
+                        j += len(non_simul[j])
+
+                    Courses += 1
+        Courses -= simulCount + nonSimulCount
+        coursesPerBlock[b] = Courses
+    return coursesPerBlock
 
 def mutate(matrix):
     """
@@ -729,6 +754,8 @@ sequencing = read_sequencing_csv(RAW_SEQUENCING_FILE)
 sequencing.update(read_blocking_csv(RAW_BLOCKING_FILE, "Terms"))
 non_simul = read_blocking_csv(RAW_BLOCKING_FILE, "NotSimultaneous")
 simul = read_blocking_csv(RAW_BLOCKING_FILE, "Simultaneous")
+print (non_simul)
+print (simul)
 
 print('File Reading Complete\n')
 
@@ -739,13 +766,13 @@ matrix_start()
 requests = copy.deepcopy(ALTERNATES)
 matrix_start()
 
-matrix_measure()
+matrix_measure(matrix)
 matrix_export_to_csv(MATRIX_OUTPUT_FILE)
 matrix_export_students(MATRIX_OUTPUT_STUDENT_FILE)
 print(matrix_get_student_timetable(1002))
 
 #numCoursesSad()
-
+#matrix_courses_per_block()
 # done!
 print('Program Terminated')
 t1 = time.time()
