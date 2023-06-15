@@ -240,18 +240,11 @@ def matrix_assign(s_key, b, c_key, section_num, is_linear_and_not_ot = False):
                     courses[simul_course][section_num]['students'].append(s_key)
                 requests[s_key].remove(simul_course)
 
-    if courses[c_key]['base_terms'] == "1" and c_key not in outside_timetable:
-        #print(s_key, b, c_key, courses[c_key]['name'])
-        pass
-
 # add non simul courses
 def matrix_assign_non_simuls(s_key, b, c_key, i, the_block = 'block', is_linear_and_not_ot = False):
         
     if non_simul.get(c_key):
         for non_simul_course in non_simul[c_key]:
-            
-            if c_key == "MCLE-10--L":
-                print(s_key, non_simul_course in requests[s_key])
 
             if non_simul_course in requests[s_key]:
                 matrix_assign(s_key, b, non_simul_course, i, is_linear_and_not_ot)
@@ -335,7 +328,7 @@ def matrix_start():
                 if c_key not in requests[s_key]:
                     continue
 
-                for b in blocks[0:4]:
+                for b in reversed(blocks[0:4]):
 
                     if sum(matrix[s_key][b].values()) > 0:
                         continue
@@ -352,7 +345,7 @@ def matrix_start():
                         # class with space in correct block
                         if courses[c_key][i]['block'] == b and len(courses[c_key][i]['students']) < int(courses[c_key]['max_enroll']):
                             
-                            for b2 in blocks[4:8]:
+                            for b2 in reversed(blocks[4:8]):
 
                                 if sum(matrix[s_key][b2].values()) > 0:
                                     continue
@@ -461,6 +454,9 @@ def matrix_measure():
     print_percent(fullWithAlts + sevenWithAlts + sixWithAlts, len(STUDENTS), "students got 8/8, 7/7, or 6/8 requested or alternate courses")
     print()
 
+    print_percent(len(STUDENTS) - fullWithAlts - sevenWithAlts - sixWithAlts, len(STUDENTS), "students with 5 or fewer requested or alternate courses")
+    print()
+
 # get a student's timetable
 def matrix_get_student_timetable(student):
 
@@ -533,6 +529,18 @@ def count_alternates():
         tot += len(ALTERNATES[s_key])
     return tot
 
+# number of courses that are sad :(
+def numCoursesSad():
+    
+    for c_key in courses:
+        for i in range(int(courses[c_key]['sections'])):
+
+            if 0 < len(courses[c_key][i]['students']) < int(courses[c_key]['max_enroll']) - 5:
+                print(c_key, courses[c_key][i]['students'])
+
+            if 0 < len(courses[c_key][i]['students']) <= 5:
+                pass
+
 # randomness of courses maker
 def shuffle_dict(dictionary, num_shuffles):
     keys = list(dictionary.keys())
@@ -547,6 +555,10 @@ def check_timetable_feasibility():
     for i in STUDENTS:
         print(i)
     
+###
+# EVOLUTIONARY
+#
+
 
 def mutate(matrix):
     """
@@ -705,17 +717,6 @@ def evolutionary_algorithm(population_size, num_generations):
     best_index = scores.index(max(scores))
     return population[best_index]
 
-
-def numCoursesSad():
-    
-    for c_key in courses:
-        for i in range(int(courses[c_key]['sections'])):
-
-            if 0 < len(courses[c_key][i]['students']) < int(courses[c_key]['max_enroll']) - 5:
-                print(c_key, courses[c_key][i]['students'])
-
-            if 0 < len(courses[c_key][i]['students']) <= 5:
-                pass
 
 ###
 # MAIN
