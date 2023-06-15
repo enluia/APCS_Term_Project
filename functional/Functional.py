@@ -5,9 +5,6 @@ import time
 
 """
 THINGS TO DO / FIX
-- linearity
-- simultaneous blocking
-- filling spares
 - iterating from there
 """
 
@@ -74,6 +71,8 @@ def read_student_csv(file_path):
     alternate_set = []
     current_student = 0
     headers = ['ID', 'Courses']
+    temp_num_req = [0] * 10
+    temp_num_ec = 0
 
     with open(file_path, 'r') as file:
         reader = csv.reader(file)
@@ -82,15 +81,19 @@ def read_student_csv(file_path):
 
             # start of a new set
             if row[0].startswith("ID"):
+
                 if current_set == None:
                     current_student = row[1]
                     current_set = []
                     continue
                 data['requests'].setdefault(current_student, current_set)
                 data['alternates'].setdefault(current_student, alternate_set)
+                temp_num_req[len(current_set) - temp_num_ec] += 1
+
                 current_student = row[1]
                 current_set = []
                 alternate_set = []
+                temp_num_ec = 0
 
             # skip headers
             elif row[0] == 'Course':
@@ -102,6 +105,10 @@ def read_student_csv(file_path):
                 if course_id in bad_courses:
                     continue
 
+                # temp
+                if course_id in outside_timetable:
+                    temp_num_ec += 1
+
                 if row[11] == 'N':
                     current_set.append(course_id)
 
@@ -111,10 +118,13 @@ def read_student_csv(file_path):
         # end of file
         data['requests'].setdefault(current_student, current_set)
         data['alternates'].setdefault(current_student, alternate_set)
+        temp_num_req[len(current_set) - temp_num_ec] += 1
 
     # verify results
     write_dict_csv(headers, data['requests'], PARSED_STUDENT_FILE)
     write_dict_csv(headers, data['alternates'], PARSED_ALTERNATES_FILE)
+
+    print(temp_num_req)
 
     return data
 
@@ -416,8 +426,7 @@ def matrix_measure():
     fullWithAlts = 0
     sevenWithAlts = 0
     sixWithAlts = 0
-    i = 0
-    disparr = []
+
     for s_key in STUDENTS:
         coursesGiven = 0
         altsGiven = 0
@@ -428,6 +437,7 @@ def matrix_measure():
                         coursesGiven += 1
                     elif c_key in ALTERNATES[s_key]:
                         altsGiven += 1
+        
         if coursesGiven >= 8:
             fullTimetable += 1
         elif coursesGiven == 7:
@@ -530,15 +540,15 @@ def count_alternates():
     return tot
 
 # number of courses that are sad :(
-def numCoursesSad():
+def numCoursesSad(threshold):
     
     for c_key in courses:
         for i in range(int(courses[c_key]['sections'])):
 
-            if 0 < len(courses[c_key][i]['students']) < int(courses[c_key]['max_enroll']) - 5:
+            if 0 < len(courses[c_key][i]['students']) < int(courses[c_key]['max_enroll']) - threshold:
                 print(c_key, courses[c_key][i]['students'])
 
-            if 0 < len(courses[c_key][i]['students']) <= 5:
+            if 0 < len(courses[c_key][i]['students']) <= threshold:
                 pass
 
 # randomness of courses maker
@@ -725,8 +735,9 @@ def evolutionary_algorithm(population_size, num_generations):
 # variable declarations
 matrix = {}
 
-STUDENTS = read_student_csv(RAW_STUDENT_FILE).get('requests')
-ALTERNATES = read_student_csv(RAW_STUDENT_FILE).get('alternates')
+STUDENTS_CSV = read_student_csv(RAW_STUDENT_FILE)
+STUDENTS = STUDENTS_CSV.get('requests')
+ALTERNATES = STUDENTS_CSV.get('alternates')
 requests = copy.deepcopy(STUDENTS)
 num_alternates = count_alternates()
 courses = read_course_csv(RAW_COURSE_FILE)
@@ -750,7 +761,7 @@ matrix_export_to_csv(MATRIX_OUTPUT_FILE)
 matrix_export_students(MATRIX_OUTPUT_STUDENT_FILE)
 print(matrix_get_student_timetable(1002))
 
-#numCoursesSad()
+#numCoursesSad(5)
 
 # done!
 print('Program Terminated')
