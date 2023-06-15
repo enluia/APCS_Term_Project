@@ -228,16 +228,16 @@ def matrix_assign(s_key, b, c_key, section_num, is_linear_and_not_ot = False):
     matrix[s_key][b][c_key] = 1
 
     # add student to class lists and remove active request from student
-    courses[c_key][section_num]['students'].append(s_key)
-    if c_key in requests[s_key]:
+    if c_key in requests[s_key] and not is_linear_and_not_ot:
+        courses[c_key][section_num]['students'].append(s_key)
         requests[s_key].remove(c_key)
 
     # simul
     if simul.get(c_key):
         for simul_course in simul.get(c_key):
-            if courses[simul_course].get(section_num):
-                courses[simul_course][section_num]['students'].append(s_key)
-            if simul_course in requests[s_key]:
+            if simul_course in requests[s_key] and not is_linear_and_not_ot:
+                if courses[simul_course].get(section_num):
+                    courses[simul_course][section_num]['students'].append(s_key)
                 requests[s_key].remove(simul_course)
 
     if courses[c_key]['base_terms'] == "1" and c_key not in outside_timetable:
@@ -246,12 +246,13 @@ def matrix_assign(s_key, b, c_key, section_num, is_linear_and_not_ot = False):
 
 # add non simul courses
 def matrix_assign_non_simuls(s_key, b, c_key, i, the_block = 'block', is_linear_and_not_ot = False):
-
-    if c_key == "MCLE-10--L":
-        print(s_key)
         
     if non_simul.get(c_key):
         for non_simul_course in non_simul[c_key]:
+            
+            if c_key == "MCLE-10--L":
+                print(s_key, non_simul_course in requests[s_key])
+
             if non_simul_course in requests[s_key]:
                 matrix_assign(s_key, b, non_simul_course, i, is_linear_and_not_ot)
                 courses[non_simul_course][i][the_block] = b
@@ -370,7 +371,7 @@ def matrix_start():
 
                                     # add non simul courses
                                     matrix_assign_non_simuls(s_key, b, c_key, i)
-                                    matrix_assign_non_simuls(s_key, b2, c_key, i, 'block2')
+                                    matrix_assign_non_simuls(s_key, b2, c_key, i, 'block2', True)
 
                                     break
                                 
@@ -416,7 +417,11 @@ def matrix_measure():
 
     # number of students with full timetables
     fullTimetable = 0
+    seven = 0
+    six = 0
     fullWithAlts = 0
+    sevenWithAlts = 0
+    sixWithAlts = 0
     i = 0
     disparr = []
     for s_key in STUDENTS:
@@ -434,10 +439,25 @@ def matrix_measure():
             if i < 0: ########################################### change this to 3 to print 3 students with full timetables
                 disparr.append(matrix_get_student_timetable(str(s_key)))
                 i += 1
-        elif coursesGiven + altsGiven >= 8:
-            fullWithAlts += 1
+        elif coursesGiven == 7:
+            seven += 1
+        elif coursesGiven == 6:
+            six += 1
+        
+        if coursesGiven + altsGiven >= 8:
+            fullWithAlts += 1;
+        elif coursesGiven + altsGiven == 7:
+            sevenWithAlts += 1
+        elif coursesGiven + altsGiven == 6:
+            sixWithAlts += 1
     print_percent(fullTimetable, len(STUDENTS), "students got 8/8 requested courses")
-    print_percent(fullTimetable + fullWithAlts, len(STUDENTS), "students got 8/8 requested or alternate courses")
+    print_percent(seven, len(STUDENTS), "students got 7/8 requested courses")
+    print_percent(six, len(STUDENTS), "students got 6/8 requested courses")
+    print_percent(fullTimetable + seven + six, len(STUDENTS), "students got 8/8, 7/7, or 6/8 requested courses")
+    print_percent(fullWithAlts, len(STUDENTS), "students got 8/8 requested or alternate courses")
+    print_percent(sevenWithAlts, len(STUDENTS), "students got 7/8 requested or alternate courses")
+    print_percent(sixWithAlts, len(STUDENTS), "students got 6/8 requested or alternate courses")
+    print_percent(fullWithAlts + sevenWithAlts + sixWithAlts, len(STUDENTS), "students got 8/8, 7/7, or 6/8 requested or alternate courses")
     print('\n' + "\n".join(disparr))
 
 # get a student's timetable
@@ -654,14 +674,14 @@ def selection(population, scores):
 def evolutionary_algorithm(population_size, num_generations):
     # Initialize a population
     population = [matrix_start() for _ in range(population_size)]
-    
+    print("WHY ISNT IT WORKING")
+    print(population_size)
     for generation in range(num_generations):
         # Calculate the fitness scores for the population
         scores = [calculate_fitness(matrix) for matrix in population]
-        
+
         # Perform selection
         parents = selection(population, scores)
-        
         # Crossover and mutation
         next_generation = []
         for i in range(population_size // 2):
@@ -740,4 +760,4 @@ print("Time Elapsed: ", t1 - t0, "seconds\n")
 #matrix = mutate(matrix)
 #matrix_measure()
 
-evolutionary_algorithm(10, 10)
+#evolutionary_algorithm(10, 10)
