@@ -438,7 +438,10 @@ def matrix_measure(matrix):
             for c_key in matrix[s_key][b]:
                 if matrix[s_key][b][c_key] == 1:
                     if c_key in STUDENTS[s_key]:
-                        coursesGiven += 1
+                        if courses[c_key]["base_terms"] == "1" and c_key not in outside_timetable:
+                            coursesGiven += 0.5
+                        else:
+                            coursesGiven += 1
                     elif c_key in ALTERNATES[s_key]:
                         altsGiven += 1
         
@@ -462,19 +465,19 @@ def matrix_measure(matrix):
         elif coursesGiven + altsGiven == len(STUDENTS[s_key]) - 2:
             sixWithAlts += 1
 
-    print_percent(fullTimetable, len(STUDENTS), "students got 8/8 requested courses")
-    print_percent(seven, len(STUDENTS), "students got 7/8 requested courses")
-    print_percent(six, len(STUDENTS), "students got 6/8 requested courses")
-    print_percent(fullTimetable + seven + six, len(STUDENTS), "students got 8/8, 7/7, or 6/8 requested courses")
+    print_percent(fullTimetable, len(STUDENTS), "students got all requested courses")
+    print_percent(seven, len(STUDENTS), "students got all but one requested courses")
+    print_percent(six, len(STUDENTS), "students got all but two requested courses")
+    print_percent(fullTimetable + seven + six, len(STUDENTS), "sum")
     print()
 
-    print_percent(fullWithAlts, len(STUDENTS), "students got 8/8 requested or alternate courses")
-    print_percent(sevenWithAlts, len(STUDENTS), "students got 7/8 requested or alternate courses")
-    print_percent(sixWithAlts, len(STUDENTS), "students got 6/8 requested or alternate courses")
-    print_percent(fullWithAlts + sevenWithAlts + sixWithAlts, len(STUDENTS), "students got 8/8, 7/7, or 6/8 requested or alternate courses")
+    print_percent(fullWithAlts, len(STUDENTS), "students got all requested courses")
+    print_percent(sevenWithAlts, len(STUDENTS), "students got all but one requested or alternate courses")
+    print_percent(sixWithAlts, len(STUDENTS), "students got all but two requested or alternate courses")
+    print_percent(fullWithAlts + sevenWithAlts + sixWithAlts, len(STUDENTS), "sum")
     print()
 
-    print_percent(len(STUDENTS) - fullWithAlts - sevenWithAlts - sixWithAlts, len(STUDENTS), "students with 5 or fewer requested or alternate courses")
+    print_percent(len(STUDENTS) - fullWithAlts - sevenWithAlts - sixWithAlts, len(STUDENTS), "not sum")
     print()
     #rint(test)
 
