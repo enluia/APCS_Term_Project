@@ -457,13 +457,13 @@ def matrix_measure(matrix):
     print_percent(fullTimetable, len(STUDENTS), "students got all requested courses")
     print_percent(seven, len(STUDENTS), "students got all but one requested courses")
     print_percent(six, len(STUDENTS), "students got all but two requested courses")
-    print_percent(fullTimetable + seven + six, len(STUDENTS), "is the sum of the above (sans alternates)")
+    print_percent(fullTimetable + seven + six, len(STUDENTS), "is the sum of the above three (sans alternates)")
     print()
 
     print_percent(fullWithAlts, len(STUDENTS), "students got all requested courses")
     print_percent(sevenWithAlts, len(STUDENTS), "students got all but one requested or alternate courses")
     print_percent(sixWithAlts, len(STUDENTS), "students got all but two requested or alternate courses")
-    print_percent(fullWithAlts + sevenWithAlts + sixWithAlts, len(STUDENTS), "is the sum of the above 3 (with alternates)")
+    print_percent(fullWithAlts + sevenWithAlts + sixWithAlts, len(STUDENTS), "is the sum of the above three (with alternates)")
     print()
 
     print_percent(len(STUDENTS) - fullWithAlts - sevenWithAlts - sixWithAlts, len(STUDENTS), "students with 3-8 requested or alternate courses unfulfilled")
