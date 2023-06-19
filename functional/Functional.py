@@ -17,7 +17,7 @@ t0 = time.time()
 
 # final variables
 RAW_STUDENT_FILE = "Data for Project/Cleaned Student Requests.csv"
-RAW_COURSE_FILE = "Data for Project/Course Information.csv"
+RAW_COURSE_FILE = "Data for Project/Better Course Information.csv"
 RAW_BLOCKING_FILE = "Data for Project/Course Blocking Rules.csv"
 RAW_SEQUENCING_FILE = "Data for Project/Course Sequencing Rules.csv"
 PARSED_STUDENT_FILE = "Data for Project/_parsedStudentData.csv"
@@ -124,7 +124,7 @@ def read_student_csv(file_path):
     write_dict_csv(headers, data['requests'], PARSED_STUDENT_FILE)
     write_dict_csv(headers, data['alternates'], PARSED_ALTERNATES_FILE)
 
-    print(temp_num_req)
+    #print(temp_num_req)
 
     return data
 
@@ -581,7 +581,7 @@ def matrix_courses_per_block():
     coursesPerBlock = {}
     for b in blocks:
         Courses = 0
-        simulCount = 0;
+        simulCount = 0
         nonSimulCount = 0
         for c_key in courses:
             for i in range(int(courses[c_key]['sections'])):
@@ -613,6 +613,11 @@ def matrix_courses_per_block():
         print(b, simulCount, nonSimulCount)
         coursesPerBlock[b] = Courses
     return coursesPerBlock
+
+
+###
+# EVOLUTIONARY
+#
 
 def mutate(matrix):
     """
