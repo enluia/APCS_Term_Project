@@ -591,6 +591,11 @@ def matrix_courses_per_block():
         coursesPerBlock[b] = Courses
     return coursesPerBlock
 
+
+###
+# EVOLUTIONARY
+#
+
 def mutate(matrix):
     """
     Mutate a timetable by randomly changing a course assignment.
