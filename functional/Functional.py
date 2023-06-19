@@ -584,36 +584,15 @@ def matrix_courses_per_block():
     coursesPerBlock = {}
     for b in blocks:
         Courses = 0
-        simulCount = 0
-        nonSimulCount = 0
         for c_key in courses:
             for i in range(int(courses[c_key]['sections'])):
                 if courses[c_key][i]['block'] == b:
-                    toBreak = 0
-                    for j in simul:
-
-                        if toBreak > 0:
-                            toBreak -= 1
-                            break
-
-                        if i in courses[j] and courses[j][i]['block'] == b:
-                            simulCount += 1
-                            toBreak += len(simul[j])
-                    toBreak = 0
-
-                    for j in non_simul:
-
-                        if toBreak > 0:
-                            toBreak -= 1
-                            break
-
-                        if i in courses[j] and courses[j][i]['block'] == b:
-                            nonSimulCount += 1
-                            toBreak += len(non_simul[j])
-
-                    Courses += 1
-        Courses -= simulCount + nonSimulCount
-        print(b, simulCount, nonSimulCount)
+                    if c_key in simul and (courses[n][i]['block'] == b for n in simul[c_key]):
+                        Courses += 1/(len(simul[c_key]) + 1)
+                    elif c_key in non_simul and (courses[n][i]['block'] == b for n in non_simul[c_key]):
+                        Courses += 1/(len(non_simul[c_key]) + 1)
+                    else:
+                        Courses += 1
         coursesPerBlock[b] = Courses
     return coursesPerBlock
 
