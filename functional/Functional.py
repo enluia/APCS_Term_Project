@@ -427,29 +427,39 @@ def matrix_measure(matrix):
     sevenWithAlts = 0
     sixWithAlts = 0
 
+    # test = {}
+    # for i in range(8):
+    #     test[i+1] = 0
+
     for s_key in STUDENTS:
         coursesGiven = 0
         altsGiven = 0
         for b in matrix[s_key]:
             for c_key in matrix[s_key][b]:
-                if matrix[s_key][b][c_key] == 1 and c_key not in outside_timetable:
+                if matrix[s_key][b][c_key] == 1:
                     if c_key in STUDENTS[s_key]:
                         coursesGiven += 1
                     elif c_key in ALTERNATES[s_key]:
                         altsGiven += 1
         
-        if coursesGiven >= 8:
+
+
+        if coursesGiven >= len(STUDENTS[s_key]):
             fullTimetable += 1
-        elif coursesGiven == 7:
+        elif coursesGiven == len(STUDENTS[s_key]) - 1:
             seven += 1
-        elif coursesGiven == 6:
+        elif coursesGiven == len(STUDENTS[s_key]) - 2:
             six += 1
         
-        if coursesGiven + altsGiven >= 8:
+        # for i in range(8):
+        #     if coursesGiven == i + 1:
+        #         test[i + 1] += 1
+        
+        if coursesGiven + altsGiven >= len(STUDENTS[s_key]):
             fullWithAlts += 1
-        elif coursesGiven + altsGiven == 7:
+        elif coursesGiven + altsGiven == len(STUDENTS[s_key]) - 1:
             sevenWithAlts += 1
-        elif coursesGiven + altsGiven == 6:
+        elif coursesGiven + altsGiven == len(STUDENTS[s_key]) - 2:
             sixWithAlts += 1
 
     print_percent(fullTimetable, len(STUDENTS), "students got 8/8 requested courses")
@@ -466,6 +476,7 @@ def matrix_measure(matrix):
 
     print_percent(len(STUDENTS) - fullWithAlts - sevenWithAlts - sixWithAlts, len(STUDENTS), "students with 5 or fewer requested or alternate courses")
     print()
+    #rint(test)
 
 # get a student's timetable
 def matrix_get_student_timetable(student):
@@ -567,27 +578,39 @@ def check_timetable_feasibility():
     
 def matrix_courses_per_block():
 
-    coursesPerBlock = []
+    coursesPerBlock = {}
     for b in blocks:
         Courses = 0
         simulCount = 0;
         nonSimulCount = 0
         for c_key in courses:
             for i in range(int(courses[c_key]['sections'])):
-                if Courses[j][i]['block'] == b:
+                if courses[c_key][i]['block'] == b:
+                    toBreak = 0
                     for j in simul:
 
-                        if Courses[j][i]['block'] == b:
+                        if toBreak > 0:
+                            toBreak -= 1
+                            break
+
+                        if i in courses[j] and courses[j][i]['block'] == b:
                             simulCount += 1
-                        j += len(simul[j])
+                            toBreak += len(simul[j])
+                    toBreak = 0
 
                     for j in non_simul:
-                        if Courses[j][i]['block'] == b:
+
+                        if toBreak > 0:
+                            toBreak -= 1
+                            break
+
+                        if i in courses[j] and courses[j][i]['block'] == b:
                             nonSimulCount += 1
-                        j += len(non_simul[j])
+                            toBreak += len(non_simul[j])
 
                     Courses += 1
         Courses -= simulCount + nonSimulCount
+        print(b, simulCount, nonSimulCount)
         coursesPerBlock[b] = Courses
     return coursesPerBlock
 
@@ -757,8 +780,8 @@ sequencing = read_sequencing_csv(RAW_SEQUENCING_FILE)
 sequencing.update(read_blocking_csv(RAW_BLOCKING_FILE, "Terms"))
 non_simul = read_blocking_csv(RAW_BLOCKING_FILE, "NotSimultaneous")
 simul = read_blocking_csv(RAW_BLOCKING_FILE, "Simultaneous")
-print (non_simul)
-print (simul)
+# print (non_simul)
+# print (simul)
 
 print('File Reading Complete\n')
 
@@ -775,7 +798,7 @@ matrix_export_students(MATRIX_OUTPUT_STUDENT_FILE)
 print(matrix_get_student_timetable(1002))
 
 #numCoursesSad()
-#matrix_courses_per_block()
+#print(matrix_courses_per_block())
 # done!
 print('Program Terminated')
 t1 = time.time()
