@@ -663,7 +663,7 @@ def crossover(matrix1, matrix2):
                     else:
                         child[student][block_index] = matrix2[student][block_index]
 
-    return child
+    return child    
 
 def calculate_fitness(matrix):
     """
@@ -681,9 +681,9 @@ def calculate_fitness(matrix):
     """
     # Implement your fitness calculation here
     print("yes")
-    if matrix_measure() == None:
+    if matrix_measure(matrix) == None:
         return 0
-    return matrix_measure()
+    return matrix_measure(matrix)
 
 def selection(population, scores):
     """
