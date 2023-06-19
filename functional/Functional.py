@@ -1,15 +1,14 @@
+# APCS Final Project: Timetables
+# by Daniel, Jason, and William
+
 import csv
 import copy
 import random
 import time
 
-"""
-THINGS TO DO / FIX
-- iterating from there
-"""
-
 print('\nStarting Program')
 t0 = time.time()
+
 
 ###
 # VARIABLES
@@ -427,10 +426,6 @@ def matrix_measure(matrix):
     sevenWithAlts = 0
     sixWithAlts = 0
 
-    # test = {}
-    # for i in range(8):
-    #     test[i+1] = 0
-
     for s_key in STUDENTS:
         coursesGiven = 0
         altsGiven = 0
@@ -444,8 +439,6 @@ def matrix_measure(matrix):
                             coursesGiven += 1
                     elif c_key in ALTERNATES[s_key]:
                         altsGiven += 1
-        
-
 
         if coursesGiven >= len(STUDENTS[s_key]):
             fullTimetable += 1
@@ -453,10 +446,6 @@ def matrix_measure(matrix):
             seven += 1
         elif coursesGiven == len(STUDENTS[s_key]) - 2:
             six += 1
-        
-        # for i in range(8):
-        #     if coursesGiven == i + 1:
-        #         test[i + 1] += 1
         
         if coursesGiven + altsGiven >= len(STUDENTS[s_key]):
             fullWithAlts += 1
@@ -468,18 +457,17 @@ def matrix_measure(matrix):
     print_percent(fullTimetable, len(STUDENTS), "students got all requested courses")
     print_percent(seven, len(STUDENTS), "students got all but one requested courses")
     print_percent(six, len(STUDENTS), "students got all but two requested courses")
-    print_percent(fullTimetable + seven + six, len(STUDENTS), "sum")
+    print_percent(fullTimetable + seven + six, len(STUDENTS), "is the sum of the above three (sans alternates)")
     print()
 
     print_percent(fullWithAlts, len(STUDENTS), "students got all requested courses")
     print_percent(sevenWithAlts, len(STUDENTS), "students got all but one requested or alternate courses")
     print_percent(sixWithAlts, len(STUDENTS), "students got all but two requested or alternate courses")
-    print_percent(fullWithAlts + sevenWithAlts + sixWithAlts, len(STUDENTS), "sum")
+    print_percent(fullWithAlts + sevenWithAlts + sixWithAlts, len(STUDENTS), "is the sum of the above three (with alternates)")
     print()
 
-    print_percent(len(STUDENTS) - fullWithAlts - sevenWithAlts - sixWithAlts, len(STUDENTS), "not sum")
+    print_percent(len(STUDENTS) - fullWithAlts - sevenWithAlts - sixWithAlts, len(STUDENTS), "students with 3-8 requested or alternate courses unfulfilled")
     print()
-    #rint(test)
 
 # get a student's timetable
 def matrix_get_student_timetable(student):
@@ -535,7 +523,6 @@ def matrix_export_students(filename):
                         stud_sched_block += '\n' + courses[c_key]['name']
                 stud_sched[b_key + 1] = stud_sched_block[1:]
             writer.writerow(stud_sched)
-
 
 
 ###
