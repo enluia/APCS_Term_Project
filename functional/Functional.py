@@ -564,7 +564,6 @@ def check_timetable_feasibility():
         print(i)
     
 def matrix_courses_per_block():
-
     coursesPerBlock = {}
     one_a_sample = []
     for b in blocks:
@@ -751,7 +750,24 @@ def evolutionary_algorithm(population_size, num_generations):
     best_index = scores.index(max(scores))
     return population[best_index]
 
+def zero_student_shuffle():
+    
+    coursesPerBlock = matrix_courses_per_block()
 
+    for b in blocks[0:8]:
+        for c_key in courses:
+            for i in range(int(courses[c_key]['sections'])):
+                if courses[c_key][i]['block'] == b and len(courses[c_key][i]['students']) == 0:
+                    courses[c_key][i]['block'] == None
+                    temp = 0
+                    temp = min(coursesPerBlock.values())
+                    print(coursesPerBlock, temp)
+                    for block in coursesPerBlock:
+                        if temp == coursesPerBlock[block] and block != 'Outside':
+                            courses[c_key][i]['block'] = block
+                            print(block, b)
+                            coursesPerBlock = matrix_courses_per_block()
+                            break
 ###
 # MAIN
 #
@@ -783,6 +799,9 @@ requests = copy.deepcopy(ALTERNATES)
 matrix_start()
 
 matrix_measure(matrix)
+
+zero_student_shuffle()
+
 matrix_export_to_csv(MATRIX_OUTPUT_FILE)
 matrix_export_students(MATRIX_OUTPUT_STUDENT_FILE)
 print(matrix_get_student_timetable(1520))
