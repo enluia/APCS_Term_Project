@@ -546,11 +546,8 @@ def numCoursesSad(threshold):
     for c_key in courses:
         for i in range(int(courses[c_key]['sections'])):
 
-            if 0 < len(courses[c_key][i]['students']) < int(courses[c_key]['max_enroll']) - threshold:
+            if len(courses[c_key][i]['students']) <= threshold:
                 print(c_key, courses[c_key][i]['students'])
-
-            if 0 < len(courses[c_key][i]['students']) <= threshold:
-                pass
 
 # randomness of courses maker
 def shuffle_dict(dictionary, num_shuffles):
@@ -569,20 +566,39 @@ def check_timetable_feasibility():
 def matrix_courses_per_block():
 
     coursesPerBlock = {}
+    one_a_sample = []
     for b in blocks:
-        Courses = 0
+
+        num_courses = 0
         for c_key in courses:
+
             for i in range(int(courses[c_key]['sections'])):
                 if courses[c_key][i]['block'] == b:
-                    if c_key in simul and (courses[n][i]['block'] == b for n in simul[c_key]):
-                        Courses += 1/(len(simul[c_key]) + 1)
-                    elif c_key in non_simul and (courses[n][i]['block'] == b for n in non_simul[c_key]):
-                        Courses += 1/(len(non_simul[c_key]) + 1)
-                    else:
-                        Courses += 1
-        coursesPerBlock[b] = Courses
-    return coursesPerBlock
 
+                    if c_key in simul:
+                        is_found = 'initial'
+                        for simul_key in simul:
+                            if c_key in simul[simul_key]:
+                                is_found = 'as_value'
+                                break
+                            if simul_key == c_key:
+                                is_found = 'as_key'
+                                break
+
+                        if is_found == 'as_key':
+                            num_courses += 1
+                            if b == '1A':
+                                one_a_sample.append(c_key)
+                            continue
+
+                    num_courses += 1
+                    if b == '1A':
+                        one_a_sample.append(c_key)
+
+        coursesPerBlock[b] = num_courses
+    
+    print(one_a_sample)
+    return coursesPerBlock
 
 ###
 # EVOLUTIONARY
@@ -769,10 +785,11 @@ matrix_start()
 matrix_measure(matrix)
 matrix_export_to_csv(MATRIX_OUTPUT_FILE)
 matrix_export_students(MATRIX_OUTPUT_STUDENT_FILE)
-print(matrix_get_student_timetable(1002))
+print(matrix_get_student_timetable(1520))
 
-#numCoursesSad()
-#print(matrix_courses_per_block())
+#numCoursesSad(5)
+print(matrix_courses_per_block())
+
 # done!
 print('Program Terminated')
 t1 = time.time()
@@ -783,4 +800,4 @@ print("Time Elapsed: ", t1 - t0, "seconds\n")
 #matrix = mutate(matrix)
 #matrix_measure()
 
-evolutionary_algorithm(10, 10)
+#evolutionary_algorithm(10, 10)
