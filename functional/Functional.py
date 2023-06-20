@@ -596,8 +596,9 @@ def matrix_courses_per_block():
 
         coursesPerBlock[b] = num_courses
     
-    print(one_a_sample)
+    #print(one_a_sample)
     return coursesPerBlock
+
 
 ###
 # EVOLUTIONARY
@@ -786,8 +787,6 @@ sequencing = read_sequencing_csv(RAW_SEQUENCING_FILE)
 sequencing.update(read_blocking_csv(RAW_BLOCKING_FILE, "Terms"))
 non_simul = read_blocking_csv(RAW_BLOCKING_FILE, "NotSimultaneous")
 simul = read_blocking_csv(RAW_BLOCKING_FILE, "Simultaneous")
-# print (non_simul)
-# print (simul)
 
 print('File Reading Complete\n')
 
@@ -800,7 +799,7 @@ matrix_start()
 
 matrix_measure(matrix)
 
-zero_student_shuffle()
+#zero_student_shuffle()
 
 matrix_export_to_csv(MATRIX_OUTPUT_FILE)
 matrix_export_students(MATRIX_OUTPUT_STUDENT_FILE)
