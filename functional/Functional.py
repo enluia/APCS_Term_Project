@@ -566,7 +566,7 @@ def check_timetable_feasibility():
 def matrix_courses_per_block():
     coursesPerBlock = {}
     one_a_sample = []
-    for b in blocks:
+    for b in blocks[0:8]:
 
         num_courses = 0
         for c_key in courses:
@@ -799,11 +799,11 @@ matrix_start()
 
 matrix_measure(matrix)
 
-#zero_student_shuffle()
+zero_student_shuffle()
 
 matrix_export_to_csv(MATRIX_OUTPUT_FILE)
 matrix_export_students(MATRIX_OUTPUT_STUDENT_FILE)
-print(matrix_get_student_timetable(1520))
+print(matrix_get_student_timetable(1284))
 
 #numCoursesSad(5)
 print(matrix_courses_per_block())
